@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html data-sign="OSM" async>
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/uwa/stylesheet.css');
+      @import url('https://use.typekit.net/fxc6mtk.css');
+
+      /*
+      {{show-crop}}
+      {{placeholder-opacity}}
+      {{placeholder-image-1}}
+      {{placeholder-toggle-new}}
+      {{placeholder-validation}}
+      {{UWA_theme--a4p}}
+      {{{UWA_background-texture--a4p}}}
+      {{{UWA_hero-image-1--a4p}}}
+      {{{UWA_hero-image-2--a4p}}}
+      {{UWA_heading-first-line--a4p}}
+      {{UWA_heading-first-line-size--a4p}}
+      {{UWA_heading-first-line-font-weight-a4p}}
+      {{UWA_heading-second-line--a4p}}
+      {{UWA_heading-second-line-size--a4p}}
+      {{UWA_heading-second-line-font-weight-a4p}}
+      {{UWA_body-copy--a4p}}
+      {{UWA_body-copy-size--a4p}}
+      {{#collection.UWA_statistics--a4p}} {{/collection.UWA_statistics--a4p}}
+      {{UWA_identifier-name--a4p}}
+      {{UWA_address--a4p}}
+      {{UWA_phone-number--a4p}}
+      {{UWA_email--a4p}}
+      {{UWA_website--a4p}}
+      {{UWA_faculty--a4p}}
+      */
+
+      :root {
+        --blue: {{{account.colors.uwa-blue}}};
+        --black: {{{account.colors.black}}};
+        --white: {{{account.colors.white}}};
+      }
+
+      html {
+        font-family: 'TT Norms Pro';
+        font-size: 11pt;
+        color: #000;
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }      
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .fit {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .theme--split-image .fit {
+        padding-top: 46pt;
+      }
+
+      .header {
+        position: relative;
+        flex: 1;
+      }
+
+      .logo__container {
+        position: absolute;
+        top: 28pt;
+        left: 24pt;
+        padding: 17pt 17pt 15pt;
+        font-size: 0;
+        background: var(--white);
+      }
+
+      .theme--split-image .logo__container {
+        top: -17pt;
+        padding: 17pt 16pt 11pt;
+      }
+
+      .theme--double-image .logo__container {
+        top: -9pt;
+        padding: 55pt 18pt 15pt;
+      }
+
+      .logo {
+        width: 170pt;
+      }
+
+      .texture {
+        position: absolute;
+        top: 116pt;
+        right: 45pt;
+        bottom: -9pt;
+        width: 458pt;
+        clip-path: polygon(100% 0, 100% 100%, 64.3% 100%, 64.3% 66%, 0% 66%, 0% 0%);
+      }
+
+      .theme--merged-image .texture {
+        display: block;
+        top: 216pt;
+        right: 135pt;
+        bottom: 0pt;
+        bottom: unset;
+        width: 351pt;
+        height: 178pt;
+        clip-path: none;
+      }
+
+      .theme--split-image .texture {
+        display: block;
+        top: 79.2%;
+        bottom: unset;
+        right: 135pt;
+        width: 367pt;
+        height: 196pt;
+        clip-path: none;
+        transform: translateY(-100%);
+      }
+
+      .theme--double-image .texture {
+        top: 226pt;
+        left: 45pt;
+        bottom: 25pt;
+        width: 530pt;
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 100%, 50% 96%, 31% 96%, 31% 100%, 0% 100%);
+      }
+
+      .texture__color {
+        background-color: var(--blue);
+      }
+
+      .hero__container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+
+      .hero {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 495pt;
+      }
+
+      .theme--merged-image .hero--primary {
+        width: 522pt;
+        top: 126pt;
+        right: 45pt;
+        bottom: 0;
+        clip-path: polygon(0 0, 65.7% 0%, 65.7% 98.2pt, 100% 98.2pt, 100% 100%, 17% 100%, 17% 93pt, 0% 93pt);
+      }
+
+      .theme--split-image .hero--primary {
+        right: 45pt;
+        width: 449pt;
+        clip-path: polygon(0 0, 81% 0%, 81% 20%, 100% 20%, 100% 100%, 81% 100%, 81% 79.2%, 0% 79.2%, 0 30%);
+      }
+
+      .theme--double-image .hero--primary {
+        top: 47pt;
+        right: 311pt;
+        left: 45pt;
+        bottom: 33pt;
+        width: auto;
+      }
+
+      .hero--secondary {
+        display: none;
+      }
+
+      .theme--double-image .hero--secondary {      
+        display: block;
+        top: 94pt;
+        right: 44pt;
+        bottom: 0pt;
+        width: 258pt;
+      }
+
+      .hero__separator {
+        position: absolute;
+        width: 7.9pt;
+        background: var(--white);
+        display: none;
+      }
+
+      .theme--split-image .hero__separator {
+        display: block;
+        top: 0;
+        right: 127pt;
+        bottom: 0;
+      }
+
+      .theme--double-image .hero__separator {
+        display: block;
+        top: 0pt;
+        right: 301.1pt;
+        bottom: 0;
+        width: 10pt;
+      }
+
+      .body {
+        position: relative;
+      }
+
+      .theme--merged-image .body {
+        max-height: 240pt;
+        padding: 30pt 45pt 0 118pt;
+        margin-bottom: 24pt;       
+      }
+
+      .theme--split-image .body {
+        max-height: 425px;
+        padding: 25pt 43pt 0 118pt;
+        margin-bottom: 26pt;
+        transform: translateY(-110pt);
+      }
+
+      .theme--double-image .body {
+        max-height: 295pt;
+        padding: 23pt 45pt 0 118pt;
+        margin-bottom: 28pt; 
+      }
+
+      .theme--full-image .body {
+        max-height: 328pt;
+        padding: 16pt 41pt 0 118pt;
+        margin-bottom: 23pt;
+      }
+
+      .heading__container {
+        font-size: 0;
+      }
+
+      .theme--merged-image .heading__container {
+        position: absolute;
+        transform: translateY(-100%);
+      }
+
+      .theme--merged-image .heading__container {
+        top: 24pt;
+        left: 116pt;
+        right: 45pt;
+      }
+
+      .theme--split-image .heading__container {
+        margin-bottom: 19pt;
+      }
+
+      .theme--split-image .heading__container.u-all-child-titles-empty { margin-bottom: 0; }
+
+      .theme--full-image .heading__container {
+        margin-bottom: 14pt;
+      }
+
+      .theme--double-image .heading__container {
+        margin-bottom: 10pt;
+        margin-top: -47pt;
+      }
+
+      .theme--double-image .heading__container.u-all-child-titles-empty {
+        margin-top: 0;
+      }
+
+      .heading--primary {
+        margin-left: -71pt;
+      }
+
+      .theme--full-image .heading--primary {
+        margin-bottom: 29.6pt;
+      }
+
+      .theme--merged-image .heading--primary {
+        margin-left: -81pt;
+      }
+
+      .theme--double-image .heading--secondary {
+        margin-top: 18.2pt;
+      }   
+
+      .theme--split-image .heading--secondary {
+        margin-top: 24.4pt;
+      }
+
+      .theme--double-image .heading--primary.u-hide + .heading--secondary {
+        margin-top: 0;
+      }
+
+      .theme--full-image .heading--primary h1,
+      .theme--full-image .heading--primary h2 {
+        margin-bottom: 0;
+      }
+
+      .theme--merged-image .heading--secondary {
+        margin-top: 4pt;
+        margin-left: -6pt;
+      }
+
+      .heading__inner {
+        display: inline-block;
+        background: var(--white);
+      }
+
+      .theme--merged-image .heading__inner {
+        padding: 0.34em 0.3em;
+      }
+
+      .theme--double-image .heading__inner{
+        padding: 5pt 9pt 5pt 0;
+      }
+
+      .heading h1 {
+        font-family: "novel-pro";
+      }
+
+      .heading h1, 
+      .heading h2 {
+        font-size: 1em;
+        line-height: 1em;
+      }
+
+      .headingFontWeight--regular h1,
+      .headingFontWeight--regular h2 {
+        font-weight: 400;
+      }
+
+      .headingFontWeight--medium h1,
+      .headingFontWeight--medium h2 {
+        font-weight: 500;
+      }
+
+      .headingFontWeight--bold h1,
+      .headingFontWeight--bold h2 {
+        font-weight: 700;
+      }
+
+      .theme--double-image .copy {
+        margin-bottom: 22pt;
+      }
+
+      .copy h3 {
+        margin-bottom: 0.1em;
+        font-size: 11.1pt;
+        font-size: 1em;
+        font-weight: bold;
+        line-height: 1.2em;
+      }
+
+      .copy p {
+        margin-bottom: 0.5em;
+        font-size: 9pt;
+        font-size: 0.8108em;
+        font-weight: 500;
+        line-height: 1.6em;
+      }
+
+      .is-firefox .copy p { font-weight: 400; }
+
+      .copy p:last-child {
+        margin-bottom: 0;
+      }
+
+      .statistic__container {
+        display: flex;
+        min-height: 70pt;
+        border-left: 1px solid var(--blue);
+        border-right: 1px solid var(--blue);
+      }
+
+      .statistic {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1;
+        padding: 7pt;
+        text-align: center;
+        border-right: 1px solid var(--blue);
+      }
+
+      .statistic:last-child {
+        border-right: none;
+      }
+
+      .statistic__text {}
+
+      .statistic__text h1 {
+        font-size: 13pt;
+        font-weight: bold;
+        line-height: 1.2em;
+        color: var(--blue);
+      }
+
+      .statistic__text p {
+        margin-bottom: 2pt;
+        font-size: 7.6pt;
+        line-height: 1.2em;
+        color: var(--blue);
+      }
+
+      .footer {
+        display: flex;
+        height: 112pt;
+        padding: 11pt 0pt 0pt 46pt;
+        align-items: flex-start;
+      }
+
+      .theme--split-image .footer,
+      .theme--double-image .footer {
+        padding-right: 46pt;
+      }
+
+      .theme--split-image .footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+
+      .info { 
+        flex: 1;
+        padding-right: 20pt;
+        font-size: 0; 
+      }
+
+      .info__identifierName {
+        display: inline-block;
+        margin-bottom: 3.6pt;
+        padding-top: 5pt;
+        border-top: 2px solid var(--black);
+      }
+
+      .info__identifierName h4 {
+        font-size: 9.2pt;
+        line-height: 1.2em;
+        font-weight: bold;
+      }
+
+      .info__address,
+      .info__identifierName,	
+      .info__phoneEmail,
+      .info__website {
+        font-size: 15pt;
+      }
+
+      .info__address p {
+        margin-bottom: 3pt;
+        font-size: 9.1pt;
+        line-height: 1.2em;
+      }
+
+      .info__phoneEmail {
+        display: flex;
+      }
+
+      .info__phone {
+        margin-right: 5pt;
+        padding-right: 5pt;  
+      }
+
+      .info__phone--borderRight {
+        border-right: 1px solid var(--black);     
+      }
+
+      .info__phone p,
+      .info__email p {
+        font-size: 9.2pt;
+        line-height: 1.2em;
+      }
+
+      .info__website {
+        margin-top: 3pt;
+      }
+
+      .info__website h2 {
+        font-size: 10.9pt;
+        font-weight: bold;
+        line-height: 1.2em;
+        color: var(--blue);
+      }
+
+      .faculty__container {
+        align-self: flex-start;
+        width: 225pt;
+        padding: 12pt 41pt 12pt 10pt;
+        background: var(--blue);
+      }
+
+      .theme--merged-image .faculty__container {
+        padding-left: 19pt;
+      }
+
+      .theme--split-image .faculty__container,
+      .theme--double-image .faculty__container {
+        align-self: flex-end;
+        width: 178pt;
+        padding: 17pt 11pt 40pt 7pt;
+      }
+
+      .faculty {
+        font-size: 12.9pt;
+        line-height: 1.2em;
+        text-align: center;
+        color: var(--white);
+      }
+
+      .theme--merged-image .faculty {
+        text-align: left;
+      }
+
+      .cricos__container {
+        display: flex;
+        position: absolute;
+        bottom: 16pt;
+        left: 45pt;
+      }
+
+      .cricos,
+      .exportId {
+        margin-right: 19pt;
+        font-size: 8pt;
+        line-height: 1.2em;
+      }
+
+      .floatBox {
+        display:none;
+        position: relative;
+        float: right;
+        width: 100pt;
+        height: 100pt;
+      } 
+
+      .theme--split-image .floatBox  {
+        display: block;
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" data-crop="{{show-crop}}" class="theme--{{{UWA_theme--a4p}}}{{^UWA_theme--a4p}}full-image{{/UWA_theme--a4p}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+
+          <div class="header">
+            <div class="texture texture--primary {{^UWA_background-texture--a4p}}texture__color{{/UWA_background-texture--a4p}}"><div class="reposition-fix">{{{UWA_background-texture--a4p}}}</div></div><!--texture-->
+            <div class="hero__container">
+              <div class="hero hero--primary"><div class="reposition-fix">{{{UWA_hero-image-1--a4p}}}</div></div><!--hero-->
+              <div class="hero hero--secondary"><div class="reposition-fix">{{{UWA_hero-image-2--a4p}}}</div></div><!--hero-->
+              <div class="hero__separator"></div><!--hero__separator-->
+            </div><!--hero__container-->
+            <div class="logo__container">
+              <img class="logo" src="{{{account.logos.formal-primary}}}">
+            </div><!--logo__container-->
+          </div><!--header-->
+          <div class="body" data-max-height="css">
+            <div class="floatBox"></div><!--floatBox-->
+            <div class="heading__container">
+              {{#UWA_heading-first-line--a4p}}
+              <div class="heading heading--primary u-heading-patch headingFontWeight--{{{UWA_heading-first-line-font-weight-a4p}}}">
+                <div class="heading__inner" style="font-size: calc(29.9pt/100*{{UWA_heading-first-line-size--a4p}}); line-height: 1.2em;">
+                  <div data-max-line="1">{{{UWA_heading-first-line--a4p}}}</div>
+                </div><!--heading__inner-->
+              </div><!--headign-->
+              {{/UWA_heading-first-line--a4p}}
+              {{#UWA_heading-second-line--a4p}}
+              <div class="heading heading--secondary u-heading-patch headingFontWeight--{{{UWA_heading-second-line-font-weight-a4p}}}">
+                <div class="heading__inner" style="font-size: calc(29.9pt/100*{{UWA_heading-second-line-size--a4p}}); line-height: 1.2em;">
+                  <div data-max-line="1">{{{UWA_heading-second-line--a4p}}}</div>
+                </div><!--heading__inner-->
+              </div><!--heading-->
+              {{/UWA_heading-second-line--a4p}}
+            </div><!--heading__container-->
+            <div class="content">
+              {{#UWA_body-copy--a4p}}
+              <div class="copy">
+                <div class="copy__inner" style="font-size: calc(11.1pt/100*{{UWA_body-copy-size--a4p}}); line-height: 1em;">{{{UWA_body-copy--a4p}}}</div><!--copy__inner-->
+              </div><!--copy-->
+              {{/UWA_body-copy--a4p}}
+              {{#collection.UWA_statistics--a4p.length}}
+              <div class="statistic__container">
+                {{#collection.UWA_statistics--a4p}}
+                {{#UWA_statistic--a4p}}
+                <div class="statistic">
+                  <div class="statistic__text">{{{UWA_statistic--a4p}}}</div><!--statistic__text-->
+                </div><!--statistic-->
+                {{/UWA_statistic--a4p}}
+                {{/collection.UWA_statistics--a4p}}
+              </div><!--statistic__container-->
+              {{/collection.UWA_statistics--a4p.length}}
+            </div><!--content-->
+          </div><!--body-->
+          <div class="footer">
+            <div class="info">
+              {{#UWA_identifier-name--a4p}}
+              <div class="info__identifierName u-heading-patch" data-max-height="28">{{{UWA_identifier-name--a4p}}}</div><!--info__identifierName-->
+              {{/UWA_identifier-name--a4p}}
+              {{#UWA_address--a4p}}
+              <div class="info__address" data-max-height="34">{{{UWA_address--a4p}}}</div><!--info__address-->
+              {{/UWA_address--a4p}}
+              <div class="info__phoneEmail" data-max-height="20">
+                {{#UWA_phone-number--a4p}}
+                <div class="info__phone {{#UWA_email--a4p}}info__phone--borderRight{{/UWA_email--a4p}}"><span data-char-limit="18">{{{UWA_phone-number--a4p}}}</span></div><!--info__phone-->
+                {{/UWA_phone-number--a4p}}
+                {{#UWA_email--a4p}}
+                <div class="info__email">{{{UWA_email--a4p}}}</div><!--info__email-->
+                {{/UWA_email--a4p}}
+              </div><!--info__phoneEmail-->
+              {{#UWA_website--a4p}}
+              <div class="info__website u-heading-patch" data-max-height="23">{{{UWA_website--a4p}}}</div><!--info__website-->
+              {{/UWA_website--a4p}}
+            </div><!--info-->
+            {{#UWA_faculty--a4p}}
+            <div class="faculty__container">
+              <div class="faculty" data-max-line="3">{{{UWA_faculty--a4p}}}</div><!--faculty-->
+            </div><!--faculty__container-->
+            {{/UWA_faculty--a4p}}
+          </div><!--footer-->
+          <div class="cricos__container">
+            <div class="cricos">{{{account.snippets.cricos}}}</div><!--cricos-->
+            <div class="exportId">{{#metadata}}OF: {{export_id}}{{/metadata}}{{^metadata}}OF: XXXXXX{{/metadata}}</div><!--exportId-->
+          </div><!--cricos__container-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/custom-rich-text.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="js/text-fit-min.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+      {{ #placeholder-toggle-new }}document.body.classList.add("u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}"); {{ /placeholder-toggle-new }}
+      {{ #placeholder-validation }}document.body.classList.add("placeholder__validation--{{placeholder-validation}}"){{ /placeholder-validation }}
+    </script>
+    <script>
+
+      console.clear();
+
+      {{{account.snippets.safariPopup}}}
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+        hideEmptyTitles();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+    </script>
+  </body>
+</html>
