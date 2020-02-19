@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html data-sign="OSZ">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <style>
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/uwa/stylesheet.css');
+      @import url('https://use.typekit.net/fxc6mtk.css');
+
+      /* 
+      input order
+
+      {{show-crop}}
+      {{{UWA_theme-a4bop}}}
+      {{{UWA_faculty-a4bop}}}
+      {{{UWA_feature-image-a4bop}}}
+      {{{UWA_heading-first-line--a4bop}}}
+      {{{UWA_heading-second-line--a4bop}}}
+      {{{UWA_heading-font-size-a4bop}}}
+      {{{pullup-swap-heading-font}}}
+      {{{UWA_heading-line1-weight-a4bop}}}
+      {{{UWA_heading-line2-weight-a4bop}}}
+      */
+
+      :root {
+        --blue: {{{account.colors.uwa-blue}}};
+        --white: {{{account.colors.white}}};
+        --black: {{{account.colors.black}}};
+
+        --font-family-content: 'TT Norms Pro';
+        --font-family-heading: 'novel-pro';
+
+        --logo: url({{{account.logos.formal-primary}}});
+      }
+
+      html {
+        font-family: var(--font-family-content);
+        font-size: 11pt;
+        color: var(--black);
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }     
+
+      .fit {
+        display: flex;
+        flex-direction: column;
+        padding: 0rem 1.39rem 0.82rem;
+      }
+
+      .header {
+        position: relative;
+        flex: 1;
+      }
+
+      .hero__container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+
+      .hero {
+        position: absolute;
+        top: 1.38rem;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+        background: var(--blue);
+      }
+
+      .hero__texture {
+        position: absolute;
+        top: 1.38rem;
+        right: -0.3rem;
+        bottom: 0;
+        left: -0.3rem;
+        background: var(--blue);
+        clip-path: polygon(0% 2.38rem, 0.3rem 2.38rem, 2.5% 0%, 85% 0%, 83% -1%, 100% 0%, 100% 2.81rem, 11.62rem 2.81rem, 97.5% 100%, 15% 100%, 15% 100%, 0 100%);
+        -webkit-clip-path: polygon(0% 2.38rem, 0.3rem 2.38rem, 2.5% 0%, 85% 0%, 83% -1%, 100% 0%, 100% 2.81rem, 11.62rem 2.81rem, 97.5% 100%, 15% 100%, 15% 100%, 0 100%);
+      }
+
+      .theme--clipImageLarge .hero__texture {
+        clip-path: polygon(0% 5.38rem, 0.3rem 5.38rem, 2.5% 0%, 85% 0%, 83% -1%, 100% 0%, 100% 2.81rem, 11.62rem 2.81rem, 97.5% 100%, 15% 100%, 15% 100%, 0 100%);
+        -webkit-clip-path: polygon(0% 5.38rem, 0.3rem 5.38rem, 2.5% 0%, 85% 0%, 83% -1%, 100% 0%, 100% 2.81rem, 11.62rem 2.81rem, 97.5% 100%, 15% 100%, 15% 100%, 0 100%);
+      }
+
+
+      .faculty__container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 0.91rem;
+        padding: 0.6rem 0.2rem 0.2rem 0.2rem;
+        width: 4.5rem;
+        height: 1.72rem;
+        text-align: center;
+        background-color: var(--blue);
+      }
+
+      .faculty {
+        font-size: 0.308rem;
+        line-height: 1.1em;
+        color: var(--white);
+      } 
+
+      .body {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .theme--clipImageSmall .body {
+        min-height: 3rem;
+        max-height: 12.12rem;
+      }
+
+      .theme--clipImageLarge .body {
+        min-height: 3rem;
+        max-height: 8.88rem;
+      }
+
+      .column__container {
+        display: flex;
+        height: 100%;
+        font-size: 1rem;
+      }
+
+      .column {
+        margin-right: 0.55rem;
+        flex: 1;
+        font-size: {{{UWA_copy-font-size--a4bop}}}{{^UWA_copy-font-size--a4bop}}100{{/UWA_copy-font-size--a4bop}}%;
+      }
+
+      .column:last-child {
+        margin-right: 0;
+      }
+
+
+      .content--top {
+        position: relative;
+        flex: 1;
+        padding: 0.9rem 0rem 1.01rem 0rem;
+      }
+
+      .column h3 {
+        position: relative;
+        margin-top: 1.23em;
+        font-size: 0.448em;
+        line-height: 1.25em;
+        font-weight: bold;
+      }
+
+      .column h3:first-child:before {
+        content: '';
+        position: absolute;
+        top: -0.5em;
+        width: 66.6%;
+        height: 0.14em;
+        background: var(--black);
+      }
+
+      .column h4 {
+        font-size: 0.34em;
+        line-height: 1.4em;
+        font-weight: 700;
+        font-family: var(--font-family-heading);
+      }
+
+      .column p {
+        margin-top: 0.28em;
+        font-size: 0.287em;
+        line-height: 1.5em;
+        font-weight: normal;
+      }
+
+      .column ul + p,
+      .column ol + p {
+        margin-top: 0.46rem;
+      }
+
+      .column p + p { margin-top: 0.35em; }
+
+      .column ul {
+        position: relative;
+        margin-top: 0.49em;
+        margin-left: 0.36em;
+        list-style-type: disc;
+      }
+
+      .column ol {
+        margin-top: 0.3em;
+        margin-left: 0.25em;
+      }
+
+      .column li {
+        font-size: 0.288em;
+        line-height: 1.5em;
+        font-weight: 500;
+      }
+
+      .column li ul li {
+        font-size: 0.288rem;
+        margin-left: 0.2rem;
+      }
+
+
+
+      .column h4:first-child,
+      .column p:first-child,
+      .column ul:first-child,
+      .column ol:first-child {
+        margin-top: 0;
+      }
+
+      .heading__container {
+        position: absolute;
+        top: 0.1rem;
+        left: 0.82rem;
+        width: 100%;
+        font-size: 0.778rem;
+        transform: translateY(-100%);
+      }
+
+      .heading {
+        max-height: 1.526rem;
+        background: var(--white);
+      }
+
+      .heading--primary {
+        padding: 0.25rem 1.8rem 0.35rem 0.25rem;
+        line-height: 1em;
+      }
+
+      .heading--secondary {
+        margin-left: 0.87rem;
+        padding: 0.4rem 1.2rem 0rem 0.25rem; 
+        font-size: 1em;
+        line-height: 0.9em;
+      }
+
+      .heading--primary + .heading--secondary { margin-top: 0.2rem; }
+
+      h1 {
+        font-family: var(--font-family-heading);
+        font-size: calc(24pt + {{{UWA_heading-font-size-a4bop}}}{{^UWA_heading-font-size-a4bop}}0{{/UWA_heading-font-size-a4bop}}pt);
+        font-weight: {{{UWA_heading-line1-weight-a4bop}}}{{^UWA_heading-line1-weight-a4bop}}normal{{/UWA_heading-line1-weight-a4bop}};
+      }
+
+      h2 {
+        font-family: var(--font-family-content);
+        font-size: calc( 24pt + {{{UWA_heading-font-size-a4bop}}}{{^UWA_heading-font-size-a4bop}}0{{/UWA_heading-font-size-a4bop}}pt);
+        font-weight: {{{UWA_heading-line2-weight-a4bop}}}{{^UWA_heading-line2-weight-a4bop}}normal{{/UWA_heading-line2-weight-a4bop}};
+      }
+
+      .swap-font h1 {
+        font-family: var(--font-family-content);
+        font-size: calc(24pt + {{{UWA_heading-font-size-a4bop}}}{{^UWA_heading-font-size-a4bop}}0{{/UWA_heading-font-size-a4bop}}pt);
+      }
+
+      .swap-font h2 {
+        font-family: var(--font-family-heading);
+        font-size: calc(24pt + {{{UWA_heading-font-size-a4bop}}}{{^UWA_heading-font-size-a4bop}}0{{/UWA_heading-font-size-a4bop}}pt);
+      }
+
+      .novel-pro h1, .novel-pro h2 {
+        font-family: var(--font-family-heading);
+        font-size: calc(24pt + {{{UWA_heading-font-size-a4bop}}}{{^UWA_heading-font-size-a4bop}}0{{/UWA_heading-font-size-a4bop}}pt);
+      }
+
+      .tt-norms h1, .tt-norms h2 {
+        font-family: var(--font-family-content);
+        font-size: calc(24pt + {{{UWA_heading-font-size-a4bop}}}{{^UWA_heading-font-size-a4bop}}0{{/UWA_heading-font-size-a4bop}}pt);
+      }
+
+      .content--bottom {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .info {
+        width: 6.8rem;
+        padding-top: 0.4rem;
+      }
+
+      .info__facultyName {
+        margin-bottom: 0.1rem;
+        font-size: 0.262rem;
+      }
+
+      .info__facultyName h4 {  
+        position: relative;
+        display: inline-block;
+        font-size: 1em;
+        font-weight: bold;      
+      }
+
+      .info__facultyName h4:before {
+        content:'';
+        position: absolute;
+        top: -0.25rem;
+        width: 100%;
+        height: 0.03rem;
+        background: var(--black);
+      }
+
+      .info__address {
+        margin-bottom: 0.11rem;
+        max-height: 0.7rem;
+        font-weight: normal;
+      }
+
+      .info__address p { font-size: 0.2582rem; }
+
+      .info__phone {
+        margin-bottom: 0.12rem;
+        font-size: 0.262rem;
+        line-height: 1.2em;
+      }
+
+      .info__contact {
+        font-size: 0.26rem;
+        font-weight: normal;
+      }
+
+      .info__contactDivider { 
+        display: none;
+        margin-left: 0.05rem;
+      }
+
+      .info__contact--bothExist .info__contactDivider { display: inline-block; }
+
+      .info__website {
+        max-height: 0.95rem;
+        font-size: 0.263rem;
+        line-height: 1.2em;
+        font-weight: bold;
+        color: var(--blue);
+      }
+
+      .logo__container {
+        height: 1.5rem;
+        align-self: flex-end;
+        font-size: 0;
+      }
+
+      .logo {
+        width: 4.47rem;
+      }
+
+      .cricos__container {
+        display: flex;
+        margin-top: 8.1pt;  
+        font-size: 6.2pt;
+      }
+
+      .cricos {
+        margin-right: 19pt;
+      }
+
+      .cricos,
+      .exportId {   
+        font-size: 6.2pt;
+        line-height: 1.2em;
+      }
+
+
+      /* Helper classes */
+      .u-hide { display: none; }
+      .u-padding-0 { padding: 0; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" class="theme--{{{UWA_theme-a4bop}}}{{^UWA_theme-a4bop}}clipImageSmall{{/UWA_theme-a4bop}}
+                                         {{{pullup-swap-heading-font}}}" data-crop="{{show-crop}}">
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+          <div class="header">
+            <div class="hero__container">
+              <div class="hero__texture"></div> <!--hero__texture-->
+              <div class="hero"><div class="reposition-fix">{{{UWA_feature-image-a4bop}}}</div></div> <!--hero-->
+            </div> <!--hero__container-->
+            {{#UWA_faculty-a4bop}}
+            <div class="faculty__container">
+              <div class="faculty" data-max-line="3">{{{UWA_faculty-a4bop}}}</div> <!--faculty-->
+            </div> <!--faculty__container-->
+            {{/UWA_faculty-a4bop}}
+          </div> <!--header-->
+          <div class="body" data-max-height="css">
+            <div class="content content--top {{^UWA_column-one--a4bop}}u-{{/UWA_column-one--a4bop}}{{^UWA_column-two--a4bop}}padding-0{{/UWA_column-two--a4bop}}">
+              <div class="heading__container">
+                {{#UWA_heading-first-line--a4bop}}
+                <div class="heading heading--primary u-heading-patch" data-max-height="css">
+                  <h1>{{{UWA_heading-first-line--a4bop}}}</h1>
+                </div><!-- heading--primary -->
+                {{/UWA_heading-first-line--a4bop}}
+                {{#UWA_heading-second-line--a4bop}}
+                <div class="heading heading--secondary u-heading-patch" data-max-height="css">
+                  <h2>{{{UWA_heading-second-line--a4bop}}}</h2>
+                </div><!-- heading--secondary -->
+                {{/UWA_heading-second-line--a4bop}}
+              </div><!-- heading__container -->
+              <div class="column__container">
+                <div class="column u-heading-patch">{{{UWA_column-one--a4bop}}}</div> <!--column-->
+                <div class="column u-heading-patch">{{{UWA_column-two--a4bop}}}</div> <!--column-->
+              </div> <!--column__container -->
+            </div> <!--content--top-->
+            <div class="content content--bottom">
+              <div class="info">
+                {{#UWA_identifier-name-a4bop}}
+                <div class="info__facultyName u-heading-patch" data-max-line="1">{{{UWA_identifier-name-a4bop}}}</div> <!--info__facultyName-->
+                {{/UWA_identifier-name-a4bop}}
+                {{#UWA_address--a4bop}}
+                <div class="info__address" data-max-height="css">{{{UWA_address--a4bop}}}</div><!-- info__address -->
+                {{/UWA_address--a4bop}}
+                {{#UWA_phone-number--a4bop}}
+                <div class="info__phone" data-char-limit="21">{{{UWA_phone-number--a4bop}}}</div><!-- info__address -->
+                {{/UWA_phone-number--a4bop}}
+                <div class="info__contact 
+                            {{#UWA_website--a4bop}}info__contact--{{/UWA_website--a4bop}}{{#UWA_email--a4bop}}bothExist{{/UWA_email--a4bop}}
+                            {{^UWA_website--a4bop}}u-{{/UWA_website--a4bop}}{{^UWA_email--a4bop}}hide{{/UWA_email--a4bop}}
+                            " data-max-line="1">
+                  <span>{{{UWA_email--a4bop}}}</span>
+                  <span class="info__contactDivider">|</span>
+                  <span class="info__website">{{{UWA_website--a4bop}}}</span>
+                </div><!-- info__contact -->
+              </div> <!--info-->
+              <div class="logo__container">
+                <img class="logo" src="{{{account.logos.formal-primary}}}"><!--logo-->
+              </div> <!--logo__container-->
+            </div> <!--content--bottom-->
+          </div> <!--body-->
+          <div class="cricos__container" data-max-height="10">
+            <div class="cricos">{{{account.snippets.cricos}}}</div><!--cricos-->
+            <div class="exportId">{{#metadata}}OF: {{export_id}}{{/metadata}}{{^metadata}}OF: XXXXXX{{export_id}}{{/metadata}}</div><!--exportId-->
+          </div><!--cricos__container-->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/custom-rich-text.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="js/text-fit-min.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      console.clear();
+
+      {{{account.snippets.safariPopup}}}
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+        hideEmptyTitles();
+      });
+
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+
+    </script>
+
+
+  </body>
+</html>
