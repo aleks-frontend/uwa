@@ -171,10 +171,11 @@
       }
 
       .theme--mergedImage .texture__container {
-        top: 3.55rem;
-        bottom: 3.2rem;
         top: auto;
+        bottom: 3.2rem;
         height: 4.3rem;
+        right: auto;
+        width: 0.4rem;
       }
 
       .theme--splitImageSmall .texture__container {
@@ -352,7 +353,6 @@
         display: flex;
         flex-direction: column;
         min-height: 3rem;
-        max-height: 11.6rem;
         padding-left: 0.1rem;
       }
 
@@ -964,7 +964,7 @@
               <div class="logo"></div><!-- logo -->
             </div><!-- logo__container -->
           </div><!-- header -->
-          <div class="body" data-max-height="css">
+          <div class="body">
             <div class="content content--top  {{^collection.UWA_column--bsop.length}}u-padding-0{{/collection.UWA_column--bsop.length}}">
               <div class="heading__container {{pullup-swap-heading-font}}">
                 {{#pullup-heading1}}
@@ -981,7 +981,7 @@
               <div class="column__container">
                 {{#collection.UWA_column--bsop}}
                 {{#block.column}}
-                <div class="column">
+                <div class="column" data-max-height="500">
                   {{{column-text}}}
                 </div><!-- column -->
                 {{/block.column}}
