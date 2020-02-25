@@ -27,7 +27,7 @@
       {{heading-line2-weight}}
       {{#collection.UWA_column--bsop}}{{/collection.UWA_column--bsop}}
       {{UWA_copy-font-size--bsop}}
-      {{UWA_faculty--bsop}}
+      {{UWA_contact-information--bsop}}
       {{UWA_identifier-name--bsop}}
       {{UWA_address--bsop}}
       {{UWA_phone-number--bsop}}
@@ -45,6 +45,7 @@
         --blue: {{{account.colors.uwa-blue}}};
         --white: {{{account.colors.white}}};
         --black: {{{account.colors.black}}};
+        --yellow: {{{account.colors.yellow}}};
 
         --font-family-content: 'TT Norms Pro';
         --font-family-heading: 'novel-pro';
@@ -76,7 +77,6 @@
       }      
 
       /* Helper classes */
-      .u-hide { display: none; }
 
       /* Helper class for fixing Reposition tool bug */
       .reposition-fix {
@@ -186,7 +186,7 @@
         right: auto;
         width: 0.5rem;
       }
-      
+
       .theme--fullBleedImage .texture__container {
         bottom: 2rem;
         height: 3.5rem;
@@ -194,45 +194,47 @@
         right: auto;
         width: 0.4rem;
       }
-      
+
       .texture {
         position: absolute;
         background: var(--blue);        
       }
-      
+
       .texture--fake {
         width: 100%;
         height: 100%;
         opacity: 0;
       }
-      
+
+      .no-feature-image .texture .reposition-fix { display: none; }
+
       .theme--largeImage .texture--primary {
         bottom: 0.35rem;
         left: 0;
         height: 6rem;
         width: 0.35rem;
       }
-      
+
       .theme--largeImage .texture--secondary {
         bottom: 0;
         right: 0;
         height: 0.35rem;
         width: 5rem;
       }     
-      
+
       .theme--splitImageLarge .texture--primary {
         height: 100%;
         left: 0;
         width: 0.5rem;
       }     
-      
+
       .theme--mergedImage .texture--primary,
       .theme--splitImageSmall .texture--primary,
       .theme--fullBleedImage .texture--primary {
         width: 100%;
         height: 100%;
       }
-      
+
       .imageMask__container {
         position: absolute;
         top: -1px;
@@ -240,13 +242,13 @@
         left: -1px;
         right: -1px;
       }
-      
+
       .imageMask {
         position: absolute;
         display: none;
         background: #fff;
       }
-      
+
       .theme--splitImageLarge .imageMask { display: block; }
       .theme--splitImageLarge .imageMask--primary { 
         top: 0;
@@ -254,14 +256,14 @@
         height: 1rem;
         width: 2rem;
       }
-      
+
       .theme--splitImageLarge .imageMask--secondary { 
         bottom: 0;
         left: 0;
         right: 2rem;
         height: 1.2rem;
       }     
-      
+
       .theme--splitImageSmall .imageMask { display: block; }
       .theme--splitImageSmall .imageMask--primary { 
         top: 0;
@@ -269,14 +271,14 @@
         right: 2rem;
         height: 0.7rem;
       }
-      
+
       .theme--splitImageSmall .imageMask--secondary { 
         bottom: 0;
         right: 0;
         height: 0.7rem;
         width: 2rem;
       }           
-      
+
       .theme--mergedImage .imageMask { display: block; }
       .theme--mergedImage .imageMask--primary { 
         top: 0;
@@ -284,7 +286,7 @@
         height: 1rem;
         width: 2rem;
       }
-      
+
       .theme--mergedImage .imageMask--secondary { 
         bottom: 0;
         left: 0;
@@ -379,10 +381,11 @@
         position: absolute;
         top: 0.2rem;
         left: 0.7rem;
-        width: 74%;
+        width: 9.7rem;
         font-size: 0.701rem;
         transform: translateY(-100%);
       }
+
 
       .heading__container h1 {
         font-size: calc(1em + {{{heading-font-size}}}{{^heading-font-size}}0{{/heading-font-size}}pt);
@@ -390,28 +393,41 @@
 
       .heading--primary h1 { 
         font-family: var(--font-family-heading); 
-        font-weight: {{{heading-line1-weight}}}{{^heading-line1-weight}}normal{{/heading-line1-weight}};
       }     
 
       .heading--secondary h1 { 
         font-family: var(--font-family-content);
-        font-weight: {{{heading-line2-weight}}}{{^heading-line2-weight}}normal{{/heading-line2-weight}};
-      }     
-
+      }    
 
       .swap-font .heading--primary h1 { font-family: var(--font-family-content); }
       .swap-font .heading--secondary h1 { font-family: var(--font-family-heading); }     
       .tt-norms .heading h1 { font-family: var(--font-family-content); }
       .novel-pro .heading h1 { font-family: var(--font-family-heading); }      
-     
+
       .theme--splitImageSmall .heading__container { left: 1.5rem; }
       .theme--splitImageLarge .heading__container { left: 0.2rem; }
       .theme--largeImage .heading__container { left: -0.2rem; top: 0.05rem; }
       .theme--mergedImage .heading__container { left: -0.3rem; }
 
-      .heading {
-        max-height: 1.226rem;
+      /* Heading Font Weight Definition */
+
+      .headingPrimaryFontWeight--regular h1,
+      .headingSecondaryFontWeight--regular h1 {
+        font-weight: normal;
       }
+
+      .headingPrimaryFontWeight--medium h1,
+      .headingSecondaryFontWeight--medium h1 {
+        font-weight: 500;
+      }
+
+      .headingPrimaryFontWeight--bold h1,
+      .headingSecondaryFontWeight--bold h1 {
+        font-weight: bold;
+      }
+
+
+      .heading { max-height: 1.226rem; }
 
       .heading--primary {
         max-height: 1.226rem;
@@ -428,7 +444,7 @@
       .heading--primary + .heading--secondary { margin-top: 0.05rem; }
 
       .heading__inner { 
-        display: inline-block;
+        display: inline-block; 
         line-height: 1.7em;
         background: var(--white);
       }
@@ -654,6 +670,8 @@
         font-weight: normal;
       }
 
+      .fit--front .info__address { display: none; }
+
       .info__address p { font-size: 0.212rem; }
 
       .info__contact {
@@ -794,9 +812,12 @@
 
       .image {
         position: absolute;
-        bottom: 0;
+        top: 0;
         left: 0;
+        bottom: 0;
         right: 0;
+        background: url('https://files.outfit.io/media_library_items/162706/Template%2520Image%2520Holder%2520-%2520Square%2520UWA%2520GOLD.png') center no-repeat;
+        background-size: cover;
       }
 
       .grid__item h1 {
@@ -828,7 +849,8 @@
         left: 0;
         bottom: 0;
         right: 0;
-        background: var(--blue);
+        background: url('https://files.outfit.io/media_library_items/162706/Template%2520Image%2520Holder%2520-%2520Square%2520UWA%2520GOLD.png') center no-repeat;
+        background-size: cover;
       }
 
       .grid--imagePos-topRight .featureImage,
@@ -872,7 +894,7 @@
         padding-bottom: 0.4rem;
       }
 
-      .footer:before {
+      .footer--lastPage:before {
         content: '';
         position: absolute;
         top: 0;
@@ -882,9 +904,42 @@
         background: var(--blue);
       }
 
-      .u-padding-0 { padding: 0; }
-      .u-display-none { display: none; }
-      
+      .footer--internalPage { min-height: auto; }
+      .footer--internalPage.footerImageToggle--show { height: 0.9rem; }
+
+      .fit--even .footer--internalPage {
+        justify-content: flex-end;
+        text-align: right;
+        height: 0.95rem;
+      }
+
+      .fit--odd .footer--internalPage { justify-content: flex-start; } 
+
+      .footer__text {
+        display: none;
+        width: 3.8rem;
+        padding-top: 0.15rem;
+        font-size: 0.183rem;
+        font-weight: 700;
+        line-height: 1.2em;
+        border-top: 0.02rem solid var(--yellow);
+      }
+
+      .pageNumber { font-weight: bold; }
+
+      .fit--odd .footer__text--primary,
+      .fit--even .footer__text--secondary {
+        display: block;
+      }
+
+      .fit--internalPage .footerImageToggle--show .footer__text--primary,
+      .fit--internalPage .footerImageToggle--show .footer__text--secondary {
+        display: none;
+      }
+
+      .footer__text--primary .pageNumber { margin-right: 0.12rem; }
+      .footer__text--secondary .pageNumber { margin-left: 0.12rem;       }
+
       .cricos__container {
         display: flex;
         position: absolute;
@@ -899,13 +954,22 @@
         line-height: 1.2em;
       }
 
+      /*hide first page contact info */
+      .firstPage .info,
+      .firstPage .cricos__container {
+        visibility: hidden;
+      }
+
+      .u-hide { display: none; }
+      .u-padding-0 { padding: 0; }
+
       /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
       /* !IMPORTANT DON'T FORGET TO STYLIZE HERO CROP ON SPLIT IMAGE SMALL VARIATION */
     </style>
   </head>
   <body style="background: white" data-crop="{{show-crop}}">
-    <div class="containerMaster u-display-none">
-      <div class="footer">
+    <div class="containerMaster u-hide">
+      <div class="footer footer--lastPage">
         <div class="info">
           {{#UWA_identifier-name--bsop}}
           <div class="info__identifierName u-heading-patch" data-max-line="1">{{{UWA_identifier-name--bsop}}}</div><!-- info__identifierName -->
@@ -915,7 +979,7 @@
           {{/UWA_address--bsop}}
           <div class="info__contact 
                       {{#UWA_phone-number--bsop}}info__contact--{{/UWA_phone-number--bsop}}{{#UWA_email--bsop}}bothExist{{/UWA_email--bsop}}
-                      {{^UWA_phone-number--bsop}}u-display-{{/UWA_phone-number--bsop}}{{^UWA_email--bsop}}none{{/UWA_email--bsop}}
+                      {{^UWA_phone-number--bsop}}u-{{/UWA_phone-number--bsop}}{{^UWA_email--bsop}}hide{{/UWA_email--bsop}}
                       " data-max-line="1">
             <span data-char-limit="14">{{{UWA_phone-number--bsop}}}</span>
             <span class="info__contactDivider">|</span>
@@ -933,11 +997,11 @@
     </div><!-- containerMaster -->
 
     <!-- FRONT PAGE -->
-    <div class="page theme--{{UWA_theme--bsop}}{{^UWA_theme--bsop}}fullBleedImage{{/UWA_theme--bsop}}">
+    <div class="page theme--{{UWA_theme--bsop}}{{^UWA_theme--bsop}}fullBleedImage{{/UWA_theme--bsop}} {{^UWA_feature-image--bsop}}no-feature-image{{/UWA_feature-image--bsop}}">
 
       <div class="bleed">
 
-        <div class="container fit {{pullup-swap-heading-font}}">
+        <div class="container fit fit--front {{pullup-swap-heading-font}}">
           <div class="header">
             <div class="hero__container">
               <div class="texture__container">
@@ -968,12 +1032,14 @@
             <div class="content content--top  {{^collection.UWA_column--bsop.length}}u-padding-0{{/collection.UWA_column--bsop.length}}">
               <div class="heading__container {{pullup-swap-heading-font}}">
                 {{#pullup-heading1}}
-                <div class="heading heading--primary" data-max-height="css">
+                <div class="heading heading--primary
+                            headingPrimaryFontWeight--{{heading-line1-weight}}{{^heading-line1-weight}}regular{{/heading-line1-weight}}" data-max-height="css">
                   <div class="heading__inner"><h1>{{{pullup-heading1}}}</h1></div><!-- heading__inner -->
                 </div><!-- heading--primary -->
                 {{/pullup-heading1}}
                 {{#pullup-heading2}}
-                <div class="heading heading--secondary" data-max-height="css">
+                <div class="heading heading--secondary
+                            headingSecondaryFontWeight--{{heading-line2-weight}}{{^heading-line2-weight}}regular{{/heading-line2-weight}}" data-max-height="css">
                   <div class="heading__inner"><h1>{{{pullup-heading2}}}</h1></div>
                 </div><!-- heading--secondary -->
                 {{/pullup-heading2}}
@@ -988,12 +1054,12 @@
                 {{/collection.UWA_column--bsop}}
               </div><!-- column__container -->
             </div><!-- content--top -->
-            <div class="content content--bottom   {{^UWA_faculty--bsop}}content--noFaculty{{/UWA_faculty--bsop}}">
-              {{#UWA_faculty--bsop}}
+            <div class="content content--bottom   {{^UWA_contact-information--bsop}}content--noFaculty{{/UWA_contact-information--bsop}}">
+              {{#UWA_contact-information--bsop}}
               <div class="faculty__container">
-                <div class="faculty" data-max-line="3">{{{UWA_faculty--bsop}}}</div><!-- faculty -->
+                <div class="faculty" data-max-line="3">{{{UWA_contact-information--bsop}}}</div><!-- faculty -->
               </div><!-- faculty__container -->
-              {{/UWA_faculty--bsop}}
+              {{/UWA_contact-information--bsop}}
               <div class="info">
                 {{#UWA_identifier-name--bsop}}
                 <div class="info__identifierName u-heading-patch" data-max-line="1">{{{UWA_identifier-name--bsop}}}</div><!-- info__identifierName -->
@@ -1003,7 +1069,7 @@
                 {{/UWA_address--bsop}}
                 <div class="info__contact 
                             {{#UWA_phone-number--bsop}}info__contact--{{/UWA_phone-number--bsop}}{{#UWA_email--bsop}}bothExist{{/UWA_email--bsop}}
-                            {{^UWA_phone-number--bsop}}u-display-{{/UWA_phone-number--bsop}}{{^UWA_email--bsop}}none{{/UWA_email--bsop}}
+                            {{^UWA_phone-number--bsop}}u-{{/UWA_phone-number--bsop}}{{^UWA_email--bsop}}hide{{/UWA_email--bsop}}
                             " data-max-line="1">
                   <span data-char-limit="14">{{{UWA_phone-number--bsop}}}</span>
                   <span class="info__contactDivider">|</span>
@@ -1053,7 +1119,7 @@
                 <div class="copy">{{{text}}}</div><!-- copy -->
                 {{/block.text-block}}
                 {{#block.image}}
-                <div class="image" style="height:{{^image-size}}25{{/image-size}}{{image-size}}%;">
+                <div class="image" style="height:{{^image-size}}25{{/image-size}}{{image-size}}%; margin-bottom: {{^image-bottom-space}}0{{/image-bottom-space}}{{image-bottom-space}}pt;">
                   <div class="reposition-fix">{{{image-bsop}}}</div><!-- reposition-fix -->
                 </div><!-- image -->
                 {{/block.image}}
@@ -1063,6 +1129,10 @@
               {{/collection.column}}
             </div> <!-- grid -->
           </div><!-- body -->
+          <div class="footer footer--internalPage">
+            <div class="footer__text footer__text--primary"><span class="pageNumber"></span>The University of Western Australia</div> <!--footer__text-->
+            <div class="footer__text footer__text--secondary">uwa.edu.au<span class="pageNumber"></span></div> <!--footer__text-->
+          </div> <!--footer-->
         </div><!-- container fit-->
       </div><!--bleed-->
 
@@ -1089,6 +1159,16 @@
       console.clear();
 
       {{{account.snippets.safariPopup}}}
+
+      function hideContact() {
+        let pages = document.querySelectorAll(".page");
+        let count = pages.length;
+        let firstPage = pages[0];
+        if (count >= 2) {
+          firstPage.classList.add('firstPage');
+        }
+      }
+      hideContact();
 
       // Tracking text changes and firing text restriction functions (mutationObserver)
       const overflowObserver = new MutationObserver(function(mutations) {
@@ -1138,7 +1218,6 @@
         hideEmptyTitles();
       });
 
-
       checkCrop();
       checkExport();
       charLimit();
@@ -1161,17 +1240,41 @@
 
       gridControll();
 
+      function injectPrimaryFooter() {
+        const containers = document.querySelectorAll('.fit--internalPage');
+        if(!containers) return;
+        let counter = 1;
+        containers.forEach(container => {
+          const evenPageNumber = container.querySelector('.footer__text--secondary .pageNumber');
+          const oddPageNumber = container.querySelector('.footer__text--primary .pageNumber');
+          counter++
+          if(counter % 2 === 0) {
+            container.classList.add('fit--even');
+            evenPageNumber.innerText = counter;
+          } else {
+            container.classList.add('fit--odd');
+            oddPageNumber.innerText = counter;
+          }
+        })
+      }
+
+      injectPrimaryFooter(); 
+
       function injectFooter() {
-        const footer = document.querySelector('.containerMaster .footer')
+        const footer = document.querySelector('.containerMaster .footer');
         const containers = document.querySelectorAll('.fit--internalPage');
         const lastContainer = containers[containers.length - 1];
+        const internalFooter = lastContainer.querySelector('.footer--internalPage');
 
-        if(!containers) return;
+        if(!footer || !containers || !internalFooter) return;
 
+        internalFooter.classList.add('u-hide');
+        lastContainer.classList.add('fit--lastPage');
         lastContainer.appendChild(footer);          
       }
 
       injectFooter();
+
 
     </script>
 
