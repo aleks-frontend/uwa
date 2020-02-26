@@ -941,7 +941,26 @@
       .footer__text--secondary .pageNumber { margin-left: 0.12rem;       }
 
       .cricos__container {
+        display: none;
+      }
+
+      .theme--fullBleedImage .cricos__container--primary,
+      .theme--largeImage .cricos__container--secondary,
+      .theme--splitImageSmall .cricos__container--primary,
+      .theme--splitImageLarge .cricos__container--secondary,
+      .theme--mergedImage .cricos__container--secondary {
         display: flex;
+      }
+
+      .cricos__container--primary {
+        margin-top: 18.7pt;
+      }
+
+      .cricos__container--noMarginTop {
+        margin-top: 0pt;
+      }
+
+      .cricos__container--secondary {
         position: absolute;
         bottom: 16pt;
         left: 0;
@@ -969,7 +988,7 @@
   </head>
   <body style="background: white" data-crop="{{show-crop}}">
     <div class="containerMaster u-hide">
-      <div class="footer footer--lastPage">
+      <div class="footer footer--lastPage theme--{{UWA_theme--bsop}}{{^UWA_theme--bsop}}fullBleedImage{{/UWA_theme--bsop}}">
         <div class="info">
           {{#UWA_identifier-name--bsop}}
           <div class="info__identifierName u-heading-patch" data-max-line="1">{{{UWA_identifier-name--bsop}}}</div><!-- info__identifierName -->
@@ -985,11 +1004,15 @@
             <span class="info__contactDivider">|</span>
             <span>{{{UWA_email--bsop}}}</span>
           </div><!-- info__contact -->
+          <div class="cricos__container cricos__container--primary cricos__container--{{#UWA_identifier-name--bsop}}no{{/UWA_identifier-name--bsop}}{{^UWA_address--bsop}}Margin{{/UWA_address--bsop}}{{^UWA_phone-number--bsop}}{{^UWA_email--bsop}}Top{{/UWA_email--bsop}}{{/UWA_phone-number--bsop}}">
+            <div class="cricos">{{{account.snippets.cricos}}}</div><!--cricos-->
+            <div class="exportId">{{#metadata}}OF: {{export_id}}{{/metadata}}{{^metadata}}OF: XXXXXX{{/metadata}}</div><!--exportId-->
+          </div><!--cricos__container-->
         </div><!-- info -->
         <div class="logo__container logo__container--secondary">
           <div class="logo logo--secondary"></div><!-- logo -->
         </div><!-- logo__container -->
-        <div class="cricos__container">
+        <div class="cricos__container cricos__container--secondary">
           <div class="cricos">{{{account.snippets.cricos}}}</div><!--cricos-->
           <div class="exportId">{{#metadata}}OF: {{export_id}}{{/metadata}}{{^metadata}}OF: XXXXXX{{/metadata}}</div><!--exportId-->
         </div><!--cricos__container-->
