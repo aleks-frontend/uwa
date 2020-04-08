@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html data-sign="OS?">
+  <head>
+    <title>A5 Multi Bage Brochure</title>
+    <!-- Template created by Timothy Phillips, Digital and Creative Services UWA, Febuary 2019 --> <!-- Format Refactored by Outfit on 14 May 2019 -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+    <script type="text/javascript" src="https://static.weboffice.uwa.edu.au/visualid/lib/jquery/jquery-1.11.latest.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://static.weboffice.uwa.edu.au/visualid/lib/font-awesome/font-awesome.4.latest.css?r4" />
+
+
+    <style>
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Circular/stylesheet.css');
+
+      html {
+        font-family: "Circular";
+        font-size: 11pt;
+        color: #000;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }      
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+      
+      .page{
+        border: 1px solid black;
+      }
+      
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" class="u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}} theme-uwa-blue {{ DCS_validation_class }}" data-crop="{{show-crop}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <section class="page">
+
+      <section class="bleed">
+
+        <section class="container fit">
+          <section class="cover-first {{ DCS_cover_text_theme }} {{ DCS_cover_shadow_class }}">
+              <main class="background-image-parent">
+                  <div class="background-image">
+                      {{{ DCS_Cover_background_image }}}
+                  </div>
+                  <span class="uwa-logo">
+                      <span class="_dark" >
+                          {{ #DCS_descriptor_logo_option_dark }}
+                              <img src="{{{ DCS_descriptor_logo_option_dark }}}" alt="">
+                          {{ /DCS_descriptor_logo_option_dark }}
+                          <img src="https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/ea39be3cc4d1144b62b179e6de6d35cc/1.svg" alt="The University of Western Australia" />
+                      </span>
+                      <span class="_light">
+                          {{ #DCS_descriptor_logo_option_light }}
+                              <img src="{{{ DCS_descriptor_logo_option_light }}}" alt="">
+                          {{ /DCS_descriptor_logo_option_light }}
+                          <img src="https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/b3865d5e67f7e36d17156728624c439d/4.svg" alt="The University of Western Australia" />
+                      </span>
+                  </span>
+                  <header>
+                      <h1>{{{ DCS_Cover_headline }}}</h1>
+                      <h2 class="underline">{{{ DCS_Cover_headline_secondary }}}</h2>
+                  </header>
+              </main>
+          </section>
+
+    	<div class="display-none">
+        <div id="inner-footer-content">
+            <footer>
+                <span class="left-page">{{ DCS_inner_page_left_footer }}</span>
+                <span class="right-page">{{ DCS_inner_page_right_footer }}</span>
+            </footer>
+        </div>
+    </div>
+          
+          <footer class="final">
+              <h2>{{ DCS_footer_heading }}</h2>
+              <p class="address">{{ DCS_footer_sub_headding }}</p>
+              <ul class="contact">
+                  {{ #DCS_footer_location }}<li><i class="fa fa-map-marker"></i> {{ DCS_footer_location }}</li>{{ /DCS_footer_location }}
+                  {{ #DCS_footer_phone }}<li><i class="fa fa-phone"></i> {{ DCS_footer_phone }}</li>{{ /DCS_footer_phone }}
+                  {{ #DCS_footer_email }}<li><i class="fa fa-envelope"></i> {{ DCS_footer_email }}</li>{{ /DCS_footer_email }}
+                  {{ #DCS_footer_web }}<li><i class="fa fa-globe"></i> {{ DCS_footer_web }}</li>{{ /DCS_footer_web }}
+              </ul>
+              <p class="cricos">CRICOS Provider Code {{ DCS_UWA_cricos }}&nbsp;&nbsp;&nbsp;OF# <span data-project-code></span></p>
+          </footer>
+        </section><!--container fit-->
+
+      </section><!--bleed-->
+
+    </section><!--page-->
+	<section class="page">
+
+      <section class="bleed">
+
+        <section class="container fit">
+          
+          
+        </section><!--container fit-->
+
+      </section><!--bleed-->
+
+    </section><!--page-->
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script src="https://outfit-assets-production.s3.amazonaws.com/scripts/projectCode.1.0.0.js"></script>
+    <script>window.setProjectCode('[ID]');</script>
+    <script>
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+        });
+      });
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+      
+      function detectSystem() {
+        const isMac = window.navigator.appVersion.includes('Mac');
+		if ( isMac ) document.body.classList.add('is-mac');
+      }
+
+      detectSystem();      
+
+    </script>
+
+
+  </body>
+</html>
