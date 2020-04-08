@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html data-sign="OS?">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="https://outfit-assets-production.s3.amazonaws.com/fonts/uwa/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="https://use.typekit.net/fxc6mtk.css">
+
+    <style>
+      /*Input Reordering
+      {{show-crop}}
+      {{primary-faculty-color}}
+      {{secondary-faculty-color}}
+      {{pullup-featureImage}}
+      {{{pullup-secondaryImage}}}
+      {{{pullup-secondaryImage}}}
+      {{pullup-heading1}}
+      {{pullup-heading2}}
+      {{pullup-heading3}}
+      {{heading-font-size-40}}
+      {{pullup-swap-heading-font}}
+      {{{heading-line1-weight}}}
+      {{{heading-line2-weight}}}
+      {{{pullup-degrees}}}
+      {{{pullup-website}}}
+      {{#collection.statistics}}{{#block.statistic}}{{{statistic-text}}}{{/block.statistic}}{{/collection.statistics}}
+      {{statistic-width}}
+      {{statistics-postition-flex}}
+      {{pullup-disclaimer}}
+      */
+
+      :root{
+        /*Primary Colors*/
+        --blue: {{{account.colors.blue}}};
+        --gold: {{{account.colors.gold}}};
+        --black: {{{account.colors.black}}};
+        --white: {{{account.colors.white}}};
+        /*Secondary Colors*/
+        --none: unset;
+        --purple: {{{account.colors.purple}}};
+        --red: {{{account.colors.red}}};
+        --orange: {{{account.colors.orange}}};
+        --yellow: {{{account.colors.yellow}}};
+        --green: {{{account.colors.green}}};
+        --teal: {{{account.colors.teal}}};
+        --mid-blue: {{{account.colors.mid-blue}}};
+        --cyan: {{{account.colors.cyan}}};
+        --tan: {{{account.colors.tan}}};
+
+        --primary-faculty-color: var(--{{{primary-faculty-color}}});
+        --secondary-faculty-color: var(--{{{secondary-faculty-color}}});
+        --theme-color: var(--secondary-faculty-color, var(--primary-faculty-color));
+
+        --font1: 'TT Norms Pro';
+        --font2: 'novel-pro';
+      }
+
+
+
+      html {
+        font-family: "TT Norms Pro";
+        font-size: 11pt;
+        color: #000;
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }      
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .container{
+        top: calc(10mm + 3mm);
+        height: calc(100% - 6mm - 150mm);
+      }
+
+      .layer{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+      }
+
+      .feature-images{
+        position: relative;
+      }
+
+      .faculty-color{
+        position: absolute;
+        width: 91%;
+        height: 46%;
+        margin-top: 12%;
+        margin-left: 4.5%;
+        background-color: var(--theme-color);
+      }
+
+      .feature-image{
+        position: absolute;
+        width: 83%;
+        height: 44.3%;
+        margin-top: 16.5%;
+        margin-left: 8.5%;
+        display: flex;
+        justify-content: space-between;
+      }
+      .feature-image .image1,
+      .feature-image .image2{
+        position: relative;
+        width: 49%;
+
+      }
+
+      .feature-image .image1{
+        height: 73%;
+        align-self: flex-end;
+      }
+
+      .feature-image .image2{
+        height: 81%;
+        align-self: flex-start;
+      }
+
+      .contentContainer{
+        margin-top: 10%;
+        width: 100%;
+        height: 90%;
+      }
+
+      .logo{
+        width: 39%;
+        height: 6.7%;
+        margin-left: 9%;
+        background-color: var(--white);
+        margin-bottom: 6.5%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .logo img{
+        width: 84%;
+      }
+
+      .heading{
+        height: 17%;
+        width: 90%;
+        margin-bottom: 44%;
+        margin-left: 10%;
+        font-size: 0.6em;
+      }
+
+      .heading-inner{
+        background: var(--white);
+      }
+
+      .heading .line1, .heading .line2{
+        display: flex;
+        align-items: center;
+      }
+
+      .heading .line1{
+        max-width: 86%;
+        min-height: 26.5%;
+      }
+
+      .heading .line2{
+        margin-top: 0.05rem;
+        max-width: 86%;
+        align-items: flex-start;
+      }
+
+      .line1 .heading-inner {
+        padding: 0% 2% 1% 1%;
+      }
+
+      .line2 .heading-inner {
+        padding: 1.5% 2.5% 1.5% 2.5%;
+      }
+
+      h1{
+        font-family: var(--font2);
+        font-size: calc(155pt + {{{heading-font-size-40}}}{{^heading-font-size-40}}0{{/heading-font-size-40}}pt);
+        font-weight: {{{heading-line1-weight}}}{{^heading-line1-weight}}normal{{/heading-line1-weight}};
+      }
+
+      h2{
+        font-family: var(--font1);
+        font-size: calc(160pt + {{{heading-font-size-40}}}{{^heading-font-size-40}}0{{/heading-font-size-40}}pt);
+        font-weight: {{{heading-line2-weight}}}{{^heading-line2-weight}}normal{{/heading-line2-weight}};
+      }
+
+      .swap-font h1{
+        font-family: var(--font1);
+        font-size: calc(160pt + {{{heading-font-size-40}}}{{^heading-font-size-40}}0{{/heading-font-size-40}}pt);
+      }
+
+      .swap-font h2{
+        font-family: var(--font2);
+        font-size: calc(155pt + {{{heading-font-size-40}}}{{^heading-font-size-40}}0{{/heading-font-size-40}}pt);
+      }
+
+      .novel-pro h1, .novel-pro h2{
+        font-family: var(--font2);
+        font-size: calc(155pt + {{{heading-font-size-40}}}{{^heading-font-size-40}}0{{/heading-font-size-40}}pt);
+      }
+
+      .tt-norms h1, .tt-norms h2{
+        font-family: var(--font1);
+        font-size: calc(160pt + {{{heading-font-size-40}}}{{^heading-font-size-40}}0{{/heading-font-size-40}}pt);
+      }
+
+      .content{
+        width: 88%;
+        height: 44%;
+        margin: 0 6%;
+        display: flex;
+        flex-direction: column;
+        max-height: 4100px;
+      }
+
+      /*Statistics Block*/
+      .statistics{
+        width: 100%;
+        margin-bottom: 9.5%;
+        display: flex;
+        align-items: center;
+        justify-content: {{statistics-postition-flex}}{{^statistics-postition-flex}}center{{/statistics-postition-flex}};
+      }
+
+      .statistics.variable .statistic{
+        width: unset;
+        min-width: 25%;
+        flex: 1;
+      }
+
+      .statistics .statistic{
+        height: 540px;
+        width: 25%;
+        border-left: 15px solid var(--theme-color);
+        font-family: var(--font1);
+        text-transform: uppercase;
+        color: var(--theme-color);
+        text-align: center;
+        padding: 0 2%;
+        max-height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .statistics .statistic:last-child {
+        border-right: 15px solid var(--theme-color);
+      }
+
+      .statistics .statistic h3, .statistics .statistic h4{
+        font-size: 135pt;
+        font-weight: bold;
+        line-height: 1;
+      }
+
+      .statistics .statistic h4{
+        font-size: 85pt;
+      }
+
+      .statistics .statistic h3 strong, .statistics .statistic h4 strong{
+        font-weight: bold;
+      }
+
+      .statistics .statistic p{
+        font-size: 50pt;
+        font-weight: 300;
+        line-height: 1;
+      }
+
+      .statistics .statistic p strong{
+        font-weight: normal;
+      }
+
+      .statistics .statistic p sub,
+      .statistics .statistic p sup,
+      .statistics .statistic h3 sub,
+      .statistics .statistic h3 sup,
+      .statistics .statistic h4 sub,
+      .statistics .statistic h4 sup{
+        top: -0.8em;
+        line-height: 1em;
+        font-size: 50%;
+      }
+
+      .disclaimer{
+        font-size: 20pt;
+        color: var(--theme-color);
+        margin-left: 3.5%;
+        max-width: 50%;
+        line-height: 1.15;
+      }
+
+      .disclaimer li{
+        padding-left: 2%;
+        margin-bottom: 0.4%;
+      }
+
+      .color-mask, .image-mask{
+        height: 102%;
+        width: 102%;
+        position: relative;
+        top: -1%;
+        left: -1%;
+      }
+
+      .rect1,
+      .rect2,
+      .rect3{
+        position: absolute;
+        background-color: var(--white);
+      }
+
+      .rect1{
+        top: -1%;
+        left: -1%;
+      }
+
+      .rect2{
+        bottom: -1%;
+        right: -1%;
+      }
+
+      .image-mask .rect1{
+        width: 37.5%;
+        height: 28%;
+      }
+
+      .image-mask .rect2{
+        height: 20%;
+        width: 67%;
+      }
+
+      .image-mask .rect3, .color-mask .rect3{
+        width: 2.5%;
+        height: 102%;
+        top: -1%;
+        bottom: -1%;
+        left: 34%;
+      }
+
+      .color-mask .rect1{
+        width: 48%;
+        height: 51%;
+      }
+
+      .color-mask .rect2{
+        width: 90%;
+        height: 54.5%;
+      }
+
+      .color-mask .rect3{
+        width: 4.5%;
+      }
+
+      .degrees {
+        text-transform: uppercase;
+        line-height: 1.15;
+        letter-spacing: -1px;
+        font-size: 73pt;
+        margin-left: 36%;
+        width: 59.5%;
+        margin-bottom: 9%;
+      }
+
+      .degrees li {
+        border-bottom: 4px solid var(--black);
+        margin-bottom: 2.3%;
+      }
+
+      .degrees li ul li{
+        border-bottom: unset;
+        margin-left: 10%;
+      }
+
+      .website {
+        font-family: var(--font1);
+        font-weight: bold;
+        color: var(--theme-color);
+        font-size: 91pt;
+        margin-left: 36%;
+        margin-bottom: 11.5%;
+      }
+
+      .cricosExportId{
+        font-family: var(--font1);
+        font-size: 20pt;
+        line-height: 1.2em;
+        position: absolute;
+        right: -380pt;
+        bottom: 50pt;
+        transform: rotateZ(-90deg);
+        transform-origin: left bottom;
+        white-space: nowrap;
+      }
+
+      .cricosExportId .exportID {
+        margin-left: 20pt;
+      }
+      
+      .feature-image.overflow{
+        background: rgba(255, 0, 0, 0.7);
+      }
+
+      .feature-image.overflow:hover:after {
+        content: 'Please add a feature image';        
+      }
+
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" data-crop="{{show-crop}}">
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit {{pullup-swap-heading-font}}">
+          <div class="feature-images layer">
+            <div class="faculty-color">
+              <div class="reposition-fix">{{{pullup-secondaryImage}}}</div>
+              <div class="color-mask">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+              </div>
+            </div>
+            <div class="feature-image {{^pullup-featureImage}}overflow{{/pullup-featureImage}}">
+              <div class="reposition-fix">{{{pullup-featureImage}}}</div>
+              <div class="image-mask">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+              </div>
+            </div>
+          </div>
+          <div class="contentContainer layer">
+            <div class="logo"><img src="{{{account.logos.formal-primary}}}"/></div>
+            <div class="heading">
+              {{#pullup-heading1}}<div class="line1" data-max-height="400"><div class="heading-inner"><h1>{{{pullup-heading1}}}</h1></div></div>{{/pullup-heading1}}
+              {{#pullup-heading2}}<div class="line2" data-max-height="400"><div class="heading-inner"><h2>{{{pullup-heading2}}}</h2></div></div>{{/pullup-heading2}}
+              {{#pullup-heading3}}<div class="line2" data-max-height="400"><div class="heading-inner"><h2>{{{pullup-heading3}}}</h2></div></div>{{/pullup-heading3}}
+            </div>
+            <div class="content" data-max-height="css">
+              <div class="degrees">{{{pullup-degrees}}}</div>
+              {{#pullup-website}}<div class="website" data-max-line="2">{{{pullup-website}}}</div>{{/pullup-website}}
+              <div class="statistics {{{statistic-width}}}">
+                {{#collection.statistics}}
+                {{#block.statistic}}
+                {{#statistic-text}}<div class="statistic" data-max-height="550">{{{statistic-text}}}</div>{{/statistic-text}}
+                {{/block.statistic}}
+                {{/collection.statistics}}
+              </div>
+              <div class="disclaimer" data-max-line="11">{{{pullup-disclaimer}}}</div>
+            </div>
+          </div>
+
+          <div class="cricosExportId"><span class="cricos">{{{account.snippets.cricos}}}</span><span class="exportID">{{#metadata}}OF: {{export_id}}{{/metadata}}{{^metadata}}OF: XXXXXX{{export_id}}{{/metadata}}</span></div>
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/custom-rich-text.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="js/text-fit-min.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      console.clear();
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+        hideEmptyTitles();
+      });
+
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+
+    </script>
+
+
+  </body>
+</html>
