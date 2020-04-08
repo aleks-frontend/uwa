@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>A5 Flyer</title>
+	<!-- Template created by Timothy Phillips, Digital and Creative Services UWA, Febuary 2019 -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="https://static.weboffice.uwa.edu.au/visualid/lib/font-awesome/font-awesome.4.latest.css?r4" />
+	<script type="text/javascript" src="https://static.weboffice.uwa.edu.au/visualid/lib/jquery/jquery-1.11.latest.js"></script>
+	<script type="text/javascript" src="script.js"></script>
+	<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="theme-uwa-blue media-{{ DCS_media_type }}">
+	<!-- Cover page -->
+	<div class="page-margin page-one">
+		<div class="page-content">
+			<div class="flex-group-vertical">
+				<div class="banner-bleed">
+					<div class="image">
+						{{{ DCS_image_banner }}}
+					</div>
+					<!-- only displays for two pages -->
+					<span class="logo _logo-color-{{ DCS_logo_colour }}">
+						<img class="dark" src="https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/ea39be3cc4d1144b62b179e6de6d35cc/1.svg" alt="The University of Western Australia" />
+						<img class="light" src="https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/b3865d5e67f7e36d17156728624c439d/4.svg" alt="The University of Western Australia" />
+					</span>
+				</div>
+
+				<h1>{{ DCS_headline }}</h1>
+				<h2>{{ DCS_headline_secondary }}</h2>
+				<div class="flex-grow content-columns _column-count-{{ DCS_copy_columns_count }} _break-inside-{{ DCS_copy_break_inside }}">
+					{{{ DCS_body_copy }}}
+				</div>
+	{{ #DCS_body_copy_2_optional }}
+			</div>
+		</div>
+	</div>
+	<!-- second page -->
+	<div class="page-margin page-two">
+		<div class="page-content">
+			<div class="flex-group-vertical">
+				<div class="banner-group">
+					{{ #DCS_image_banner_2_optional }}
+						<div class="image">
+							{{{ DCS_image_banner_2_optional }}}
+						</div>
+					{{ /DCS_image_banner_2_optional }}
+					{{ #DCS_image_banner_3_optional }}
+						<div class="gutter"></div>
+						<div class="image">
+							{{{ DCS_image_banner_3_optional }}}
+						</div>
+					{{ /DCS_image_banner_3_optional }}
+				</div>
+				<div class="flex-grow content-columns _column-count-{{ DCS_copy_columns_count }} _break-inside-{{ DCS_copy_break_inside }}">
+					{{{ DCS_body_copy_2_optional }}}
+				</div>
+	{{ /DCS_body_copy_2_optional }}
+				<footer>
+					<div class="top">
+						<p class="heading">{{ DCS_contact-heading }}</p>
+					</div>
+					<div class="bottom">
+						<div class="left contact">
+							<p><strong>{{ DCS_contact-name }}</strong></p>
+							<p>
+								<span>{{ DCS_contact-location }}</span>
+								<span><i class="fa fa-phone"></i> {{ DCS_contact-phone }}</span>
+							</p>
+							<p>
+								<span><i class="fa fa-envelope"></i> {{ DCS_contact-email }}</span>
+								<span><i class="fa fa-globe"></i> <strong>{{ DCS_contact-url }}</strong></span>
+							</p>
+						</div>
+						<div class="right">
+							<img src="https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/ea39be3cc4d1144b62b179e6de6d35cc/1.svg" class="logo" alt="The University of Western Australia" />
+						</div>
+					</div>
+				</footer>
+			</div>
+		</div>
+		<div class="cricos-absolute">
+			<span>CRICOS Provider Code {{ UWA_cricos }}</span>&nbsp;
+			<span>DCS <span data-project-code></span></span>
+		</div>
+	</div>
+</body>
+
+</html>
