@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html data-sign="OSM">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,600,600i");
+      @import url("https://outfit-assets-production.s3.amazonaws.com/fonts/uwa/stylesheet.css");
+
+      :root {
+        --uwa-blue: {{{account.colors.uwa-blue}}};
+        --black: #000;
+      }
+
+      html {
+        font-family: 'Source Sans Pro';
+        font-size: 11pt;
+        color: #000;
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }      
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      ul {
+        margin: 0 0 4.586mm 0 !important;
+      }
+
+      li {
+        margin: 0 !important;
+        padding-left: 3mm !important;
+      }
+
+
+      ul {
+        font-size: 9pt;
+        font-weight: 400;
+        list-style: none;
+        margin: 1em 0 0 0;
+        padding: 0;
+      }
+
+      ul li {
+        position: relative;
+        padding-left: 1.25em;
+      }
+
+      ul li ul,
+      ul li:not(:first-of-type) {
+        margin-top: 0.15em;
+      }
+
+      ul li:before {
+        content: '•';
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .header {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .header--front {
+        margin-bottom: 11pt;
+        padding: 51pt 37pt 0 37pt;
+      }
+
+      .header--back {
+        height: 206pt;
+        flex-shrink: 0;
+      }
+
+      .logo {
+        width: 225pt;
+        height: 38pt;
+        object-fit: contain;
+        object-position: left;
+        margin-bottom: 14.3pt;
+      }
+
+      .header__content {
+        padding-left: 4pt;
+        padding-right: 2pt;
+      }
+
+      .heading h1 {
+        color: var(--uwa-blue);
+        font-family: 'UWA';
+        font-size: 19.6pt;
+        line-height: 1.15em;
+      }
+
+      .subheading {
+        margin-top: 29.4pt;
+      }
+
+      .subheading h2 {
+        padding-bottom: 3pt;
+        border-bottom: 1px solid var(--uwa-blue);
+        font-size: 11pt;
+        color: var(--uwa-blue);
+        line-height: 1.2em;
+      }
+
+      .body {
+        position: relative;
+        flex: 1;
+      }
+
+      .body--back {
+        padding: 49.1pt 39pt 20pt 43pt;
+      }
+
+      .header + .body--back {
+        padding-top: 12.1pt;
+      }
+
+      .breakoutCopy h2 {
+        margin-bottom: 10pt;
+        font-size: 14pt;
+        font-weight: 400;
+        color: var(--uwa-blue);
+        line-height: 1.3em;
+      }
+
+      .copy h3 {
+        font-size: 11.3pt;
+        color: var(--uwa-blue);
+        line-height: 1.2em;
+        font-weight: 600;
+      }
+
+      .copy p {
+        font-size: 9pt;
+        font-weight: 400;
+        color: var(--black);
+        letter-spacing: 0.0pt;
+        line-height: 1.5em;
+        margin-bottom: 12pt;
+      }
+
+      .copy p:last-child {
+        margin-bottom: 0;
+      }
+
+      .copy strong {
+        font-weight: bold;
+      }
+
+      .coverImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+
+      .footer {
+        padding: 0pt 90pt 30pt 43pt;
+      }
+
+      .subheader {
+        padding-bottom: 0.04rem;
+        font-size: 9pt;
+        border-bottom: 0.02rem solid var(--black);
+        letter-spacing: 0.005rem;
+      }
+
+      .details {
+        margin-top: 0.3rem;
+        line-height: 13pt;
+        font-size: 9pt;
+        letter-spacing: 0.007rem;
+      }
+
+      .website {
+        margin-top: 0.02rem;
+        font-size: 9pt;;
+      }
+
+      .u-hide {
+        display: none;
+      }
+
+      .page {
+        border-bottom: 1px soli #fff;
+      }
+
+      .is-export-mode.page {
+        border-bottom: none;
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" class="u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}" data-crop="{{show-crop}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      {{#placeholder-image-1}}
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+      {{/placeholder-image-1}}
+      {{#placeholder-image-2}}
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-2 }}"></div>
+      {{/placeholder-image-2}}
+    </div><!-- end placeholderMaster -->
+
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+
+          <div class="header header--front">
+            {{#UWA_logo--dlb}}
+            <img class="logo" src="{{{account.logos.formal-primary}}}"><!--logo-->
+            {{/UWA_logo--dlb}}
+            <div class="header__content">
+              {{#UWA_heading--dlb}}
+              <div class="heading" data-max-height="75">{{{UWA_heading--dlb}}}</div><!--heading-->
+              {{/UWA_heading--dlb}}
+              {{#UWA_subheading--dlb}}
+              <div class="subheading" data-max-height="30">{{{UWA_subheading--dlb}}}</div><!--subheading-->
+              {{/UWA_subheading--dlb}}
+            </div><!--header__content-->
+          </div><!--header-->
+          <div class="body">
+            <div class="coverImage"><div class="reposition-fix">{{{UWA_front-image--dlb}}}</div></div><!--coverImage-->
+          </div><!--body-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+          {{#UWA_back-image--dlb}}	
+          <div class="header header--back">
+            <div class="coverImage"><div class="reposition-fix">{{{UWA_back-image--dlb}}}</div></div><!--coverImage-->
+          </div><!--header-->
+          {{/UWA_back-image--dlb}}
+          <div class="body body--back">
+            <div class="body__inner" data-max-height="dynamic">
+              {{#UWA_breakout-copy-style--dlb}}
+              <div class="breakoutCopy">{{{UWA_breakout-copy-style--dlb}}}</div><!--breakoutCopy-->
+              {{/UWA_breakout-copy-style--dlb}}
+              <div class="copy">{{{UWA_back-copy--dlb}}}</div><!--copy-->
+            </div><!--body__inner-->
+          </div><!--body-->
+          <div class="footer">
+            {{#UWA_subheader--dlb}}
+            <div class="subheader" data-max-line="1">{{{UWA_subheader--dlb}}}</div> <!--subheader-->
+            {{/UWA_subheader--dlb}}
+            {{#UWA_details--dlb}}
+            <div class="details"  data-max-line="4">{{{UWA_details--dlb}}}</div> <!--subheader-->
+            {{/UWA_details--dlb}}
+            {{#UWA_website--dlb}}
+            <div class="website"  data-max-line="1">{{{UWA_website--dlb}}}</div> <!--subheader-->
+            {{/UWA_website--dlb}}
+          </div> <!--footer-->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles('.subheading');
+        });
+      });
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        hideEmptyTitles('.subheading');
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+      function detectSystem() {
+        const isMac = window.navigator.appVersion.includes('Mac');
+        if ( isMac ) document.body.classList.add('is-mac');
+      }
+
+      detectSystem();
+
+      hideEmptyTitles('.subheading');
+
+    </script>
+
+
+  </body>
+</html>
