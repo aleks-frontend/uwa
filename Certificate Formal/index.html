@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Print Generic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="tinycolor.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i">
+    <link rel="stylesheet" href="https://outfit-assets-production.s3.amazonaws.com/fonts/Cubano/stylesheet.css">
+    <link rel="stylesheet" href="https://outfit-assets-production.s3.amazonaws.com/fonts/uwa/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="minireset.css">
+    <link rel="stylesheet" type="text/css" href="crop.css">
+
+    <style>
+
+      * {
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .placeholder {
+        background-image: url('https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/8bf04cd02246d105099d229534f0ec5f/59_Certificate%20portrait.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0.7;
+        z-index: 100;
+      }
+
+      .overflow {
+        border: 1px dashed red;
+        position: relative; }
+      .overflow h1, 
+      .overflow h2, 
+      .overflow h3, 
+      .overflow h4, 
+      .overflow h5, 
+      .overflow h6, 
+      .overflow p, 
+      .overflow li { color: red !important; }
+      .overflow::before {
+        content: '+';
+        position: absolute;
+        z-index: 5;
+        top: 5px;
+        right: 5px;
+        height: 15px;
+        width: 15px;
+        border: 1px solid red;
+        color: red;
+        padding: 2px 2px 2px 3px;
+        box-sizing: border-box;
+        font-size: 13px;
+        text-align: center;
+        line-height: 8px;
+        background-color: white;
+        text-align: center; }
+      .overflow:hover:before {
+        background-color: red;
+        color: white; }
+      .overflow:after {
+        display: none; }
+      .overflow:hover:after {
+        display: block;
+        content: 'There is overset content in this column. Please remove it';
+        position: absolute;
+        top: 25px;
+        right: 5px;
+        background-color: black;
+        color: white;
+        border-radius: 2px;
+        padding: 5px;
+        box-sizing: border-box;
+        font-size: 11px;
+        font-weight: 400;
+        line-height: 1.1em;
+        text-align: right;
+        width: 15em;
+      }
+
+      body {         
+        font-family: 'Source Sans Pro', sans-serif; 
+      }
+      
+      .signature { display: flex; height: 0.8em; }
+      .signature img { height: 100%; }
+
+      .header-lockup { position: absolute; top: 2.4em; left: 1.7em; display: flex; align-items: center; }
+      .uwa-logo { height: 1.2em; }
+      .uwa-logo img { height: 100%; }
+      .seperator { width: 3px; height: 1.3em; background-color: {{{account.colors.uwa-blue}}}; margin: 0 0.3em; }
+      .faculty p { color: {{{account.colors.uwa-blue}}}; font-family: 'UWA'; font-size: 0.5em; line-height: 1em; }
+
+      .text-lockup { position: absolute; left: 2.3em; top: 5.3em; }
+      .text-lockup h1 { margin: 0; padding: 0; color: {{{ text-colour }}}; font-family: 'UWA'; font-size: 0.7em; text-transform: uppercase; }
+      .text-lockup p { margin: 3.3em 0 0 0; padding: 0; color: black; font-size: 0.3em; }
+      .text-lockup h2 { margin: 1.2em 0 0 0; color: {{{ text-colour }}}; font-family: 'UWA'; font-size: 0.6em; text-transform: uppercase; }
+
+      .text-lockup h2:nth-of-type(3) { margin: 1em 0 0 0; }
+
+      .text-lockup p:nth-of-type(2) { margin: 2.4em 0 0 0; }
+      .text-lockup p:nth-of-type(3) { margin: 2.4em 0 0 0; }
+      .text-lockup p:nth-of-type(4) { margin: 2.4em 0 0 0; }
+
+      .detail-lockup { position: absolute; left: 2.3em; top: 14em; }
+      .detail-one p, .detail-two p { margin: 0.7em 0 0 0 !important; font-size: 0.2em; border-top: 1px solid black; padding: 0.5em 0; }
+
+      .detail-one, .detail-two {
+        width: 200px;
+      }     
+      
+      .detail-two { margin: 0.6em 0 0 0; }
+
+      .emblem { position: absolute; right: -3.3em; bottom: 1em; width: 12.5em; z-index: -1; }
+      .emblem img { width: 100%; }
+
+      .badge { position: absolute; right: 1.4em; bottom: 1.6em; width: 3.6em; }
+      .badge img { width: 100%; }
+
+      .theme-one .emblem { display: none; }
+      .theme-one .badge { display: block; }
+
+      .theme-two .emblem { display: block; }
+      .theme-two .badge { display: none; }
+
+      .theme-two .text-lockup h1 { display: none; }
+      .theme-two p:nth-of-type(1) { margin: 0; }
+
+      .theme-one .additional-text { display: none; }
+      .theme-two .additional-text { display: block; }
+      
+      .cricos {
+        position: absolute;
+        left: 2.3em;
+        bottom: 0.7em;
+      }
+
+      .cricos p {
+        color: black;
+        margin: 1.5em 0;
+        font-size: 0.1em;
+        font-weight: 400;
+      }
+
+      @media (min-width: 1100px) and (max-width: 1300px) {
+
+        .detail-lockup { display: flex; }
+        .detail-two { margin: 0 0 0 1em; }
+        
+        .cricos { bottom: 1.2em; }
+
+        .theme-one .detail-lockup { left: 8em; top: 13em; }
+        .theme-two .detail-lockup { left: 12em; top: 13em; }
+
+        .emblem { right: -5.8em; }
+
+      }
+      
+      .logo__wrapper {
+        display: flex;
+        align-items: center;
+      }
+
+      .logo__description {
+        align-self: center;
+        font-size: 0.3rem
+      }
+
+      .logo {
+        margin-right: 0.5rem;
+      }
+      
+      .logo {
+        height: 1.1rem;
+      }
+      
+      .logo--descriptor {
+        display: none;
+      }
+
+      .descriptor-visible .logo {
+        display: none;
+      }
+
+      .descriptor-visible .logo--descriptor {
+        display: block;
+      }     
+
+    </style>
+  </head>                             
+  <body style="background-color: white;" class="{{{ theme }}}">
+    
+    {{#spreadsheet.names}}
+
+    <div class="page">
+      <div class="bleed">
+
+        <div class="header-lockup"></div>
+
+        <div class="text-lockup">
+          <div class="certificate-name"></div>
+          <p>This is to certify that</p>
+          <h2>{{{ first-name }}} {{{ last-name }}}</h2>
+          <p>Has successfully completed the</p>
+          <h2 style="padding-bottom: 20pt;">{{{ course }}}</h2>
+          <div class="additional-text"></div>
+          <p class="date-field"></p>
+        </div>
+
+        <div class="detail-lockup"></div>
+
+        <div class="emblem">
+          <img src="https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/a515156b5b2f90f42bc6bb6f578f074f/emblem.svg">
+        </div>
+
+        <div class="badge">
+          <img src="https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/889952a0154538874c4691e6718873b0/badge.svg">
+        </div>
+        
+        <div class="cricos"></div>
+
+      </div>
+    </div>
+
+    {{/spreadsheet.names}}
+    
+    <script>
+      window.showCrop = {{show-crop}};
+    </script>
+
+    <script src="main.js"></script>
+    <script src="prefixfree.js"></script>
+    <script src="moment.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script>
+      function loop() {
+        checkHeight(document.getElementsByClassName('check-overflow'));
+
+      } setInterval(loop, 500);
+
+      function checkHeight(element) {
+        for (i = 0 ; i < element.length ; i++ ) {
+          var currentElement = element[i];
+          var height         = currentElement.offsetHeight;
+          var parent         = currentElement.parentNode;
+          var parentHeight   = parent.offsetHeight;
+
+          if (height > parentHeight) {
+            parent.classList.add('overflow');
+          } else {
+            parent.classList.remove('overflow');
+          }
+
+          if ((currentElement).parentNode.classList.contains('overflow')) {
+            document.body.classList.add('overflow-true');
+          } else {
+            document.body.classList.remove('overflow-true'); 
+          }
+        }
+      }
+      
+      var moment = moment();
+      var date = document.querySelector('.date-field');
+      date.innerHTML = moment.format('Do MMMM YYYY');
+      
+      var detailLockup = document.getElementsByClassName('detail-lockup');
+      for ( i = 0 ; i < detailLockup.length ; i++ ) {
+        detailLockup[i].innerHTML = `{{#authoriser-one}}<div class="detail-one"><div class="signature"><img src="{{{ authoriser-one-signature}}}"></div> {{{ authoriser-one }}}</div> {{/authoriser-one}} {{#authoriser-two}}<div class="detail-two"><div class="signature"><img src="{{{ authoriser-two-signature}}}"></div> {{{ authoriser-two }}}</div> {{/authoriser-two}}`
+      };        
+      
+      var headerLockup = document.getElementsByClassName('header-lockup');
+      for ( i = 0 ; i < headerLockup.length ; i++ ) {
+        headerLockup[i].innerHTML = `<div class="{{{ UWA_descriptor }}}"><div class="logo__wrapper"><img src="https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/ea39be3cc4d1144b62b179e6de6d35cc/1.svg" alt="" class="logo"><img src="{{{ UWA_faculty-logo }}}" alt="" class="logo logo--descriptor" /></div></div>`
+      };   
+      
+      var dateField = document.getElementsByClassName('date-field');
+      for ( i = 0 ; i < dateField.length ; i++ ) {
+        dateField[i].innerHTML = `{{{ date }}}`
+      };   
+      
+      var cricos = document.getElementsByClassName('cricos');
+      for ( i = 0 ; i < cricos.length ; i++ ) {
+        cricos[i].innerHTML = `<p>{{{ cricos }}}</p>`
+      }; 
+      
+      var certName = document.getElementsByClassName('certificate-name');
+      for ( i = 0 ; i < certName.length ; i++ ) {
+        certName[i].innerHTML = `<h1>{{{ certificate-name }}}</h1>`
+      };  
+      
+      var addText = document.getElementsByClassName('additional-text');
+      for ( i = 0 ; i < addText.length ; i++ ) {
+        addText[i].innerHTML = `<p>{{{ additional-text }}}</p>`
+      };  
+      
+    </script>
+
+  </body>
+</html>
