@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html data-sign="OSZ">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,600,600i");
+      @import url("https://outfit-assets-production.s3.amazonaws.com/fonts/uwa/stylesheet.css");
+
+      :root {
+        --white: #ffffff;
+        --black: #000000;
+        --blue: {{{account.colors.uwa-blue}}};
+        --gray: #808080;
+      }
+
+      html {
+        font-family: "Source Sans Pro", sans-serif;
+        font-size: 11pt;
+        color: #000;
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }      
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+
+      .fit {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .header {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding-top: 9pt;
+        padding-left: 27pt;
+      }
+
+      .logo {
+        width: 230pt;
+        height: 71.7pt;
+        padding: 18pt 0;
+        object-fit: contain;
+        object-position: 0 0;
+      }
+
+      .body {
+        position: relative;
+        flex: 1;
+        padding: 18.4pt 50pt 0 30.5pt;
+      }
+
+      .featureImg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;   
+      }
+
+      /* Back Page */
+
+      .fit--back {
+        padding: 10.8pt 42pt 48pt 27.9pt;
+      }
+
+      .fit--backSecondary {
+        padding-bottom: 0pt;
+      }
+
+      .header--back {
+        padding: 0;
+        margin-bottom: 16.7pt;
+      }
+
+      .heading {
+        position: relative;
+        font-family: "UWA", sans-serif;
+        font-size: 23.4pt;
+        color: var(--white);
+      }
+
+      .heading h1 {
+        font-weight: 500;
+        font-size: {{{UWA_heading-size--po}}}%;
+        line-height: 1;
+      }
+
+
+      .stamp {
+        display: flex;
+        flex-direction: column;
+        margin-top: 10.1pt;
+        width: 79pt;
+        height: 71pt;
+      }
+
+
+      .stamp--hide {
+        display: none; 
+      }
+
+      .stamp__body, .stamp__footer {
+        text-align: center;
+        font-weight: bold;
+        text-transform: uppercase;
+        line-height: 1.2em;
+      }
+
+      .stamp__body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 71pt;
+        font-size: 11pt;
+        border: 1pt solid var(--gray);
+        padding-top: 2pt;
+      }
+
+      .stamp__footer {
+        font-size: 12.6pt;
+        height: 22pt;
+        color: var(--white);
+        background-color: var(--black);
+      }
+
+      .body--back {
+        display: flex;
+        padding: 0;
+      }
+
+      .body--backSecondary {
+        flex-direction: column;
+      }
+
+      .main {
+        width: 251pt;
+        flex-shrink: 0;
+      }
+
+      .main--secondary {
+        flex: 1;
+      }
+
+      .copy {
+        -webkit-column-count: 2; /* Chrome, Safari, Opera */
+        -moz-column-count: 2; /* Firefox */
+        column-count: 2;
+        -webkit-column-gap: 5pt; /* Chrome, Safari, Opera */
+        -moz-column-gap: 5pt; /* Firefox */
+        column-gap: 5pt;
+        -webkit-perspective:1;
+      }
+
+      .copy--secondary {
+        -webkit-column-count: 2; /* Chrome, Safari, Opera */
+        -moz-column-count: 2; /* Firefox */
+        column-count: 2;
+      }
+
+      .copyColumn--1 {
+        -webkit-column-count: 1; /* Chrome, Safari, Opera */
+        -moz-column-count: 1; /* Firefox */
+        column-count: 1;
+      }
+
+      .copy p {
+        font-size: 8.9pt;
+        color: var(--gray);
+        line-height: 1.5em;
+      }
+
+      .copy h3 {
+        font-size: 11.2pt;
+        font-weight: 700;
+        color: var(--blue);
+      }
+
+      .copy strong {
+        color: var(--black);
+        font-weight: bold;
+      }
+
+      .copy em {
+        color: var(--gray);
+      }
+
+      .side {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        flex: 1;
+        height: 168pt;
+        padding-bottom: 42.2pt;
+        padding-left: 13pt;
+      }
+
+      .details {
+        line-height: 0.7em;
+      }
+
+      .details__item {
+        color: var(--gray);
+        font-size: 8.9pt;
+      }
+
+      .details__item:nth-child(1){
+        margin-bottom: -1pt;
+      }
+
+      .details__item--secondary{
+        text-transform: uppercase;
+      }
+
+      .footer--back {
+        padding-top: 15pt;
+
+      }
+
+      .faculty__header {
+        margin-bottom: 13.5pt;
+        position: relative;
+        font-size: 10.2pt;
+        color: var(--blue);
+      }
+
+      .faculty__header::after {
+        content: '';
+        position: absolute;
+        bottom: -4.4pt;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background-color: var(--blue);
+      }
+
+      .faculty__details {
+        font-size: 8.9pt;
+        line-height: 1.6em;
+      }
+
+      .faculty__website {
+        margin-top: 0pt;
+        font-size: 9.2pt;
+        line-height: 1.3em;
+        font-weight: 600;
+      }
+
+      .cricos {
+        margin-top: 9.1pt;
+        font-size: 6.3pt;
+      }
+
+      .faculty{
+        margin-bottom: 15pt;
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" class="u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}" data-crop="{{show-crop}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-2 }}"></div>
+    </div><!-- end placeholderMaster -->
+
+
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit fit--front">
+
+          <div class="header">
+            {{#UWA_logo--po}}<img class="logo" src="{{UWA_logo--po}}" data-target-id="logo"/>{{/UWA_logo--po}} {{^UWA_logo--po}}<img class="logo" src="{{account.logos.formal-primary}}" data-target-id="logo"/>{{/UWA_logo--po}}<!--logo-->
+          </div> <!--header-->
+
+          <div class="body">
+            {{ #UWA_feature-img--po }}
+            <div class="featureImg">
+              <div class="reposition-fix" data-target-id="feature-image">{{{UWA_feature-img--po}}}</div>
+            </div> <!--featureImg--->
+            {{ /UWA_feature-img--po }}
+            <div class="heading" data-max-line="2" data-target-id="heading">{{{UWA_heading--po}}}</div> <!--heading-->
+          </div> <!--body-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+    <!--{{{UWA_copy--po}}}-->
+    {{ #spreadsheet.recipient-details--po }}
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit fit--back">
+
+          <div class="header header--back">
+            {{#UWA_logo--po}}<img class="logo" src="{{UWA_logo--po}}" data-target-id="logo"/>{{/UWA_logo--po}} {{^UWA_logo--po}}<img class="logo" src="{{account.logos.formal-primary}}" data-target-id="logo"/>{{/UWA_logo--po}}<!--logo-->            
+            <div class="stamp stamp--{{^UWA_stamp-visibilty--po}}show{{/UWA_stamp-visibilty--po}}{{UWA_stamp-visibilty--po}}" data-target-id="stamp-visibility">
+              <div class="stamp__body">Postage<br>Paid<br>Australia</div>
+              <div class="stamp__footer">Priority</div>
+            </div> <!--stamp-->
+          </div> <!--header--back-->
+
+          <div class="body body--back">
+            <div class="main">
+              <div data-max-height="dynamic">
+                <div class="copy" data-target-id="copy">{{{UWA_copy--po}}}</div> <!--copy-->
+              </div><!-- end dynamic -->
+            </div> <!--main-->
+
+            <div class="side">
+              <div class="details">
+                {{ #UWA_name--po}}
+                <div class="details__item" data-max-line="2">{{{UWA_name--po}}}</div>
+                {{ /UWA_name--po}}
+
+                {{ #UWA_address-line-1--po }}
+                <div class="details__item" data-max-line="2">{{{UWA_address-line-1--po}}}</div>
+                {{ /UWA_address-line-1--po}}
+
+                {{ #UWA_address-line-2--po}}
+                <div class="details__item" data-max-line="2">{{{UWA_address-line-2--po}}}</div>
+                {{ /UWA_address-line-2--po}}
+
+
+                <div class="details__item details__item--secondary" data-max-line="2">
+                  {{#UWA_suburb--po}}{{{UWA_suburb--po}}}{{/UWA_suburb--po}} {{#UWA_state--po}}{{{UWA_state--po}}}{{/UWA_state--po}} {{#UWA_postcode--po}}{{{UWA_postcode--po}}}{{/UWA_postcode--po}}
+                </div>
+
+                {{#UWA_country--po}}
+                <div class="details__item" data-max-line="2">{{{UWA_country--po}}}</div>
+                {{/UWA_country--po}}
+              </div> <!--details-->
+            </div> <!--side-->
+
+          </div> <!--body--back-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    {{ /spreadsheet.recipient-details--po }}
+
+
+    {{ ^spreadsheet.recipient-details--po.length  }}
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit fit--back fit--backSecondary">
+
+          <div class="header header--back">
+            {{#UWA_logo--po}}<img class="logo" src="{{UWA_logo--po}}" data-target-id="logo"/>{{/UWA_logo--po}} {{^UWA_logo--po}}<img class="logo" src="{{account.logos.formal-primary}}" data-target-id="logo"/>{{/UWA_logo--po}}<!--logo-->           
+          </div> <!--header--back-->
+
+          <div class="body body--back body--backSecondary">
+            <div class="main--secondary">
+              <div data-max-height="dynamic">
+                <div class="copy copy--secondary copyColumn--{{UWA-column--po}}{{^UWA-column--po}}3{{/UWA-column--po}}" data-target-id="copy">{{{UWA_copy--po}}}</div> <!--copy-->
+              </div><!-- end dynamic -->
+            </div> <!--main-->
+
+            <div class="footer footer--back">
+              <div class="faculty">
+                {{#UWA_faculty-header--po}}
+                <div class="faculty__header" data-max-line="1">{{{UWA_faculty-header--po}}}</div><!--faculty__header-->
+                {{/UWA_faculty-header--po}}
+                {{#UWA_faculty-details--po}}
+                <div class="faculty__details" data-max-line="2">{{{UWA_faculty-details--po}}}</div><!--faculty__details-->
+                {{/UWA_faculty-details--po}}
+                {{#UWA_faculty-website--po}}
+                <div class="faculty__website" data-max-line="1">{{{UWA_faculty-website--po}}}</div><!--faculty__website-->
+                {{/UWA_faculty-website--po}}
+              </div><!--faculty-->
+              <div class="cricos"><!--CRICOS Provider Code:{{{UWA_cricos--po}}}--></div><!--cricos-->
+            </div><!--footer-->
+
+          </div> <!--body--back-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    {{ /spreadsheet.recipient-details--po.length }}
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+        });
+      });
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+      function detectSystem() {
+        const isMac = window.navigator.appVersion.includes('Mac');
+        if ( isMac ) document.body.classList.add('is-mac');
+      }
+
+
+      detectSystem();
+
+    </script>
+
+
+  </body>
+</html>
