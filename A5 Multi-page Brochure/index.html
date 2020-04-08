@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>A5 Multi Bage Brochure</title>
+    <!-- Template created by Timothy Phillips, Digital and Creative Services UWA, Febuary 2019 -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="https://static.weboffice.uwa.edu.au/visualid/lib/font-awesome/font-awesome.4.latest.css?r4" />
+    <script type="text/javascript" src="https://static.weboffice.uwa.edu.au/visualid/lib/jquery/jquery-1.11.latest.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="styles.css">
+	<style>
+      .page{
+        overflow: hidden;
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+      }
+      
+      .fit{
+        position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+      }
+  	</style>
+</head>
+
+
+<body class="theme-uwa-blue media-{{ DCS_media_type }} {{ DCS_validation_class }}">
+
+     <!-- Cover page -->
+  <div class="page"><div class="fit">
+    <section class="cover-first {{ DCS_cover_text_theme }} {{ DCS_cover_shadow_class }}">
+        <main class="background-image-parent">
+            <div class="background-image">
+                {{{ DCS_Cover_background_image }}}
+            </div>
+            <span class="uwa-logo">
+                <span class="_dark" >
+                    {{ #DCS_descriptor_logo_option_dark }}
+                        <img src="{{{ DCS_descriptor_logo_option_dark }}}" alt="">
+                    {{ /DCS_descriptor_logo_option_dark }}
+                    <img src="https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/ea39be3cc4d1144b62b179e6de6d35cc/1.svg" alt="The University of Western Australia" />
+                </span>
+                <span class="_light">
+                    {{ #DCS_descriptor_logo_option_light }}
+                        <img src="{{{ DCS_descriptor_logo_option_light }}}" alt="">
+                    {{ /DCS_descriptor_logo_option_light }}
+                    <img src="https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/b3865d5e67f7e36d17156728624c439d/4.svg" alt="The University of Western Australia" />
+                </span>
+            </span>
+            <header>
+                <h1>{{{ DCS_Cover_headline }}}</h1>
+                <h2 class="underline">{{{ DCS_Cover_headline_secondary }}}</h2>
+            </header>
+        </main>
+    </section>
+    </div></div>
+    <div class="display-none">
+        <div id="inner-footer-content">
+            <footer>
+                <span class="left-page">{{ DCS_inner_page_left_footer }}</span>
+                <span class="right-page">{{ DCS_inner_page_right_footer }}</span>
+            </footer>
+        </div>
+    </div>
+
+    {{ #collection.DCS_content_pages }}
+
+
+        {{ #block.DCS_image_page }}
+  <div class="page"><div class="fit">
+            <section class="inner">
+                <main>
+                    <ul class="image-stack-full _{{ DCS_image_stack_full_a5_class }}">
+                        <li class="pos-1">{{{ DCS_image_stack_1 }}}</li>
+                        <li class="pos-2">{{{ DCS_image_stack_2 }}}</li>
+                        <li class="pos-3">{{{ DCS_image_stack_3 }}}</li>
+                    </ul>
+                </main>
+            </section>
+    </div></div>
+        {{ /block.DCS_image_page }}
+
+        {{ #block.DCS_content_page }}
+            <!-- half page image -->
+  <div class="page"><div class="fit">
+                <section class="inner">
+                    <main>
+                        <div class="mixed-content-group {{ DCS_mixed_content_group_class }}">
+                            <ul class="_images">
+                                <li class="_pos-1">{{{ DCS_image_stack_1 }}}<img class="aspect-square" src="//static.weboffice.uwa.edu.au/visualid/external-sites/outfit.io/img/aspect-square.png" alt=""></li>
+                                <li class="_pos-2">{{{ DCS_image_stack_2 }}}<img class="aspect-square" src="//static.weboffice.uwa.edu.au/visualid/external-sites/outfit.io/img/aspect-square.png" alt=""></li>
+                            </ul>
+                            <div class="gutter"></div>
+                            <div class="_copy">
+                                <div class="copy-stack _{{ DCS_flex_content_layout_class }}">
+                                    {{ #collection.DCS_flex_content }}
+
+                                        {{ #block.DCS_flex_content_copy }}
+                                            <div class="content-copy">
+                                                {{{ DCS_flex_content_copy_body }}}
+                                            </div>
+                                        {{ /block.DCS_flex_content_copy }}
+
+                                        {{ #block.DCS_flex_content_quote }}
+                                            <div class="content-quote">
+                                                <blockquote>{{{ DCS_flex_content_quote_body }}}</blockquote>
+                                            </div>
+                                        {{ /block.DCS_flex_content_quote }}
+
+                                        {{ #block.DCS_flex_content_image }}
+                                            <div class="content-image {{ DCS_flex_content_image_align_class }}">
+                                                <img src="{{{ DCS_flex_content_image }}}" alt="" style="max-width: {{ DCS_flex_content_image_width }}%;">
+                                            </div>
+                                        {{ /block.DCS_flex_content_image }}
+
+                                        {{ #block.DCS_table_2_col }}
+                                            <div class="content-table">
+                                                {{ #DCS_table_title }}
+                                                <h3 class="table">{{ DCS_table_title }}</h3>
+                                                {{ /DCS_table_title }}
+                                                <table class="col-size-a-{{ DCS_table_col_a_size }} row-padding-{{ DCS_table_row_padding }}">
+                                                    {{ #DCS_table_col_a_header }}
+                                                    <thead>
+                                                        <tr>
+                                                            <th>{{ DCS_table_col_a_header }}</th>
+                                                            <th>{{ DCS_table_col_b_header }}</th>
+                                                        </tr>
+                                                    </thead>
+                                                    {{ /DCS_table_col_a_header }}
+                                                    <tbody>
+                                                        {{ #spreadsheet.DCS_table_row }}
+                                                            <tr>
+                                                                <td>{{ column_a }}</td>
+                                                                <td>{{ column_b }}</td>
+                                                            </tr>
+                                                        {{ /spreadsheet.DCS_table_row }}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        {{ /block.DCS_table_2_col }}
+
+                                    {{ /collection.DCS_flex_content }}
+
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </section>
+    </div></div>
+        {{ /block.DCS_content_page }}
+
+    {{ /collection.DCS_content_pages }}
+
+	<!--<div class="page"><div class="fit">-->
+    <footer class="final">
+        <h2>{{ DCS_footer_heading }}</h2>
+        <p class="address">{{ DCS_footer_sub_headding }}</p>
+        <ul class="contact">
+            {{ #DCS_footer_location }}<li><i class="fa fa-map-marker"></i> {{ DCS_footer_location }}</li>{{ /DCS_footer_location }}
+            {{ #DCS_footer_phone }}<li><i class="fa fa-phone"></i> {{ DCS_footer_phone }}</li>{{ /DCS_footer_phone }}
+            {{ #DCS_footer_email }}<li><i class="fa fa-envelope"></i> {{ DCS_footer_email }}</li>{{ /DCS_footer_email }}
+            {{ #DCS_footer_web }}<li><i class="fa fa-globe"></i> {{ DCS_footer_web }}</li>{{ /DCS_footer_web }}
+        </ul>
+        <p class="cricos">CRICOS Provider Code {{ DCS_UWA_cricos }}&nbsp;&nbsp;&nbsp;OF# <span data-project-code></span></p>
+    </footer>
+<!--</div></div>-->
+  
+  <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <!-- fetch outfit project code -->
+    <script src="https://outfit-assets-production.s3.amazonaws.com/scripts/projectCode.1.0.0.js"></script>
+  <script src="main.js"></script>
+    <script>window.setProjectCode('[ID]');</script>
+  
+  
+  	
+  
+  	<script>
+  		checkCrop();
+  
+  	</script>
+</body>
+
+</html>
