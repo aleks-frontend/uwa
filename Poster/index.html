@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="minireset.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" href="https://uwa-outfit-styleguide.netlify.com/assets/uwa-outfit.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://outfit-assets-production.s3.amazonaws.com/fonts/uwa/stylesheet.css" >
+
+
+    <style>
+      
+      a { color: var(--navy); }
+
+      html, body {        
+        color: #000;
+      }
+
+      .overflow {
+        border: 3px dashed red;
+        position: relative; }
+      .overflow h1,
+      .overflow h2,
+      .overflow h3,
+      .overflow h4,
+      .overflow h5,
+      .overflow h6,
+      .overflow p,
+      .overflow li { color: red !important; }
+      .overflow::before {
+        content: ‘+’;
+        position: absolute;
+        z-index: 5;
+        top: 5x;   
+        right: 5px;   
+        height: 40px;   
+        width: 40px;    
+        border: 1px solid red;
+        color: red;
+        padding: 2px 2px 2px 3px;
+        box-sizing: border-box;
+        font-size: 30px;   
+        text-align: center;
+        line-height: 8px;
+        background-color: white;
+        text-align: center; }
+      .overflow:hover:before {
+        background-color: red;
+        color: white; }
+      .overflow:after {
+        display: none; }
+      .overflow:hover:after {
+        display: block;
+        content: ‘There is overset content in this column. Please remove it’;
+        position: absolute;
+        top: 65px;  
+        right: 5px;
+        background-color: black;
+        color: white;
+        border-radius: 2px;
+        padding: 5px;
+        box-sizing: border-box;
+        font-size: 30px;   
+        font-weight: 400;
+        line-height: 1.1em;
+        text-align: right;
+        width: 15em;
+      }
+
+      .placeholder {
+        position: absolute;
+        top: 3mm;
+        left: 3mm;
+        right: 3mm;
+        bottom: 3mm;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/ecb30a5bbdb3512e7e1bd2b0ee147c89/poster-placholder.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        z-index: 100;
+        pointer-events: none;
+        opacity: 0.4;
+      }          
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .img {
+        flex-basis: 11.47rem;
+        position: relative;
+        overflow: hidden; 
+      }
+
+      .body {
+        flex: 1;
+        color: #000;
+        padding: 0.5rem 1.52rem 0.1rem;
+      }
+
+      .headline {
+        font-size: 0.68rem;
+        line-height: 1.1em;
+        margin-bottom: 0.2rem;
+      }
+
+      .subheader {
+        font-size: 0.3rem;
+        border-bottom: 0.0233rem solid var(--navy);
+        padding-bottom: 0.07rem;
+        margin-bottom: 0.54rem;
+      }
+
+      .content {
+        margin-top: 0.53rem;
+      }
+
+      .content__text {
+        margin-bottom: 0.32rem;
+      }
+
+      .content__text p {
+        margin-bottom: 1em;
+        font-size: 0.2142rem;
+        line-height: 1.45em;
+        color: #000;
+      }
+      
+      .content__text ul {
+        margin: 1em 0;
+        font-size: 0.2142rem;        
+      }
+      
+      .content__text ul li {
+        padding-left: 1em;
+        margin: 0;
+      }      
+
+      .content__text h3 {
+        font-size: 0.26rem;
+        margin-bottom: 0.0rem;
+      }
+
+      .content__website {
+        display: block;
+        text-decoration: none;
+        font-size: 0.273rem;
+      }
+
+      .footer {
+        padding-bottom: 0.7rem;
+        padding: 0rem 1.5rem 0.69rem;
+      }
+
+      .logo {
+        height: 1.1rem
+      }
+
+      .logo--descriptor {
+        display: none;
+      }
+
+      .descriptor-visible .logo {
+        display: none;
+      }
+
+      .descriptor-visible .logo--descriptor {
+        display: block;
+      }      
+
+      .logo__wrapper {
+        margin-bottom: 0.3rem;
+        margin-bottom: -0.15rem;
+      }
+
+      .text {
+        align-self: center;
+        font-size: 0.3rem
+      }
+
+      .cricos {
+        text-align: right;
+        font-size: 0.145rem;
+      }      
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+      
+      /* Fix for small font size on A5 -- Timothy Phillips, UWA, DCS, 21019-03-05 */
+      
+      .content__text p {
+        font-size: 0.25rem;
+      }
+    </style>
+  </head>
+  <body style="background: white">    
+
+    <div class="page">
+
+      <div class="bleed center-children">
+
+        <!--<div class="placeholder"></div>-->
+
+        <div class="container fit">
+
+          <div class="img">{{{ UWA_image }}}</div><!--headline-->
+          <div class="body">
+	
+          <div>
+            <div style="max-height: 6.1em;">
+              <div class="check-overflow">
+
+                <h1 class="headline color-navy">
+                  {{{ UWA_headline }}}
+                </h1><!--headline-->       
+                {{#UWA_subheader}}
+                <h2 class="subheader color-navy">
+                  {{{ UWA_subheader }}}
+                </h2>
+                {{/UWA_subheader}}
+                <div class="content">
+                  <div class="content__text color-navy">
+                    {{{ UWA_poster_copy }}}
+                  </div><!--content__text-->    
+                  <a href="#" class="content__website uwa-300 color-navy">
+                    {{{ UWA_website }}}
+                  </a><!--content__website-->   
+                </div><!--content-->
+
+              </div>
+            </div>
+          </div>
+
+          </div><!--body-->
+          <div class="footer {{{ UWA_descriptor }}}">
+            <div class="logo__wrapper">
+              <img src="https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/ea39be3cc4d1144b62b179e6de6d35cc/1.svg" alt="" class="logo">
+              <img src="{{{ UWA_faculty-logo }}}" alt="" class="logo logo--descriptor" />
+            </div><!--logo__wrapper-->
+            <div class="cricos source-sans-400">CRICOS Provider Code: 00126G OF#<span class="code" data-project-code></span></div><!--cricos-->
+
+          </div><!--footer-->  
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+
+                                                         if (window.showCrop) {
+                                                           document.querySelector('body').classList.add('show-crop');
+                                                         } else {
+                                                           document.querySelector('body').classList.add('hide-crop');
+                                                         }                                               
+    </script>
+
+    <script src="main.js"></script>   
+    <script src="prefixfree.js"></script>
+
+    <script>
+
+      function checkHeight(element) {
+        for (i = 0 ; i < element.length ; i++ ) {
+          var currentElement = element[i];
+          var height         = currentElement.offsetHeight;
+          var parent         = currentElement.parentNode;
+          var parentHeight   = parent.offsetHeight;
+
+          if (height > parentHeight) {
+            parent.classList.add('overflow');
+          } else {
+            parent.classList.remove('overflow');
+          }
+
+          if ((currentElement).parentNode.classList.contains('overflow')) {
+            document.body.classList.add('overflow-true');
+          } else {
+            document.body.classList.remove('overflow-true'); 
+          }
+        }
+      }   
+
+      function loop() {
+        checkHeight(document.getElementsByClassName('check-overflow'));
+      } setInterval(loop, 1000);
+
+      function checkCrop() {
+        if ({{show-crop}} === true) {
+        } else {
+          [].forEach.call(document.querySelectorAll('.outfit-resizable-background'), function (el) {
+            el.parentNode.style.left = '0';
+            el.parentNode.style.right = '0';
+            el.parentNode.style.top = '0';
+            el.parentNode.style.bottom = '0';
+            el.parentNode.style.width = '100%';
+            el.parentNode.style.height = '100%';
+          });
+        }
+      }
+
+      checkCrop();
+
+    </script>
+
+    
+    <script src="https://outfit-assets-production.s3.amazonaws.com/scripts/projectCode.1.0.0.js"></script>
+    <script>window.setProjectCode('[ID]');</script>
+  </body>
+</html>
