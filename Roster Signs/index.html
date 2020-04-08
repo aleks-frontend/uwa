@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html async>
+  <head>
+    <title>Print Generic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="crop.css">
+    <link rel="stylesheet" href="https://outfit-assets-production.s3.amazonaws.com/fonts/uwa/stylesheet.css">
+    <link rel="stylesheet" href="minireset.css">
+
+    <style>
+      
+      /*
+      Inputs Order
+      
+      {{ header-font-slider}}
+      {{ subheader-font-slider}}
+      {{ UWA_arrow-visibility-roster }}
+      {{ arrow-direction-all }}
+      {{{ header }}}
+      {{{ subheader }}}
+      {{ UWA_faculty-logo--rs }}
+      */
+
+
+      * { -webkit-font-smoothing: antialiased;}h1,p,body{margin:0;padding:0;font-family:'UWA';font-weight:300;line-height:1em;}
+      h1{font-size:1.{{{ header-font-slider}}}em;}p{font-size:0.{{{ subheader-font-slider}}}em;}.overflow::before,.overflow::after{font-size:20px;}
+      .content {display:flex;flex-direction:column;height:100%;}.document {position: relative;display:flex;flex-direction:column;height:50%!important;color:white;}.page{background-color:#27348b;}
+      .text{position: relative; display:flex;flex-direction:column;height: 100%;align-items:center;justify-content:center;text-align:center;}
+      .top{transform:rotate(180deg);padding:1em;position:relative;}.bottom{border-top:1px solid white;padding:1em;}
+      .arrow{ position: relative; display:{{{ UWA_arrow-visibility-roster }}};height:100%;align-items:center;}.arrow-inner{margin:0 auto;}.arrow img{width:3.32rem;}
+      .logo{position:absolute;bottom:0.48em;right:0.5em;height:0.7rem;width: 4rem; object-fit: contain; object-position: right center; z-index:200;}.cricos{color:black!important;position:absolute;bottom:0.2em;left:4em;font-size:0.1em;}     
+      
+      .logo--outside { bottom: auto; top: 0.48em; left: 0.5em; transform: rotate(180deg); }
+
+      .north .top .arrow  		{transform: rotate(270deg);}
+      .south .top .arrow  		{transform: rotate(90deg);}
+      .east .top .arrow 		{transform: rotate(180deg);}
+      .west .top .arrow	 		{transform: rotate(0);}
+      .north .bottom .arrow  	{transform: rotate(-270deg);}
+      .south .bottom .arrow  	{transform: rotate(-90deg);}
+      .east .bottom .arrow		{transform: rotate(-0deg);}
+      .west .bottom .arrow	   	{transform: rotate(-180deg);}
+
+      .descriptor-visible .logo {
+        display: none;
+      }
+      
+      .descriptor-visible .logo--descriptor {
+        display: block;
+      }
+
+      .logo--descriptor {
+        display: none;
+      }
+
+    </style>
+  </head>
+  <body style="background:white;" class="{{{ arrow-direction-all }}}">
+
+    <div class="page">
+      <div class="bleed">
+        <div class="content">
+          <img src="{{{UWA_faculty-logo--rs}}}" class="logo logo--outside">
+          <div class="document top">
+            <div class="text">
+              <div style="max-height:3.6em;">
+                <div class="check-overflow">
+                  <h1>{{{ header }}}</h1>
+                  <p>{{{ subheader }}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="arrow">
+              <div class="arrow-inner">
+                <img src="https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/6b20cff8004d6fbf18018c69af407c13/signage-arrow.svg">
+              </div>
+            </div>
+            <div class="footer">
+              <div class="cricos">OF# <span data-project-code></span></div>
+            </div>
+          </div>
+
+          <div class="document bottom">
+            <div class="text">
+              <div style="max-height:3.6em;">
+                <div class="check-overflow">
+                  <h1>{{{ header }}}</h1>
+                  <p>{{{ subheader }}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="arrow">
+              <div class="arrow-inner">
+                <img src="https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/6b20cff8004d6fbf18018c69af407c13/signage-arrow.svg">
+              </div>
+            </div>
+            <img src="{{{UWA_faculty-logo--rs}}}" class="logo">
+            <div class="footer {{{ UWA_descriptor }}}">
+              <div class="cricos">OF# <span data-project-code></span></div>
+              <img src="{{{UWA_faculty-logo}}}" alt="" class="logo logo--descriptor" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.showCrop = {{show-crop}};
+    </script>
+    <script src="main.js"></script>
+    <script>
+      function loop() {
+        checkHeight(document.getElementsByClassName('check-overflow'));
+      } setInterval(loop, 500);
+
+      function checkHeight(element) {
+        for (i = 0 ; i < element.length ; i++ ) {
+          var currentElement = element[i];
+          var height         = currentElement.offsetHeight;
+          var parent         = currentElement.parentNode;
+          var parentHeight   = parent.offsetHeight;
+          if (height > parentHeight) {
+            parent.classList.add('overflow');
+          } else {
+            parent.classList.remove('overflow');
+          }
+          if ((currentElement).parentNode.classList.contains('overflow')) {
+            document.body.classList.add('overflow-true');
+          } else {
+            document.body.classList.remove('overflow-true'); 
+          }
+        }
+      }
+    </script>
+    <script src="https://outfit-assets-production.s3.amazonaws.com/scripts/projectCode.1.0.0.js"></script>
+    <script>window.setProjectCode('[ID]');</script>
+    
+    <script type="text/javascript">
+      // Add many fallbacks for Print Ready
+      document.addEventListener('DOMContentLoaded', function(event) {
+        document.dispatchEvent(new Event('printready'));
+      });
+
+      setTimeout(function() {
+        document.dispatchEvent(new Event('printready'));
+      }, 5500);
+
+      document.dispatchEvent(new Event('printready'));
+    </script>    
+  </body>
+</html>
