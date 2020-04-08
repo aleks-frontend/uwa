@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="minireset.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" href="https://uwa-outfit-styleguide.netlify.com/assets/uwa-outfit.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://outfit-assets-production.s3.amazonaws.com/fonts/uwa/stylesheet.css" >
+
+    <style>
+
+      a { color: var(--navy); }      
+      
+      html {
+        font-family: 'UWA';
+        font-size: 11pt;
+        color: #000;
+      }
+
+      .overflow {
+        border: 1px dashed red !important;
+        position: relative; }
+      .overflow h1,
+      .overflow h2,
+      .overflow h3,
+      .overflow h4,
+      .overflow h5,
+      .overflow h6,
+      .overflow p,
+      .overflow li { color: red !important; }
+      .overflow::before {
+        content: ‘+’;
+        position: absolute;
+        z-index: 5;
+        top: 5x;   
+        right: 5px;   
+        height: 55px;   
+        width: 55px;    
+        border: 1px solid red;
+        color: red;
+        padding: 2px 2px 2px 3px;
+        box-sizing: border-box;
+        font-size: 40px;   
+        text-align: center;
+        line-height: 8px;
+        background-color: white;
+        text-align: center; }
+      .overflow:hover:before {
+        background-color: red;
+        color: white; }
+      .overflow:after {
+        display: none; }
+      .overflow:hover:after {
+        display: block;
+        content: ‘There is overset content in this column. Please remove it’;
+        position: absolute;
+        top: 65px;  
+        right: 5px;
+        background-color: black;
+        color: white;
+        border-radius: 2px;
+        padding: 5px;
+        box-sizing: border-box;
+        font-size: 40px;   
+        font-weight: 400;
+        line-height: 1.1em;
+        text-align: right;
+        width: 15em;
+      }
+
+      .placeholder {
+        position: absolute;
+        top: 3mm;
+        left: 3mm;
+        right: 3mm;
+        bottom: 3mm;
+        background-image: url("https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/76a9bd799f111dc974dab890e254afa1/dl-brochure-placholder.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        z-index: 100;
+        pointer-events: none;
+        opacity: 0.3;
+        display: none;
+      }
+
+      .placeholder-internalPage {
+        background-image: url("https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/ffbeda804030766b6df923463cd469a1/uwa-22.jpg");
+        opacity: 0.5;
+        display: none;
+      }
+
+      .background-image {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+        z-index: -1;
+      }
+
+      .background-image div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }    
+
+      .container {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+      }
+
+      .col {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .col--middle,
+      .col--front {
+        flex: 1;
+      }
+
+      .col--middle {
+        display: block;
+      }
+
+      .inner__image {
+        position: relative;
+        height: 5.5rem;
+        overflow: hidden;
+      }
+
+      .inner__content {
+        padding: 0.7rem 1.1rem 0.7rem 1.1rem;
+        line-height: 0.35rem;
+      }
+
+      .inner__content p {
+        margin-bottom: 4.586mm;
+        font-size: 9pt;
+        font-weight: 400;
+      }
+
+      .col--back {
+        display: flex;
+        flex-basis: 7.4rem;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 1.35rem 1rem 1.1rem 0.7rem;
+        color: #fff;
+      }
+
+      .back__logo {
+        width: 3rem;
+        margin-left: -0.05rem;
+      }
+
+      .socialLinks {
+        margin-bottom: 0.1rem;
+        padding-left: 0.05rem;
+        letter-spacing: 0.002rem;
+        font-size: 0.27rem;
+      }
+
+      .socialLinks__item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: #fff;
+        text-decoration: none;
+      }
+
+      .socialLinks__icon {
+        width: 0.32rem;
+        height: 0.32rem;
+        background-size: contain;
+      }
+
+      .socialLinks__icon--facebook {
+        background-image: url('https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/366ed503d0232c3956baacee99ea58e8/facebook.svg');
+      }
+
+      .socialLinks__icon--twitter {
+        background-image: url('https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/11ada7b210512259d96f2a167e6ee4f4/twitter.svg');
+      }      
+
+      .socialLinks__icon--youtube {
+        background-image: url('https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/7dd0c3cc9b2caaf18ba95399e8d0fd1b/youtube.svg');
+      }    
+
+      .socialLinks__icon--snapchat {
+        background-image: url('https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/efb62ce40325df2496d7027131404856/snapchat.svg');
+      }          
+
+      .socialLinks__icon--instagram {
+        background-image: url('https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/e0acc9c6f72c4ed780245454fe112cef/instagram.svg');
+      }       
+
+      .socialLinks__label {
+        margin-left: 0.12rem;
+      }
+
+      .back__footer {
+        padding-right: 1.7rem;
+        padding-left: 0.04rem;
+      }
+
+      .details__header {
+        padding-bottom: 0.04rem;
+        border-bottom: 0.02rem solid;
+        letter-spacing: 0.005rem;
+        font-size: 0.282rem;
+      }
+
+      .details {
+        margin-top: 0.3rem;
+        line-height: 13pt;
+        font-size: 9pt;
+        letter-spacing: 0.007rem;
+      }
+
+      .website {
+        margin-top: 0.02rem;
+        font-size: 0.23rem;
+      }
+
+      .code {
+        margin-top: 0.421rem;
+        font-size: 0.166rem;
+      }
+
+      .code__value {
+        position: absolute;
+        bottom: 1.1rem;
+        right: 1rem;
+        font-size: 0.15rem;
+      }
+
+      .front__header {
+        padding: 1.35rem 0.6rem 0.4rem 0.82rem;
+      }
+
+      .front__logo {
+        height: 0.9rem;
+        margin-left: -0.1rem;
+      }
+
+      .col--front h1 {
+        margin-top: 0.36rem;
+        margin-bottom: 0.15rem;
+        font-size: 20pt;
+        line-height: 1.2em;
+        letter-spacing: 0.007rem;
+      }
+
+      .front__subheading {
+        padding-bottom: 0.047rem;
+        font-size: 11pt;
+        border-bottom: 0.02rem solid var(--navy);
+      }
+
+      .imageWrapper {
+        display: flex;
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /*** Internal Page ***/
+
+      .columns {
+        columns: 3;
+        column-gap: 1.46rem;
+        column-fill: auto;
+        padding: 1.2rem 1.1rem 0.85rem 1.1rem;
+        font-size: 9pt;
+      }
+      
+      .back-page-option-2 .columns {
+        padding: 5.8rem 1.1rem 0.85rem 1.1rem;
+      }
+
+      .columns p {
+        margin-bottom: 0.4rem;
+        font-size: 0.23rem;
+        color: #000;
+      }
+      
+      h3 {
+        color: var(--navy);
+      }
+
+      h4 {
+        font-size: 14pt;
+        font-weight: 400;
+        color: var(--navy);
+        margin-bottom: 4.586mm;
+		line-height: 17pt;
+      }
+
+      p {
+        font-weight: 400;
+      }
+
+      h3 {
+        margin-bottom: 0;
+        font-size: 11pt;
+      }
+
+      blockquote {
+        font-size: 0.37rem;
+        line-height: 1.15em;
+        margin-bottom: 0.3rem;
+      }
+
+      .back-page-option-1 .image-container { display: none; }
+      .back-page-option-2 .image-container { display: flex; }
+      
+      .image-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 207pt;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-grow: 1;
+        flex-shrink: 1;
+      }
+      
+      .image {
+        height: 100%;
+		flex-basis: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      
+      .top-image-wrapper {
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .image:first-child { background-color: #F498BF; }
+      .image:nth-child(2) { background-color: #F171A7; }
+      .image:last-child { background-color: #EE1D8A; }
+      
+      ul, li {
+        color: black;
+        font-size: 9pt;
+        line-height: 13pt;
+        font-weight: 400;
+      }
+
+      ul {
+        margin: 0 0 4.586mm 0 !important;
+      }
+
+      li {
+        margin: 0 !important;
+        padding-left: 4mm !important;
+      }
+      
+      .descriptor-visible .front__logo {
+        display: none;
+      }
+      
+      .descriptor-visible .logo--descriptor {
+        display: block;
+      }
+
+      .logo--descriptor {
+        display: none;
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" class="back-page-option-{{ dl-brochure-option }}">    
+
+    <div class="page">
+      <div class="bleed center-children">
+        <div class="placeholder"></div>
+        <div class="container fit frontPage">
+
+          <div class="col col--middle">
+            <div class="inner__image">
+              {{{ UWA_image }}}
+            </div><!-- end inner__image -->
+
+            <div class="inner__content source-sans-600">
+              <div style="max-height: 38.2em; font-size: 9pt;">
+                <div class="check-overflow">{{{ UWA_copy }}}</div><!-- end check-overflows -->
+              </div>
+            </div><!-- end inner__content -->   
+
+          </div><!-- end col -->
+
+          <div class="col col--back background-navy">
+            <img src="https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/b3865d5e67f7e36d17156728624c439d/4.svg" class="back__logo">
+
+            <div class="socialLinks source-sans-400">
+              {{#spreadsheet.UWA_social-links}}
+              <a class="socialLinks__item" href="{{{ UWA_social-links-link }}}">
+                <div class="socialLinks__icon socialLinks__icon--{{UWA_social-links-icon}}"></div><!-- end socialLinks__icon -->
+                <div style="max-height: 1.4em;"><div class="check-overflow"><div class="socialLinks__label">{{{UWA_social-links-label}}}</div></div></div><!-- end socialLinks__label -->
+              </a><!-- end socialLinks__item -->   
+              {{/spreadsheet.UWA_social-links}}           
+            </div><!-- end socialLinks -->
+
+            <div class="back__footer source-sans-400">
+              {{#UWA_subheader}}<div class="details__header" style="max-height: 1.5em;">
+              <div class="check-overflow fit-text-1">
+                {{{ UWA_subheader }}}
+              </div><!-- end check-overflow -->
+              </div><!-- end details__header -->{{/UWA_subheader}}
+              <div class="details">
+                <div style="font-size: 0.23rem; max-height: 22.5em;">
+                  <div class="check-overflow">
+                    {{{ UWA_details }}}
+                  </div><!-- end check-overflow -->
+                </div>
+              </div><!-- end details -->
+              <div class="website source-sans-600" style="max-height: 1.5em;">
+                <div class="check-overflow">
+                  {{{ UWA_website }}}
+                </div><!-- end check-overflow -->
+              </div><!-- end website -->
+              <div class="code">
+                <div class="code__label">CRICOS Provider Code: {{{UWA_cricos}}} <span class="code__value" >OF#<span data-project-code></span></span></div> <!-- end code__value -->
+              </div><!-- end code -->
+            </div><!-- end back__footer -->
+          </div><!-- end col-back col -->
+
+          <div class="col col--front {{{ UWA_descriptor }}}">
+            <div class="front__header">
+              
+              <img src="https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/ea39be3cc4d1144b62b179e6de6d35cc/1.svg" class="front__logo">
+              <img src="{{{ UWA_faculty-logo }}}" alt="" class="front__logo logo--descriptor" />
+              
+              <h1 class="front__heading color-navy" style="max-height: 4.5em;">
+                <div class="check-overflow">
+                  {{{ UWA_heading }}}
+                </div><!-- end check-overflow -->
+              </h1>
+              {{#UWA_subheader-front}}
+              <div class="front__subheading socure-sans-400 color-navy" style="max-height: 1.5em;">
+                <div class="check-overflow">
+                  {{{ UWA_subheader-front }}}
+                </div><!-- end check-overflow -->
+              </div><!-- end front__subheading -->
+              {{/UWA_subheader-front}}
+            </div><!-- end front__header -->
+            <div class="imageWrapper">
+              {{{ UWA_cover-image }}}
+            </div><!-- end imageWrapper -->
+          </div><!-- end col -->
+
+        </div><!--container fit frontPage-->
+      </div><!--bleed-->
+    </div><!--page-->
+
+    <div class="page">
+      <div class="bleed center-children">
+        <div class="placeholder placeholder-internalPage"></div>
+        <div class="container backPage">
+          
+          <div class="image-container">
+            {{#collection.inside-images}}
+            <div class="top-image-wrapper image">{{{ image-block }}}</div>
+            {{/collection.inside-images}}
+          </div>
+
+          <div class="columns color-navy source-sans-400">
+            <div style="max-height: 179.7em; border: 1px solid transparent;">
+              <div class="check-overflow">
+                {{#collection.inside-spread}}
+                
+                  {{#block.UWA_copy-two_block}}
+                    <div>{{{ UWA_copy-two }}}</div>
+                  {{/block.UWA_copy-two_block}}
+
+                  {{#block.UWA_quote_block}}
+                    <h4>{{{ UWA_copy-quote }}}</h4>
+                  {{/block.UWA_quote_block}}
+
+                {{/collection.inside-spread}}
+                
+              </div>
+            </div>
+          </div><!-- end columns-->     
+
+        </div><!--container backPage-->
+      </div><!--bleed-->
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+
+       if (window.showCrop) {
+         document.querySelector('body').classList.add('show-crop');
+       } else {
+         document.querySelector('body').classList.add('hide-crop');
+       }                                               
+    </script>
+
+    <script src="main.js"></script>   
+    <script src="prefixfree.js"></script>
+
+    <script>
+
+      // Check Overflow function
+      function checkHeight(element) {
+        for (i = 0 ; i < element.length ; i++ ) {
+          var currentElement = element[i];
+          var height         = currentElement.offsetHeight;
+          var parent         = currentElement.parentNode;
+          var parentHeight   = parent.offsetHeight;
+
+          console.log(parentHeight);
+          if (height > parentHeight) {
+            parent.classList.add('overflow');
+          } else {
+            parent.classList.remove('overflow');
+          }
+
+          if ((currentElement).parentNode.classList.contains('overflow')) {
+            document.body.classList.add('overflow-true');
+          } else {
+            document.body.classList.remove('overflow-true'); 
+          }
+        }
+      }   
+
+      function loop() {
+        checkHeight(document.getElementsByClassName('check-overflow'));
+      } setInterval(loop, 1000);
+
+    </script>
+    
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.3.min.js" type="text/javascript"></script>
+
+
+    
+    
+    <script src="https://outfit-assets-production.s3.amazonaws.com/scripts/projectCode.1.0.0.js"></script>
+    <script>window.setProjectCode('[ID]');</script>
+    
+    <script>
+      TextFit.fit({
+        selector: '.fit-text-1'
+      });
+      TextFit.fit({
+        selector: '.fit-text-2'
+      });
+    </script>
+
+  </body>
+</html>
