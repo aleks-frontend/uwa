@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="minireset.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" href="https://uwa-outfit-styleguide.netlify.com/assets/uwa-outfit.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://outfit-assets-production.s3.amazonaws.com/fonts/uwa/stylesheet.css" >
+    
+    <style>
+      
+      
+      html, body {
+        font-family: 'UWA';
+        font-size: 11pt;
+        color: #fff;
+      }
+      
+      .overflow {
+        border: 3px dashed red;
+        position: relative; }
+      .overflow h1,
+      .overflow h2,
+      .overflow h3,
+      .overflow h4,
+      .overflow h5,
+      .overflow h6,
+      .overflow p,
+      .overflow li { color: red !important; }
+      .overflow::before {
+        content: ‘+’;
+        position: absolute;
+        z-index: 5;
+        top: 5x;   
+        right: 5px;   
+        height: 55px;   
+        width: 55px;    
+        border: 1px solid red;
+        color: red;
+        padding: 2px 2px 2px 3px;
+        box-sizing: border-box;
+        font-size: 40px;   
+        text-align: center;
+        line-height: 8px;
+        background-color: white;
+        text-align: center; }
+      .overflow:hover:before {
+        background-color: red;
+        color: white; }
+      .overflow:after {
+        display: none; }
+      .overflow:hover:after {
+        display: block;
+        content: ‘There is overset content in this column. Please remove it’;
+        position: absolute;
+        top: 65px;  
+        right: 5px;
+        background-color: black;
+        color: white;
+        border-radius: 2px;
+        padding: 5px;
+        box-sizing: border-box;
+        font-size: 40px;  
+        font-weight: 400;
+        line-height: 1.1em;
+        text-align: right;
+        width: 15em;
+      }
+      
+      .placeholder {
+        position: absolute;
+        top: 3mm;
+        left: 3mm;
+        right: 3mm;
+        bottom: 3mm;
+        background-image: url("https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/fd9e5e5e404cf7f672bc3cc26522e57e/signage-placholder.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        z-index: 100;
+        pointer-events: none;
+        opacity: 0.5;
+      }
+
+      .background-image {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+        z-index: -1;
+      }
+
+      .background-image div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }   
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+
+      .heading {
+        display: flex;
+        flex: 1;
+        justify-content: center;
+        align-items: center;
+        margin-top: -0.28rem;
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+        text-align: center;
+        font-size: 2.27rem;
+        line-height: 1.03em;
+        letter-spacing: -0.03rem;
+        width: 100%;
+      }
+
+      .direction {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: -0.5rem;
+      }
+      
+      .arrow {
+        display: {{{ UWA_arrow-visibility }}};
+        transform: rotate({{{ UWA_arrow-direction }}}deg);
+      }
+      
+      .arrow img {
+        width: 3.32rem;
+      }
+
+      .footer {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 1.8rem 1.55rem 0.8rem 1.55rem;
+      }
+
+      .logo {
+        width: 3.6rem;
+      }
+
+      .cricos {
+        position: absolute;
+        bottom: 0.8rem;
+        left: 1.4rem;
+        font-size: 0.1rem;
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white">    
+
+    <div class="page">
+
+      <div class="bleed center-children">
+
+
+        <div class="container fit background-navy">
+          
+                  	  
+          
+          <div class="heading" style="font-size: {{ UWA_main-header-font-size }}{{^UWA_main-header-font-size}}2.3{{/UWA_main-header-font-size}}rem;">
+            <span class="uwa-700" style="max-height: 10.5rem; font-size: {{ UWA_main-header-font-size }}{{^UWA_main-header-font-size}}2.3{{/UWA_main-header-font-size}}rem;">
+              <div class="check-overflow">
+               {{{ UWA_headline }}}
+              </div><!-- end check overflow -->
+            </span>
+          </div><!-- end heading -->
+          
+          
+          
+          <div class="direction">
+            <div class="arrow">
+            	<img src="https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/6b20cff8004d6fbf18018c69af407c13/signage-arrow.svg">
+            </div><!-- end arrow -->
+          </div><!-- end direction -->
+          <div class="footer">
+            <img src="https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/b3865d5e67f7e36d17156728624c439d/4.svg" class="logo">
+            <div class="cricos"> OF#<span data-project-code></span></div><!-- end code -->
+          </div><!-- end footer -->
+
+
+    
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    
+
+   <script>
+    window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+
+    if (window.showCrop) {
+        document.querySelector('body').classList.add('show-crop');
+    } else {
+        document.querySelector('body').classList.add('hide-crop');
+    }                                               
+  </script>
+  
+  <script src="main.js"></script>   
+  <script src="prefixfree.js"></script>
+
+    <script>
+      
+      function checkHeight(element) {
+        for (i = 0 ; i < element.length ; i++ ) {
+          var currentElement = element[i];
+          var height         = currentElement.offsetHeight;
+          var parent         = currentElement.parentNode;
+          var parentHeight   = parent.offsetHeight;
+
+          if (height > parentHeight) {
+            parent.classList.add('overflow');
+          } else {
+            parent.classList.remove('overflow');
+          }
+
+          if ((currentElement).parentNode.classList.contains('overflow')) {
+            document.body.classList.add('overflow-true');
+          } else {
+            document.body.classList.remove('overflow-true'); 
+          }
+        }
+      }   
+      
+      function loop() {
+        checkHeight(document.getElementsByClassName('check-overflow'));
+      } setInterval(loop, 1000);
+     
+    </script>
+    
+    <script src="https://outfit-assets-production.s3.amazonaws.com/scripts/projectCode.1.0.0.js"></script>
+    <script>window.setProjectCode('[ID]');</script>
+  </body>
+</html>
