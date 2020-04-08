@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Course Guide Flyer</title>
+	<!-- Template created by Timothy Phillips, Digital and Creative Services UWA, Febuary 2019 -->
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="https://static.weboffice.uwa.edu.au/visualid/lib/font-awesome/font-awesome.4.latest.css?r4" />
+	<script type="text/javascript" src="https://static.weboffice.uwa.edu.au/visualid/lib/jquery/jquery-1.11.latest.js"></script>
+	<script type="text/javascript" src="script.js"></script>
+	<link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body class="theme-{{ DCS_faculty_theme }} media-{{ DCS_media_type }}">
+	<!-- Cover page -->
+	<div class="page-margin page-one _logo-colour-{{ DCS_logo_colour }} {{ DCS_cover_shadow_class }}">
+		<div class="page-content">
+			<!-- hero image -->
+			{{{ DCS_hero_image }}}
+			<!-- end hero image -->
+			<div class="headder-wrapper">
+				<span class="uwa-logo">
+					<img class="dark" src="https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/ea39be3cc4d1144b62b179e6de6d35cc/1.svg" alt="The University of Western Australia" />
+					<img class="light" src="https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/b3865d5e67f7e36d17156728624c439d/4.svg" alt="The University of Western Australia" />
+				</span>
+			</div>
+			<div class="headder-wrapper" style="margin-top: {{{ DCS_headline_vertical_offset }}}mm;">
+				<h1 class="headline {{ DCS_cover_header_colour_match }}">{{ DCS_headline }}</h1>
+			</div>
+			<div class="course-info-block theme-colour">
+				<div class="url">{{ DCS_course-stats_url }}</div>
+				<ul class="course-stats theme-colour">
+					{{ #collection.DCS_course-stats }}
+
+						{{ #block.DCS_course-stats_icon-section }}
+							<li class="has-icon">
+								<div class="image">
+									<img src="{{{ DCS_course-stats_icon-image }}}"/>
+								</div>
+								{{{ DCS_course-stats_copy }}}
+							</li>
+						{{ /block.DCS_course-stats_icon-section }}
+
+						{{ #block.DCS_course-stats_text-section }}
+							<li>
+								{{{ DCS_course-stats_copy }}}
+							</li>
+						{{ /block.DCS_course-stats_text-section }}
+
+					{{ /collection.DCS_course-stats }}
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- second page -->
+	<div class="page-margin page-two">
+		<div class="page-content flex-group-vertical">
+			<div class="headline-box">
+				<h2>{{ DCS_headline }}</h2>
+			</div>
+			<div class="gap"></div>
+			<div class="introduction theme-colour">{{{ DCS_body_intro }}}</div>
+			<div class="gap"></div>
+			<div class="content-columns copy _break-inside-{{ DCS_copy_break_inside }}">
+				{{{ DCS_body_copy }}}
+			</div>
+			<div class="gap"></div>
+			<div class="flex-grow">
+				{{ #DCS_highlight-box_copy }}
+					<div class="quote-block theme-colour-base copy">
+						{{{ DCS_highlight-box_copy }}}
+					</div>
+				{{ /DCS_highlight-box_copy }}
+			</div>
+			<div class="gap"></div>
+			<footer>
+				<p class="heading">{{ DCS_contact-heading }}</p>
+				<p class="address">{{ DCS_contact-address }}</p>
+				<p class="contact">
+					<i class="fa fa-phone"></i> {{ DCS_contact-phone }}
+					<i class="fa fa-envelope"></i> {{ DCS_contact-email }}
+					<i class="fa fa-globe"></i> {{ DCS_contact-url }}
+				</p>
+				{{ #DCS_contact-phone_2 }}
+				<p class="contact">
+					<i class="fa fa-phone"></i> {{{ DCS_contact-phone_2 }}}
+					<i class="fa fa-envelope"></i> {{{ DCS_contact-email_2 }}}
+					<i class="fa fa-globe"></i> {{{ DCS_contact-url_2 }}}
+				</p>
+				{{ /DCS_contact-phone_2 }}
+			</footer>
+		</div>
+		<p class="cricos">
+			<span>CRICOS Provider Code {{ UWA_cricos }}</span>&nbsp;&nbsp;&nbsp;
+			<span>OF# <span data-project-code></span></span>
+		</p>
+	</div>
+
+	<script src="https://outfit-assets-production.s3.amazonaws.com/scripts/projectCode.1.0.0.js"></script>
+    <script>window.setProjectCode('[ID]');</script>
+</body>
+
+</html>
