@@ -21,10 +21,12 @@
       {{UWA_feature-image--bsop}}
       {{pullup-heading1}}
       {{pullup-heading2}}
+      {{{pullup-heading3}}}
       {{heading-font-size}}
       {{pullup-swap-heading-font}}
       {{heading-line1-weight}}
       {{heading-line2-weight}}
+      {{UWA_heading-3-border-width--bsop}}
       {{#collection.UWA_column--bsop}}{{/collection.UWA_column--bsop}}
       {{UWA_copy-font-size--bsop}}
       {{UWA_contact-information--bsop}}
@@ -46,12 +48,32 @@
         --white: {{{account.colors.white}}};
         --black: {{{account.colors.black}}};
         --yellow: {{{account.colors.yellow}}};
+        --gold: {{{account.colors.uwa-gold}}};
+
+        /*color for table with opacity 0.1 as default*/
+        --blue2: rgba(0, 48, 135, 0.1);
+        --black2: rgba(0,0,0,0.1);
+        --gold2:rgba(218, 170, 0, 0.1);
+
+        --blue3: rgba(0, 48, 135, 0.05);
+        --black3: rgba(0,0,0,0.05);
+        --gold3:rgba(218, 170, 0, 0.05);
+
 
         --font-family-content: 'TT Norms Pro';
         --font-family-heading: 'novel-pro';
 
         --logo: url({{{account.logos.formal-primary}}});
       }
+
+      .columnBackgroundColour--blue { --column-dynamic-background-colour: var(--blue3); --column-dynamic-dark-background-colour: var(--blue2); }
+      .columnBackgroundColour--black { --column-dynamic-background-colour: var(--black3); --column-dynamic-dark-background-colour: var(--black2); }
+      .columnBackgroundColour--gold { --column-dynamic-background-colour: var(--gold3); --column-dynamic-dark-background-colour: var(--gold2); }
+
+
+      .lineColour--blue { --dynamic-line-colour: var(--blue); }
+      .lineColour--black { --dynamic-line-colour: var(--black); }
+      .lineColour--gold { --dynamic-line-colour: var(--gold); }
 
       html {
         font-family: var(--font-family-content);
@@ -105,7 +127,7 @@
 
       .theme--splitImageSmall .fit { padding-left: 0.2rem; }
 
-      .fit--internalPage { padding: 3.4rem 1.05rem 0 ; }
+      .fit--internalPage { padding: 3.4rem 1.05rem 0 ; /*max-height: 20rem;*/}
 
       .header {
         position: relative;
@@ -364,8 +386,8 @@
         min-height: auto;
         max-height: none;
         flex: 1;
-        display: block;
         padding: 0;
+        overflow: hidden;
       }
 
       .content { position: relative; }
@@ -381,11 +403,29 @@
         position: absolute;
         top: 0.2rem;
         left: 0.7rem;
-        width: 9.7rem;
         font-size: 0.701rem;
         transform: translateY(-100%);
       }
 
+      .theme--fullBleedImage .heading__container {
+        width: 10.8rem;
+      }
+
+      .theme--largeImage .heading__container {
+        width: 11.6rem;
+      }
+
+      .theme--splitImageSmall .heading__container {
+        width: 11.1rem;
+      }
+
+      .theme--splitImageLarge .heading__container {
+        width: 11.3rem;
+      }
+
+      .theme--mergedImage .heading__container {
+        width: 11.5rem;
+      }
 
       .heading__container h1 {
         font-size: calc(1em + {{{heading-font-size}}}{{^heading-font-size}}0{{/heading-font-size}}pt);
@@ -441,7 +481,10 @@
         line-height: 0.9em;
       }
 
-      .heading--primary + .heading--secondary { margin-top: 0.05rem; }
+      .heading--primary + .heading--secondary,
+      .heading--secondary + .heading--secondary { 
+        margin-top: 0.05rem; 
+      }
 
       .heading__inner { 
         display: inline-block; 
@@ -450,7 +493,7 @@
       }
 
       .heading--primary .heading__inner { padding: 0 0.65rem 0 0.2rem; }
-      .heading--secondary .heading__inner { padding: 0 0.65rem 0 0.4rem; }
+      .heading--secondary .heading__inner { padding: 0 0.7rem 0 0.4rem; }
 
       .column__container {
         display: flex;
@@ -500,6 +543,12 @@
         transform: translateX(-100%);
       }
 
+      .headingBorderWidth--small .column h3:before,
+      .headingBorderWidth--small .grid__item h3:before { width: 85%; }
+      
+      .headingBorderWidth--full-width .column h3:before,
+      .headingBorderWidth--full-width .grid__item h3:before { width: 0%;}
+
       .column h2 + h3,
       .column h3 + h3,
       .grid__item h2 + h3
@@ -548,14 +597,14 @@
       .column ul,
       .grid__item  ul {
         position: relative;
-        margin-top: 0.35em;
+        margin-top: 0.099em;
         margin-left: 0.29em;
         list-style-type: disc;
       }
 
       .column ol,
       .grid__item  ol {
-        margin-top: 0.3em;
+        margin-top: 0.099em;
         margin-left: 0.25em;
       }
 
@@ -585,6 +634,10 @@
       }
 
       .content--bottom {
+
+      }
+
+      .content--bottom .footer{
         display: flex;
         flex-direction: row-reverse;
         justify-content: space-between;
@@ -703,10 +756,11 @@
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: 4.2rem 1fr 4.2rem;
         grid-auto-flow: dense;
-        margin-bottom: 1rem;
-        height: 13rem;
-        grid-gap :0.6rem 0.3rem;
+        margin-bottom: 0.5rem;
+        grid-gap: 0.6rem 0.3rem;
         font-size: 1rem;
+        flex: 1;
+        overflow: hidden;
       }
 
       .is-firefox .grid { font-size: 0.975rem; }
@@ -716,7 +770,6 @@
 
       .grid__item { 
         position: relative;
-        max-height: 13.1rem;
         grid-row: span 3;
         font-size: {{{UWA_copy-font-size--bsop}}}{{^UWA_copy-font-size--bsop}}100{{/UWA_copy-font-size--bsop}}%;
         overflow: hidden;
@@ -738,12 +791,10 @@
 
       .grid--imageSize-3 .grid__item:not(.grid__item--image) { 
         grid-row: span 2; 
-        max-height: 8.3rem;
       }
 
       .grid--imageSize-2.grid--col-2 .grid__item:not(.grid__item--image) { 
         grid-row: span 2; 
-        max-height: 8.3rem;
       }
 
       .grid--imageSize-1.grid--imagePos-topRight .grid__item--image {
@@ -767,7 +818,6 @@
       .grid--imagePos-bottomRight.grid--col-1 .grid__item:nth-child(2),
       .grid--imagePos-bottomRight.grid--imageSize-2 .grid__item:nth-child(3) {
         grid-row: span 2; 
-        max-height: 8.3rem;
       }
 
       /* Covers top left and bottom left + col 2 + col 1 */
@@ -776,13 +826,11 @@
       .grid--imagePos-bottomLeft .grid__item:nth-child(2),
       .grid--imagePos-bottomLeft.grid--imageSize-2 .grid__item:nth-child(3) {
         grid-row: span 2; 
-        max-height: 8.4rem;
       }
 
       .grid--imagePos-topRight.grid--col-2 .grid__item:nth-child(3),
       .grid--imagePos-bottomRight.grid--col-2 .grid__item:nth-child(3) {
         grid-row: span 2;
-        max-height: 8.3rem;
       }
 
       .grid--imageSize-1.grid--imagePos-bottomRight .grid__item--image {
@@ -806,7 +854,7 @@
       .grid__item:nth-child(4) { grid-column: 3; }
 
       .grid--displayImage--hide .grid__item:not(.grid__item--image) {
-        max-height: 13.1rem !important;
+        /* max-height: 13.1rem !important; */
         grid-row: span 3 !important;
       }
 
@@ -982,11 +1030,158 @@
       .u-hide { display: none; }
       .u-padding-0 { padding: 0; }
 
+      .partner-logos {
+        display: flex;
+        flex-direction: row-reverse;
+        width: calc(100% - 1rem);
+      }
+
+      .partner-logo {
+        max-height: 1.3rem;
+        flex: 1;
+        text-align: center;
+        max-width: 30%;
+      }
+      .partner-logo img {
+        max-height: 1rem;
+      }
+
+      .fit--internalPage .partner-logos{
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto;
+        grid-gap: 0.3rem;
+      }
+
+      .fit--internalPage .partner-logo{
+        max-width: unset;
+      }
+
+      .logo-inner.no-logo{
+        height: 1.3rem;
+        background: lightgrey;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .logo-inner.no-logo:before {
+        content: "Partner Logo Here";
+        font-size: 0.3rem;
+        padding: 0 1.2pt;
+      }
+
+      .fit--internalPage .partner-logos.large{
+        grid-template-columns: repeat(6, 1fr);
+      }
+
+      /*Adding tables to Internal Pages*/
+      .tableGrid {
+        display: grid;
+        grid-template-rows: auto;
+        margin-bottom: 0.12rem;
+      }
+
+      .tableGrid:last-child { margin-bottom: 0; }
+
+      .tableGrid .tableGrid__item:first-child,
+      .tableGrid .tableGrid__item:nth-child(2) { border-top: 0.02rem solid gray; }
+      .tableGrid--threeColumnTable .tableGrid__item:nth-child(3) { border-top: 0.02rem solid gray; }
+
+      .tableGrid--twoColumnTable.columnSize--50-50 { grid-template-columns: 1fr 1fr; }
+      .tableGrid--twoColumnTable.columnSize--25-75 { grid-template-columns: 1fr 3fr; }
+      .tableGrid--twoColumnTable.columnSize--75-25 { grid-template-columns: 3fr 1fr; }
+
+      .tableGrid--threeColumnTable.columnSize--50-25-25 { grid-template-columns: 2fr 1fr 1fr; }
+      .tableGrid--threeColumnTable.columnSize--25-25-50 { grid-template-columns: 1fr 1fr 2fr; }
+      .tableGrid--threeColumnTable.columnSize--33-33-33 { grid-template-columns: 1fr 1fr 1fr; }
+
+      .tableGrid__item {
+        padding: 0.07rem 0.12rem;
+        font-size: 0.206em;
+        line-height: 1em;
+        border-bottom: 0.02rem solid gray;
+        border-right: 0.02rem solid gray;
+      }
+
+      .tableGrid__item--heading { color: unset; }
+
+      .tableGrid__item--left { border-left: 0.02rem solid gray; }
+
+      .tableGrid__item--data { background-color: var(--column-dynamic-background-colour); }
+
+      .flexibleTable__item--data { background-color: var(--column-dynamic-background-colour); }
+
+      .tableGrid__item--heading { font-weight: bold; }
+
+      table {
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+        border-bottom: 0.02rem solid var(--dynamic-line-colour);
+        border-collapse: separate;
+        border-spacing: 0 0.07rem;
+      }
+
+      .lineColour--none table { border-bottom: 0; }
+
+      .flexibleTable {
+        margin-top: 0.23rem;
+        margin-bottom: 0.23rem;
+      }
+
+      .flexibleTable td {
+        padding: 0.07rem 0.12rem;
+        font-size: 0.206em;
+        line-height: 1em;
+        max-width: 16%;
+      }
+
+      .flexibleTable__item--heading { font-weight: bold; }
+
+      .flexibleTable__item--heading { border-bottom: 0.02rem solid var(--dynamic-line-colour); }
+
+      .lineColour--none .flexibleTable__item--heading { border-bottom: 0; }
+
+      .flexibleTable__row + .flexibleTable__row { margin-top: 0.23rem; }
+
+
+      /*Adding additional styling for tables for tableColourTheme input*/
+      .tableGrid--twoColumnTable > .tableGrid__item:nth-child(-n+2),
+      .tableGrid--threeColumnTable > .tableGrid__item:nth-child(-n+3),
+      .flexibleTable__row--header {
+        background-color: white !important;
+      }
+
+      .tableGrid--twoColumnTable.tableColourTheme--rows > .tableGrid__item:nth-child(4n-1),
+      .tableGrid--twoColumnTable.tableColourTheme--rows > .tableGrid__item:nth-child(4n),
+      .tableGrid--threeColumnTable.tableColourTheme--rows > .tableGrid__item:nth-child(6n+4),
+      .tableGrid--threeColumnTable.tableColourTheme--rows > .tableGrid__item:nth-child(6n+5),
+      .tableGrid--threeColumnTable.tableColourTheme--rows > .tableGrid__item:nth-child(6n+6) {
+        background-color: var(--column-dynamic-dark-background-colour);
+      }
+
+      .tableGrid--twoColumnTable.tableColourTheme--columns > .tableGrid__item:nth-child(even),
+      .tableGrid--threeColumnTable.tableColourTheme--columns .tableGrid__item--dark {
+        background-color: var(--column-dynamic-dark-background-colour);
+      }
+
+      .tableColourTheme--rows .flexibleTable__row--data:nth-child(even) {
+        background-color: var(--column-dynamic-dark-background-colour);
+      }
+
+      .tableColourTheme--columns .flexibleTable__item--data:nth-child(even) {
+        background-color: var(--column-dynamic-dark-background-colour);
+      }
+
+
+
       /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
       /* !IMPORTANT DON'T FORGET TO STYLIZE HERO CROP ON SPLIT IMAGE SMALL VARIATION */
     </style>
   </head>
-  <body style="background: white" data-crop="{{show-crop}}">
+  <body style="background: white" data-crop="{{show-crop}}" data-reduce-export-font-size-by-percent="0.5"  data-prevent-export-overflow="false" class="headingBorderWidth--{{UWA_heading-3-border-width--bsop}}{{^UWA_heading-3-border-width--bsop}}small{{/UWA_heading-3-border-width--bsop}}">
     <div class="containerMaster u-hide">
       <div class="footer footer--lastPage theme--{{UWA_theme--bsop}}{{^UWA_theme--bsop}}fullBleedImage{{/UWA_theme--bsop}}">
         <div class="info">
@@ -1000,7 +1195,7 @@
                       {{#UWA_phone-number--bsop}}info__contact--{{/UWA_phone-number--bsop}}{{#UWA_email--bsop}}bothExist{{/UWA_email--bsop}}
                       {{^UWA_phone-number--bsop}}u-{{/UWA_phone-number--bsop}}{{^UWA_email--bsop}}hide{{/UWA_email--bsop}}
                       " data-max-line="1">
-            <span data-char-limit="14">{{{UWA_phone-number--bsop}}}</span>
+            <span data-char-limit="25">{{{UWA_phone-number--bsop}}}</span>
             <span class="info__contactDivider">|</span>
             <span>{{{UWA_email--bsop}}}</span>
           </div><!-- info__contact -->
@@ -1066,6 +1261,12 @@
                   <div class="heading__inner"><h1>{{{pullup-heading2}}}</h1></div>
                 </div><!-- heading--secondary -->
                 {{/pullup-heading2}}
+                {{#pullup-heading3}}
+                <div class="heading heading--secondary
+                            headingSecondaryFontWeight--{{heading-line2-weight}}{{^heading-line2-weight}}regular{{/heading-line2-weight}}" data-max-height="css">
+                  <div class="heading__inner"><h1>{{{pullup-heading3}}}</h1></div>
+                </div><!-- heading--secondary -->
+                {{/pullup-heading3}}
               </div><!-- heading__container -->
               <div class="column__container">
                 {{#collection.UWA_column--bsop}}
@@ -1078,34 +1279,42 @@
               </div><!-- column__container -->
             </div><!-- content--top -->
             <div class="content content--bottom   {{^UWA_contact-information--bsop}}content--noFaculty{{/UWA_contact-information--bsop}}">
-              {{#UWA_contact-information--bsop}}
-              <div class="faculty__container">
-                <div class="faculty" data-max-line="3">{{{UWA_contact-information--bsop}}}</div><!-- faculty -->
-              </div><!-- faculty__container -->
-              {{/UWA_contact-information--bsop}}
-              <div class="info">
-                {{#UWA_identifier-name--bsop}}
-                <div class="info__identifierName u-heading-patch" data-max-line="1">{{{UWA_identifier-name--bsop}}}</div><!-- info__identifierName -->
-                {{/UWA_identifier-name--bsop}}
-                {{#UWA_address--bsop}}
-                <div class="info__address" data-max-height="css">{{{UWA_address--bsop}}}</div><!-- info__address -->
-                {{/UWA_address--bsop}}
-                <div class="info__contact 
-                            {{#UWA_phone-number--bsop}}info__contact--{{/UWA_phone-number--bsop}}{{#UWA_email--bsop}}bothExist{{/UWA_email--bsop}}
-                            {{^UWA_phone-number--bsop}}u-{{/UWA_phone-number--bsop}}{{^UWA_email--bsop}}hide{{/UWA_email--bsop}}
-                            " data-max-line="1">
-                  <span data-char-limit="14">{{{UWA_phone-number--bsop}}}</span>
-                  <span class="info__contactDivider">|</span>
-                  <span>{{{UWA_email--bsop}}}</span>
-                </div><!-- info__contact -->
-                {{#UWA_website--bsop}}
-                <div class="info__website" data-max-height="css">{{{UWA_website--bsop}}}</div><!-- info__website -->
-                {{/UWA_website--bsop}}
-              </div><!-- info -->
-              <div class="cricos__container">
-                <div class="cricos">{{{account.snippets.cricos}}}</div><!--cricos-->
-                <div class="exportId">{{#metadata}}OF: {{export_id}}{{/metadata}}{{^metadata}}OF: XXXXXX{{/metadata}}</div><!--exportId-->
-              </div><!--cricos__container-->
+              <div class='partner-logos'>
+                {{#collection.partner-logos}}
+                <div class="partner-logo"><img src="{{{partner-logo}}}{{^partner-logo}}https://files.outfit.io/media_library_items/172196/Partner%2520Logo%2520Placeholder.svg{{/partner-logo}}"></div>
+                {{/collection.partner-logos}}
+              </div>
+              <div class="footer">
+                {{#UWA_contact-information--bsop}}
+                <div class="faculty__container">
+                  <div class="faculty" data-max-line="3">{{{UWA_contact-information--bsop}}}</div><!-- faculty -->
+                </div><!-- faculty__container -->
+                {{/UWA_contact-information--bsop}}
+
+                <div class="info">
+                  {{#UWA_identifier-name--bsop}}
+                  <div class="info__identifierName u-heading-patch" data-max-line="1">{{{UWA_identifier-name--bsop}}}</div><!-- info__identifierName -->
+                  {{/UWA_identifier-name--bsop}}
+                  {{#UWA_address--bsop}}
+                  <div class="info__address" data-max-height="css">{{{UWA_address--bsop}}}</div><!-- info__address -->
+                  {{/UWA_address--bsop}}
+                  <div class="info__contact 
+                              {{#UWA_phone-number--bsop}}info__contact--{{/UWA_phone-number--bsop}}{{#UWA_email--bsop}}bothExist{{/UWA_email--bsop}}
+                              {{^UWA_phone-number--bsop}}u-{{/UWA_phone-number--bsop}}{{^UWA_email--bsop}}hide{{/UWA_email--bsop}}
+                              " data-max-line="1">
+                    <span data-char-limit="14">{{{UWA_phone-number--bsop}}}</span>
+                    <span class="info__contactDivider">|</span>
+                    <span>{{{UWA_email--bsop}}}</span>
+                  </div><!-- info__contact -->
+                  {{#UWA_website--bsop}}
+                  <div class="info__website" data-max-height="css">{{{UWA_website--bsop}}}</div><!-- info__website -->
+                  {{/UWA_website--bsop}}
+                </div><!-- info -->
+                <div class="cricos__container">
+                  <div class="cricos">{{{account.snippets.cricos}}}</div><!--cricos-->
+                  <div class="exportId">{{#metadata}}OF: {{export_id}}{{/metadata}}{{^metadata}}OF: XXXXXX{{/metadata}}</div><!--exportId-->
+                </div><!--cricos__container-->
+              </div>
             </div><!-- content--bottom -->
           </div><!-- body -->
         </div><!-- container fit-->
@@ -1121,7 +1330,7 @@
       <div class="bleed">
 
         <div class="container fit fit--internalPage">
-          <div class="body body--internalPage">
+          <div class="body body--internalPage" data-max-height="900">
             <div class="grid 
                         grid--displayImage--{{^UWA_display-feature-image--bsop}}hide{{/UWA_display-feature-image--bsop}}{{UWA_display-feature-image--bsop}}
                         grid--imageSize-{{^UWA_feature-image-size--bsop}}1{{/UWA_feature-image-size--bsop}}{{UWA_feature-image-size--bsop}}
@@ -1136,21 +1345,82 @@
               </div><!-- grid__item--image -->
               {{#collection.column}}
               {{#block.column-block}}
-              <div class="grid__item grid__item--text" data-max-height="css">
-                {{#collection.column-items}}
-                {{#block.text-block}}
-                <div class="copy">{{{text}}}</div><!-- copy -->
-                {{/block.text-block}}
-                {{#block.image}}
-                <div class="image" style="height:{{^image-size}}25{{/image-size}}{{image-size}}%; margin-bottom: {{^image-bottom-space}}0{{/image-bottom-space}}{{image-bottom-space}}pt;">
-                  <div class="reposition-fix">{{{image-bsop}}}</div><!-- reposition-fix -->
-                </div><!-- image -->
-                {{/block.image}}
-                {{/collection.column-items}}
+              <div class="grid__item grid__item--text js-imageHeightSetter-container">
+                <div class="grid__itemInner" data-max-height="dynamic">
+                  {{#collection.column-items}}
+                  {{#block.text-block}}
+                  <div class="copy">{{{text}}}</div><!-- copy -->
+                  {{/block.text-block}}
+                  {{#block.image}}
+                  <div class="image js-imageHeightSetter-image" data-image-height="{{image-size}}" style="margin-bottom: {{^image-bottom-space}}0{{/image-bottom-space}}{{image-bottom-space}}pt;">
+                    <div class="reposition-fix">{{{image-bsop}}}</div><!-- reposition-fix -->
+                  </div><!-- image -->
+                  {{/block.image}}
+                  {{#block.two-column-table}}  
+                  <div class="tableGrid tableGrid--twoColumnTable columnSize--{{column-size}}{{^column-size}}50-50{{/column-size}} columnBackgroundColour--{{column-background-colour}}{{^column-background-colour}}none{{/column-background-colour}} tableColourTheme--{{table-colour-theme}}{{^table-colour-theme}}rows{{/table-colour-theme}}">
+                    {{#spreadsheet.two-column-table-heading}}
+                    <div class="tableGrid__item tableGrid__item--heading tableGrid__item--left">{{{column-1-heading}}}</div><!-- tableGrid__item--heading -->
+                    <div class="tableGrid__item tableGrid__item--heading">{{{column-2-heading}}}</div><!-- tableGrid__item--heading -->
+                    {{/spreadsheet.two-column-table-heading}}
+                    {{#spreadsheet.two-column-table-data}}
+                    <div class="tableGrid__item tableGrid__item--data tableGrid__item--left">{{{column-1}}}</div><!-- tableGrid__item -->
+                    <div class="tableGrid__item tableGrid__item--data">{{{column-2}}}</div><!-- tableGrid__item -->
+                    {{/spreadsheet.two-column-table-data}}
+                  </div><!-- grid--twoColumnTable -->         
+                  {{/block.two-column-table}}
+                  {{#block.three-column-table}}          
+                  <div class="tableGrid tableGrid--threeColumnTable columnSize--{{column-size}}{{^column-size}}33-33-33{{/column-size}} columnBackgroundColour--{{column-background-colour}}{{^column-background-colour}}none{{/column-background-colour}} tableColourTheme--{{table-colour-theme}}{{^table-colour-theme}}rows{{/table-colour-theme}}">
+                    {{#spreadsheet.three-column-table-heading}}
+                    <div class="tableGrid__item tableGrid__item--heading tableGrid__item--left">{{{column-1-heading}}}</div><!-- tableGrid__item--heading -->
+                    <div class="tableGrid__item tableGrid__item--heading">{{{column-2-heading}}}</div><!-- tableGrid__item--heading -->
+                    <div class="tableGrid__item tableGrid__item--heading">{{{column-3-heading}}}</div><!-- tableGrid__item--heading -->
+                    {{/spreadsheet.three-column-table-heading}}
+                    {{#spreadsheet.three-column-table-data}}
+                    <div class="tableGrid__item tableGrid__item--data tableGrid__item--left">{{{column-1}}}</div><!-- tableGrid__item -->
+                    <div class="tableGrid__item tableGrid__item--data tableGrid__item--dark">{{{column-2}}}</div><!-- tableGrid__item -->
+                    <div class="tableGrid__item tableGrid__item--data">{{{column-3}}}</div><!-- tableGrid__item -->
+                    {{/spreadsheet.three-column-table-data}}
+                  </div><!-- grid--twoColumnTable --> 
+                  {{/block.three-column-table}}
+                  {{#block.flexible-column-table}}
+                  <table class="flexibleTable columnBackgroundColour--{{column-background-colour}}{{^column-background-colour}}none{{/column-background-colour}} tableColourTheme--{{table-colour-theme}}{{^table-colour-theme}}rows{{/table-colour-theme}} lineColour--{{line-colour}}{{^line-colour}}none{{/line-colour}} js-emptyColumnsCheck-table">
+                    {{#spreadsheet.flexible-column-table-heading}}
+                    <tr class="flexibleTable__row flexibleTable__row--header">
+                      <td class="flexibleTable__item flexibleTable__item--heading {{^column-1-heading}}empty-col-1{{/column-1-heading}}">{{{column-1-heading}}}</td><!-- tableGrid__item--heading -->
+                      <td class="flexibleTable__item flexibleTable__item--heading {{^column-2-heading}}empty-col-2{{/column-2-heading}}">{{{column-2-heading}}}</td><!-- tableGrid__item--heading -->
+                      <td class="flexibleTable__item flexibleTable__item--heading {{^column-3-heading}}empty-col-3{{/column-3-heading}}">{{{column-3-heading}}}</td><!-- tableGrid__item--heading -->
+                      <td class="flexibleTable__item flexibleTable__item--heading {{^column-4-heading}}empty-col-4{{/column-4-heading}}">{{{column-4-heading}}}</td><!-- tableGrid__item--heading -->
+                      <td class="flexibleTable__item flexibleTable__item--heading {{^column-5-heading}}empty-col-5{{/column-5-heading}}">{{{column-5-heading}}}</td><!-- tableGrid__item--heading -->
+                      <td class="flexibleTable__item flexibleTable__item--heading {{^column-6-heading}}empty-col-6{{/column-6-heading}}">{{{column-6-heading}}}</td><!-- tableGrid__item--heading -->
+                    </tr>
+                    {{/spreadsheet.flexible-column-table-heading}}
+                    {{#spreadsheet.flexible-column-table-data}}
+                    <tr class="flexibleTable__row flexibleTable__row--data">
+                      <td class="flexibleTable__item flexibleTable__item--data {{^column-1}}empty-col-1{{/column-1}}">{{{column-1}}}</td><!-- tableGrid__item -->
+                      <td class="flexibleTable__item flexibleTable__item--data {{^column-2}}empty-col-2{{/column-2}}">{{{column-2}}}</td><!-- tableGrid__item -->
+                      <td class="flexibleTable__item flexibleTable__item--data {{^column-3}}empty-col-3{{/column-3}}">{{{column-3}}}</td><!-- tableGrid__item -->
+                      <td class="flexibleTable__item flexibleTable__item--data {{^column-4}}empty-col-4{{/column-4}}">{{{column-4}}}</td><!-- tableGrid__item -->
+                      <td class="flexibleTable__item flexibleTable__item--data {{^column-5}}empty-col-5{{/column-5}}">{{{column-5}}}</td><!-- tableGrid__item -->
+                      <td class="flexibleTable__item flexibleTable__item--data {{^column-6}}empty-col-6{{/column-6}}">{{{column-6}}}</td><!-- tableGrid__item -->
+                    </tr>
+                    {{/spreadsheet.flexible-column-table-data}}
+                  </table><!-- grid__container -->
+                  {{/block.flexible-column-table}}
+                  {{/collection.column-items}}
+                </div><!-- grid__itemInner -->
               </div><!-- grid__item -->
               {{/block.column-block}}
               {{/collection.column}}
             </div> <!-- grid -->
+            <div class='partner-logos'>
+              {{#collection.partner-logos}}
+              <div class="partner-logo">
+                <div class="logo-inner {{^partner-logo}}no-logo{{/partner-logo}}">
+                  {{#partner-logo}}<img src="{{{partner-logo}}}">{{/partner-logo}}
+                </div>
+              </div>
+              {{/collection.partner-logos}}
+            </div>
           </div><!-- body -->
           <div class="footer footer--internalPage">
             <div class="footer__text footer__text--primary"><span class="pageNumber"></span>The University of Western Australia</div> <!--footer__text-->
@@ -1298,6 +1568,63 @@
 
       injectFooter();
 
+      /*Internal Pages*/
+      var partnerLogoContainers = document.querySelectorAll(".fit--internalPage .partner-logos");
+      partnerLogoContainers.forEach(partnerLogoContainer => {
+        var partnerLogos = partnerLogoContainer.querySelectorAll(".partner-logo");
+        if(partnerLogos.length > 9){
+          partnerLogoContainer.classList.add("large");
+        }
+      });
+
+
+      /*if(partnerLogos.length > 9){
+        var partnerLogoContainer = document.querySelectorAll(".fit--internalPage .partner-logos");
+        partnerLogoContainer.forEach(el =>{
+        el.classList.add("large");
+      });
+      }
+
+      partnerLogos.forEach((el, i) =>{
+        el.style.gridArea = "logo" + (i+1);
+      });
+*/
+
+      function imageHeightSetter() {
+        const colContainer = document.querySelectorAll('.js-imageHeightSetter-container');
+
+        colContainer.forEach(container => {
+          const colContainerHeight = container.offsetHeight;
+
+          const imageBlocks = container.querySelectorAll('.js-imageHeightSetter-image');
+
+          imageBlocks.forEach(image => {
+            const setHeight = image.dataset.imageHeight || 25;
+            image.style.height = `${( colContainerHeight / 100 ) * setHeight - 1}px`;
+          })
+        })
+      }
+
+      imageHeightSetter();
+
+      function emptyColumnsCheck() {
+        const tables = document.querySelectorAll('.js-emptyColumnsCheck-table');
+
+        for (const table of tables) {
+          const totalColumns = table.querySelectorAll('tr:first-child td').length;
+          const rowsLength = table.querySelectorAll('tr').length;
+          const colsLength = table.querySelectorAll('td').length;
+
+          for (let i = 1; i <= totalColumns; i++) {
+            const columnEmptyCells = table.querySelectorAll(`.empty-col-${i}`);
+
+            if (columnEmptyCells.length === rowsLength)
+              columnEmptyCells.forEach(columnEmptyCell => columnEmptyCell.style.display = 'none');
+          }
+        }
+      }
+
+      emptyColumnsCheck();
 
     </script>
 
