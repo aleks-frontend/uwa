@@ -64,16 +64,16 @@
         --font-family-heading: 'novel-pro';
 
         --logo: url({{{account.logos.formal-primary}}});
+        --border-colour-dynamic: transparent;
       }
 
       .columnBackgroundColour--blue { --column-dynamic-background-colour: var(--blue3); --column-dynamic-dark-background-colour: var(--blue2); }
       .columnBackgroundColour--black { --column-dynamic-background-colour: var(--black3); --column-dynamic-dark-background-colour: var(--black2); }
       .columnBackgroundColour--gold { --column-dynamic-background-colour: var(--gold3); --column-dynamic-dark-background-colour: var(--gold2); }
 
-
-      .lineColour--blue { --dynamic-line-colour: var(--blue); }
-      .lineColour--black { --dynamic-line-colour: var(--black); }
-      .lineColour--gold { --dynamic-line-colour: var(--gold); }
+      .tableBorderColour--blue { --border-colour-dynamic: var(--blue); }
+      .tableBorderColour--black { --border-colour-dynamic: var(--black); }
+      .tableBorderColour--gold { --border-colour-dynamic: var(--gold); }
 
       html {
         font-family: var(--font-family-content);
@@ -545,7 +545,7 @@
 
       .headingBorderWidth--small .column h3:before,
       .headingBorderWidth--small .grid__item h3:before { width: 85%; }
-      
+
       .headingBorderWidth--full-width .column h3:before,
       .headingBorderWidth--full-width .grid__item h3:before { width: 0%;}
 
@@ -1081,33 +1081,17 @@
         display: grid;
         grid-template-rows: auto;
         margin-bottom: 0.12rem;
-      }
+      }            
 
       .tableGrid:last-child { margin-bottom: 0; }
-
-      .tableGrid .tableGrid__item:first-child,
-      .tableGrid .tableGrid__item:nth-child(2) { border-top: 0.02rem solid gray; }
-      .tableGrid--threeColumnTable .tableGrid__item:nth-child(3) { border-top: 0.02rem solid gray; }
-
-      .tableGrid--twoColumnTable.columnSize--50-50 { grid-template-columns: 1fr 1fr; }
-      .tableGrid--twoColumnTable.columnSize--25-75 { grid-template-columns: 1fr 3fr; }
-      .tableGrid--twoColumnTable.columnSize--75-25 { grid-template-columns: 3fr 1fr; }
-
-      .tableGrid--threeColumnTable.columnSize--50-25-25 { grid-template-columns: 2fr 1fr 1fr; }
-      .tableGrid--threeColumnTable.columnSize--25-25-50 { grid-template-columns: 1fr 1fr 2fr; }
-      .tableGrid--threeColumnTable.columnSize--33-33-33 { grid-template-columns: 1fr 1fr 1fr; }
 
       .tableGrid__item {
         padding: 0.07rem 0.12rem;
         font-size: 0.206em;
         line-height: 1em;
-        border-bottom: 0.02rem solid gray;
-        border-right: 0.02rem solid gray;
       }
 
       .tableGrid__item--heading { color: unset; }
-
-      .tableGrid__item--left { border-left: 0.02rem solid gray; }
 
       .tableGrid__item--data { background-color: var(--column-dynamic-background-colour); }
 
@@ -1115,16 +1099,27 @@
 
       .tableGrid__item--heading { font-weight: bold; }
 
+      .tableGrid__item h1 { 
+        font-size: 1.2em; 
+        font-weight: bold;
+      }
+
+      .tableGrid__item h2 { 
+        font-size: 1.1em; 
+        font-weight: bold;
+      }
+
+      .tableGrid__item kbd {
+        font-family: inherit;
+        color: var(--blue);
+      }
+
       table {
         display: table;
         table-layout: fixed;
         width: 100%;
-        border-bottom: 0.02rem solid var(--dynamic-line-colour);
         border-collapse: separate;
-        border-spacing: 0 0.07rem;
       }
-
-      .lineColour--none table { border-bottom: 0; }
 
       .flexibleTable {
         margin-top: 0.23rem;
@@ -1140,12 +1135,22 @@
 
       .flexibleTable__item--heading { font-weight: bold; }
 
-      .flexibleTable__item--heading { border-bottom: 0.02rem solid var(--dynamic-line-colour); }
-
-      .lineColour--none .flexibleTable__item--heading { border-bottom: 0; }
-
       .flexibleTable__row + .flexibleTable__row { margin-top: 0.23rem; }
 
+      .flexibleTable td kbd { 
+        font-family: inherit;
+        color: var(--blue); 
+      }
+
+      .flexibleTable td h1 { 
+        font-size: 1.2em; 
+        font-weight: bold;
+      }
+
+      .flexibleTable td h2 { 
+        font-size: 1.1em; 
+        font-weight: bold;
+      }
 
       /*Adding additional styling for tables for tableColourTheme input*/
       .tableGrid--twoColumnTable > .tableGrid__item:nth-child(-n+2),
@@ -1159,23 +1164,104 @@
       .tableGrid--threeColumnTable.tableColourTheme--rows > .tableGrid__item:nth-child(6n+4),
       .tableGrid--threeColumnTable.tableColourTheme--rows > .tableGrid__item:nth-child(6n+5),
       .tableGrid--threeColumnTable.tableColourTheme--rows > .tableGrid__item:nth-child(6n+6) {
-        background-color: var(--column-dynamic-dark-background-colour);
+      background-color: var(--column-dynamic-dark-background-colour);
       }
 
       .tableGrid--twoColumnTable.tableColourTheme--columns > .tableGrid__item:nth-child(even),
       .tableGrid--threeColumnTable.tableColourTheme--columns .tableGrid__item--dark {
-        background-color: var(--column-dynamic-dark-background-colour);
+      background-color: var(--column-dynamic-dark-background-colour);
       }
 
       .tableColourTheme--rows .flexibleTable__row--data:nth-child(even) {
-        background-color: var(--column-dynamic-dark-background-colour);
+      background-color: var(--column-dynamic-dark-background-colour);
       }
 
       .tableColourTheme--columns .flexibleTable__item--data:nth-child(even) {
-        background-color: var(--column-dynamic-dark-background-colour);
+      background-color: var(--column-dynamic-dark-background-colour);
       }
 
 
+      /* Helper class for table error handling */
+      .invalid-table {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid red;
+      }
+
+      .invalid-table::after {
+        content: 'Sum of your table columns exceeds 100%';
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 0.5em;
+        font-size: 0.2rem;
+        font-weight: bold;
+        background: red;
+        color: white;
+      }
+
+
+      .styledBorder-column.tableGrid > .tableGrid__item { border-bottom: 1px solid var(--border-colour-dynamic); }
+
+      .styledBorder-row.tableGrid > .tableGrid__item { border-left: 1px solid var(--border-colour-dynamic); }
+      .styledBorder-row.tableGrid--twoColumnTable > .tableGrid__item:nth-child(2n) { border-left: unset; }
+      .styledBorder-row.tableGrid--threeColumnTable > .tableGrid__item:nth-child(3n-1) { border-left: unset; }
+
+      .styledBorder-top-and-bottom.tableGrid--twoColumnTable > .tableGrid__item:nth-last-child(-n+2) { border-bottom: 1px solid var(--border-colour-dynamic); }
+      .styledBorder-top-and-bottom.tableGrid--twoColumnTable > .tableGrid__item:nth-child(-n+3) { border-bottom: 1px solid var(--border-colour-dynamic); }
+      .styledBorder-top-and-bottom.tableGrid--threeColumnTable > .tableGrid__item:nth-last-child(-n+3) { border-bottom: 1px solid var(--border-colour-dynamic); }
+      .styledBorder-top-and-bottom.tableGrid--threeColumnTable > .tableGrid__item:nth-child(-n+4) { border-bottom: 1px solid var(--border-colour-dynamic); }
+
+      .styledBorder-outer.tableGrid--twoColumnTable > .tableGrid__item:nth-last-child(-n+2) { border-bottom: 1px solid var(--border-colour-dynamic); }
+      .styledBorder-outer.tableGrid--twoColumnTable > .tableGrid__item:nth-child(-n+3) { border-top: 1px solid var(--border-colour-dynamic); }
+      .styledBorder-outer.tableGrid--twoColumnTable > .tableGrid__item:nth-child(odd) { border-right: 1px solid var(--border-colour-dynamic); }
+      .styledBorder-outer.tableGrid--twoColumnTable > .tableGrid__item:nth-child(even) { border-left: 1px solid var(--border-colour-dynamic); }
+
+      .styledBorder-outer.tableGrid--threeColumnTable > .tableGrid__item:nth-last-child(-n+3) { border-bottom: 1px solid var(--border-colour-dynamic); }
+      .styledBorder-outer.tableGrid--threeColumnTable > .tableGrid__item:nth-child(-n+4) { border-top: 1px solid var(--border-colour-dynamic); }
+      .styledBorder-outer.tableGrid--threeColumnTable > .tableGrid__item:nth-child(3n+2) { border-left: 1px solid var(--border-colour-dynamic); }
+      .styledBorder-outer.tableGrid--threeColumnTable > .tableGrid__item:nth-child(3n+4) { border-right: 1px solid var(--border-colour-dynamic); }
+
+      .styledBorder-column.flexibleTable td { border-bottom: 1px solid var(--border-colour-dynamic); }
+
+      .styledBorder-row.flexibleTable td { border-left: 1px solid var(--border-colour-dynamic); }      
+      .styledBorder-row.flexibleTable tr td:first-child { border-left: none; }
+
+      .styledBorder-top-and-bottom.flexibleTable tr:first-child td,
+      .styledBorder-top-and-bottom.flexibleTable tr:last-child td { border-bottom: 1px solid var(--border-colour-dynamic); }
+
+      .styledBorder-outer.flexibleTable { border: 1px solid var(--border-colour-dynamic); }  
+      .styledBorder-outer.styledBorder-row.flexibleTable,
+      .styledBorder-outer.styledBorder-top-and-bottom.flexibleTable { border-bottom: unset; }
+
+      .spacer { height: 0.5rem; }
+
+      .tableHeading {
+        margin-bottom: 0.2rem;
+        font-size: 0.42rem;
+        font-weight: normal;
+        line-height: 1.2em;
+        color: var(--black);
+        text-transform: uppercase;
+      }
+      
+      .tableHeading--alt { 
+        position: relative;
+      	flex: 1;
+        padding-left: 2em;
+      }
+      
+      .tableHeading--alt::before {
+      	content: '';
+        position: absolute;
+        left: 1em;
+        bottom: 0;
+        height: 100%;
+        width: 1px;
+        background: black;
+      }
+      
+      .u-mb-0 { margin-bottom: 0; }
 
       /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
       /* !IMPORTANT DON'T FORGET TO STYLIZE HERO CROP ON SPLIT IMAGE SMALL VARIATION */
@@ -1356,65 +1442,172 @@
                     <div class="reposition-fix">{{{image-bsop}}}</div><!-- reposition-fix -->
                   </div><!-- image -->
                   {{/block.image}}
-                  
-                  
-                  
-                  {{#block.two-column-table}}  
-                  <div class="tableGrid tableGrid--twoColumnTable columnSize--{{column-size}}{{^column-size}}50-50{{/column-size}} columnBackgroundColour--{{column-background-colour}}{{^column-background-colour}}none{{/column-background-colour}} tableColourTheme--{{table-colour-theme}}{{^table-colour-theme}}rows{{/table-colour-theme}}">
+                  {{#block.two-column-table}}
+                  <div 
+                       style="grid-template-columns: {{#column-1-size}}{{column-1-size}}%{{/column-1-size}}{{^column-1-size}}1fr{{/column-1-size}} {{#column-2-size}}{{column-2-size}}%{{/column-2-size}}{{^column-2-size}}1fr{{/column-2-size}}"
+                       data-column-sizes="{{#column-1-size}}{{column-1-size}},{{/column-1-size}}{{#column-2-size}}{{column-2-size}}{{/column-2-size}}"
+                       data-border-styles="{{table-border-style}}"
+                       class="tableGrid 
+                              tableGrid--twoColumnTable 
+                              tableBorderColour--{{table-border-colour}}{{^table-border-colour}}none{{/table-border-colour}}
+                              columnBackgroundColour--{{column-background-colour}}{{^column-background-colour}}none{{/column-background-colour}} 
+                              tableColourTheme--{{table-colour-theme}}{{^table-colour-theme}}rows{{/table-colour-theme}} ">
+                    {{#table-heading}}
+                    <div 
+                         class="tableHeading" 
+                         style="grid-column: 1 / -1;"
+                         data-max-line="1">
+                      <div style="width: {{table-heading-width}}%">{{{table-heading}}}</div>                      
+                    </div><!-- heading -->
+                    {{/table-heading}}                    
                     {{#spreadsheet.two-column-table-heading}}
-                    <div class="tableGrid__item tableGrid__item--heading tableGrid__item--left">{{{column-1-heading}}}</div><!-- tableGrid__item--heading -->
-                    <div class="tableGrid__item tableGrid__item--heading">{{{column-2-heading}}}</div><!-- tableGrid__item--heading -->
+                    <div class="tableGrid__item tableGrid__item--heading tableGrid__item--left">
+                      <div class="js-customRichText-src">{{{column-1-heading}}}</div>                      
+                    </div><!-- tableGrid__item--heading -->
+                    <div class="tableGrid__item tableGrid__item--heading">
+                      <div class="js-customRichText-src">{{{column-2-heading}}}</div>
+                    </div><!-- tableGrid__item--heading -->
                     {{/spreadsheet.two-column-table-heading}}
                     {{#spreadsheet.two-column-table-data}}
-                    <div class="tableGrid__item tableGrid__item--data tableGrid__item--left">{{{column-1}}}</div><!-- tableGrid__item -->
-                    <div class="tableGrid__item tableGrid__item--data">{{{column-2}}}</div><!-- tableGrid__item -->
+                    <div class="tableGrid__item tableGrid__item--data tableGrid__item--left">
+                      <div class="js-customRichText-src">{{{column-1}}}</div>
+                    </div><!-- tableGrid__item -->
+                    <div class="tableGrid__item tableGrid__item--data">
+                      <div class="js-customRichText-src">{{{column-2}}}</div>
+                    </div><!-- tableGrid__item -->
                     {{/spreadsheet.two-column-table-data}}
                   </div><!-- grid--twoColumnTable -->         
                   {{/block.two-column-table}}
-                  {{#block.three-column-table}}          
-                  <div class="tableGrid tableGrid--threeColumnTable columnSize--{{column-size}}{{^column-size}}33-33-33{{/column-size}} columnBackgroundColour--{{column-background-colour}}{{^column-background-colour}}none{{/column-background-colour}} tableColourTheme--{{table-colour-theme}}{{^table-colour-theme}}rows{{/table-colour-theme}}">
+                  {{#block.three-column-table}}  
+                  <div 
+                       style="grid-template-columns: {{#column-1-size}}{{column-1-size}}%{{/column-1-size}}{{^column-1-size}}1fr{{/column-1-size}} {{#column-2-size}}{{column-2-size}}%{{/column-2-size}}{{^column-2-size}}1fr{{/column-2-size}} {{#column-3-size}}{{column-3-size}}%{{/column-3-size}}{{^column-3-size}}1fr{{/column-3-size}}"
+                       data-column-sizes="{{#column-1-size}}{{column-1-size}},{{/column-1-size}}{{#column-2-size}}{{column-2-size}},{{/column-2-size}}{{#column-3-size}}{{column-3-size}}{{/column-3-size}}"
+                       data-border-styles="{{table-border-style}}"
+                       class="tableGrid 
+                              tableGrid--threeColumnTable 
+                              tableBorderColour--{{table-border-colour}}{{^table-border-colour}}none{{/table-border-colour}}
+                              columnBackgroundColour--{{column-background-colour}}{{^column-background-colour}}none{{/column-background-colour}} 
+                              tableColourTheme--{{table-colour-theme}}{{^table-colour-theme}}rows{{/table-colour-theme}}">
+                    {{#table-heading}}
+                    <div 
+                         class="tableHeading" 
+                         style="grid-column: 1 / -1;"
+                         data-max-line="1">
+                      <div style="width: {{table-heading-width}}%">{{{table-heading}}}</div>                      
+                    </div><!-- heading -->
+                    {{/table-heading}}
                     {{#spreadsheet.three-column-table-heading}}
-                    <div class="tableGrid__item tableGrid__item--heading tableGrid__item--left">{{{column-1-heading}}}</div><!-- tableGrid__item--heading -->
-                    <div class="tableGrid__item tableGrid__item--heading">{{{column-2-heading}}}</div><!-- tableGrid__item--heading -->
-                    <div class="tableGrid__item tableGrid__item--heading">{{{column-3-heading}}}</div><!-- tableGrid__item--heading -->
+                    <div class="tableGrid__item tableGrid__item--heading tableGrid__item--left">
+                      <div class="js-customRichText-src">{{{column-1-heading}}}</div>
+                    </div><!-- tableGrid__item--heading -->
+                    <div class="tableGrid__item tableGrid__item--heading">
+                      <div class="js-customRichText-src">{{{column-2-heading}}}</div>
+                    </div><!-- tableGrid__item--heading -->
+                    <div class="tableGrid__item tableGrid__item--heading">
+                      <div class="js-customRichText-src">{{{column-3-heading}}}</div>
+                    </div><!-- tableGrid__item--heading -->
                     {{/spreadsheet.three-column-table-heading}}
                     {{#spreadsheet.three-column-table-data}}
-                    <div class="tableGrid__item tableGrid__item--data tableGrid__item--left">{{{column-1}}}</div><!-- tableGrid__item -->
-                    <div class="tableGrid__item tableGrid__item--data tableGrid__item--dark">{{{column-2}}}</div><!-- tableGrid__item -->
-                    <div class="tableGrid__item tableGrid__item--data">{{{column-3}}}</div><!-- tableGrid__item -->
+                    <div class="tableGrid__item tableGrid__item--data tableGrid__item--left">
+                      <div class="js-customRichText-src">{{{column-1}}}</div>
+                    </div><!-- tableGrid__item -->
+                    <div class="tableGrid__item tableGrid__item--data tableGrid__item--dark">
+                      <div class="js-customRichText-src">{{{column-2}}}</div>
+                    </div><!-- tableGrid__item -->
+                    <div class="tableGrid__item tableGrid__item--data">
+                      <div class="js-customRichText-src">{{{column-3}}}</div>
+                    </div><!-- tableGrid__item -->
                     {{/spreadsheet.three-column-table-data}}
                   </div><!-- grid--twoColumnTable --> 
                   {{/block.three-column-table}}
                   {{#block.flexible-column-table}}
-                  <table class="flexibleTable columnBackgroundColour--{{column-background-colour}}{{^column-background-colour}}none{{/column-background-colour}} tableColourTheme--{{table-colour-theme}}{{^table-colour-theme}}rows{{/table-colour-theme}} lineColour--{{line-colour}}{{^line-colour}}none{{/line-colour}} js-emptyColumnsCheck-table">
-                    {{#spreadsheet.flexible-column-table-heading}}
-                    <tr class="flexibleTable__row flexibleTable__row--header">
-                      <td class="flexibleTable__item flexibleTable__item--heading {{^column-1-heading}}empty-col-1{{/column-1-heading}}">{{{column-1-heading}}}</td><!-- tableGrid__item--heading -->
-                      <td class="flexibleTable__item flexibleTable__item--heading {{^column-2-heading}}empty-col-2{{/column-2-heading}}">{{{column-2-heading}}}</td><!-- tableGrid__item--heading -->
-                      <td class="flexibleTable__item flexibleTable__item--heading {{^column-3-heading}}empty-col-3{{/column-3-heading}}">{{{column-3-heading}}}</td><!-- tableGrid__item--heading -->
-                      <td class="flexibleTable__item flexibleTable__item--heading {{^column-4-heading}}empty-col-4{{/column-4-heading}}">{{{column-4-heading}}}</td><!-- tableGrid__item--heading -->
-                      <td class="flexibleTable__item flexibleTable__item--heading {{^column-5-heading}}empty-col-5{{/column-5-heading}}">{{{column-5-heading}}}</td><!-- tableGrid__item--heading -->
-                      <td class="flexibleTable__item flexibleTable__item--heading {{^column-6-heading}}empty-col-6{{/column-6-heading}}">{{{column-6-heading}}}</td><!-- tableGrid__item--heading -->
-                    </tr>
-                    {{/spreadsheet.flexible-column-table-heading}}
-                    {{#spreadsheet.flexible-column-table-data}}
-                    <tr class="flexibleTable__row flexibleTable__row--data">
-                      <td class="flexibleTable__item flexibleTable__item--data {{^column-1}}empty-col-1{{/column-1}}">{{{column-1}}}</td><!-- tableGrid__item -->
-                      <td class="flexibleTable__item flexibleTable__item--data {{^column-2}}empty-col-2{{/column-2}}">{{{column-2}}}</td><!-- tableGrid__item -->
-                      <td class="flexibleTable__item flexibleTable__item--data {{^column-3}}empty-col-3{{/column-3}}">{{{column-3}}}</td><!-- tableGrid__item -->
-                      <td class="flexibleTable__item flexibleTable__item--data {{^column-4}}empty-col-4{{/column-4}}">{{{column-4}}}</td><!-- tableGrid__item -->
-                      <td class="flexibleTable__item flexibleTable__item--data {{^column-5}}empty-col-5{{/column-5}}">{{{column-5}}}</td><!-- tableGrid__item -->
-                      <td class="flexibleTable__item flexibleTable__item--data {{^column-6}}empty-col-6{{/column-6}}">{{{column-6}}}</td><!-- tableGrid__item -->
-                    </tr>
-                    {{/spreadsheet.flexible-column-table-data}}
-                  </table><!-- grid__container -->
+                  <div data-js-hook-set-table-heading="outer">
+                    <div data-js-hook-set-table-heading="wrapper" style="display: flex;">
+                      <div 
+                           class="tableHeading u-mb-0" 
+                           data-js-hook-set-table-heading="heading"
+                           style="width: {{#table-heading-width}}{{table-heading-width}}%{{/table-heading-width}}{{^table-heading-width}}auto{{/table-heading-width}};"
+                           data-max-line="1">{{{table-heading}}}</div><!-- heading -->
+                      {{#table-heading-2}}
+                      <div 
+                           class="tableHeading tableHeading--alt u-mb-0" 
+                           data-max-line="1">{{{table-heading-2}}}</div><!-- heading -->                      
+                      {{/table-heading-2}}
+                    </div><!-- end wrapper-->
+                    <table class="flexibleTable 
+                                  tableBorderColour--{{table-border-colour}}{{^table-border-colour}}none{{/table-border-colour}}
+                                  columnBackgroundColour--{{column-background-colour}}{{^column-background-colour}}none{{/column-background-colour}} 
+                                  tableColourTheme--{{table-colour-theme}}{{^table-colour-theme}}rows{{/table-colour-theme}} 
+                                  js-emptyColumnsCheck-table"
+                           data-border-styles="{{table-border-style}}"
+                           data-js-hook-set-table-heading="table"                           
+                           data-flexi-column-sizes="[{{column-1-size}}{{^column-1-size}}0{{/column-1-size}}, {{column-2-size}}{{^column-2-size}}0{{/column-2-size}}, {{column-3-size}}{{^column-3-size}}0{{/column-3-size}}, {{column-4-size}}{{^column-4-size}}0{{/column-4-size}}, {{column-5-size}}{{^column-5-size}}0{{/column-5-size}}, {{column-6-size}}{{^column-6-size}}0{{/column-6-size}}]"
+                           >
+                      {{#spreadsheet.flexible-column-table-heading}}
+                      <tr class="flexibleTable__row flexibleTable__row--header">
+                        <td 
+                            class="flexibleTable__item flexibleTable__item--heading {{^column-1-heading}}empty-col-1{{/column-1-heading}}"
+                            data-visible-column="{{#column-1-heading}}true{{/column-1-heading}}">
+                          <div class="js-customRichText-src">{{{column-1-heading}}}</div>
+                        </td><!-- tableGrid__item--heading -->
+                        <td 
+                            class="flexibleTable__item flexibleTable__item--heading {{^column-2-heading}}empty-col-2{{/column-2-heading}}"
+                            data-visible-column="{{#column-2-heading}}true{{/column-2-heading}}">
+                          <div class="js-customRichText-src">{{{column-2-heading}}}</div>
+                        </td><!-- tableGrid__item--heading -->
+                        <td 
+                            class="flexibleTable__item flexibleTable__item--heading {{^column-3-heading}}empty-col-3{{/column-3-heading}}"
+                            data-visible-column="{{#column-3-heading}}true{{/column-3-heading}}">
+                          <div class="js-customRichText-src">{{{column-3-heading}}}</div>
+                        </td><!-- tableGrid__item--heading -->
+                        <td 
+                            class="flexibleTable__item flexibleTable__item--heading {{^column-4-heading}}empty-col-4{{/column-4-heading}}"
+                            data-visible-column="{{#column-4-heading}}true{{/column-4-heading}}">
+                          <div class="js-customRichText-src">{{{column-4-heading}}}</div>
+                        </td><!-- tableGrid__item--heading -->
+                        <td 
+                            class="flexibleTable__item flexibleTable__item--heading {{^column-5-heading}}empty-col-5{{/column-5-heading}}"
+                            data-visible-column="{{#column-5-heading}}true{{/column-5-heading}}">
+                          <div class="js-customRichText-src">{{{column-5-heading}}}</div>
+                        </td><!-- tableGrid__item--heading -->
+                        <td 
+                            class="flexibleTable__item flexibleTable__item--heading {{^column-6-heading}}empty-col-6{{/column-6-heading}}"
+                            data-visible-column="{{#column-6-heading}}true{{/column-6-heading}}">
+                          <div class="js-customRichText-src">{{{column-6-heading}}}</div>
+                        </td><!-- tableGrid__item--heading -->
+                      </tr>
+                      {{/spreadsheet.flexible-column-table-heading}}
+                      {{#spreadsheet.flexible-column-table-data}}
+                      <tr class="flexibleTable__row flexibleTable__row--data">
+                        <td class="flexibleTable__item flexibleTable__item--data {{^column-1}}empty-col-1{{/column-1}}">
+                          <div class="js-customRichText-src">{{{column-1}}}</div>
+                        </td><!-- tableGrid__item -->
+                        <td class="flexibleTable__item flexibleTable__item--data {{^column-2}}empty-col-2{{/column-2}}">
+                          <div class="js-customRichText-src">{{{column-2}}}</div>
+                        </td><!-- tableGrid__item -->
+                        <td class="flexibleTable__item flexibleTable__item--data {{^column-3}}empty-col-3{{/column-3}}">
+                          <div class="js-customRichText-src">{{{column-3}}}</div>
+                        </td><!-- tableGrid__item -->
+                        <td class="flexibleTable__item flexibleTable__item--data {{^column-4}}empty-col-4{{/column-4}}">
+                          <div class="js-customRichText-src">{{{column-4}}}</div>
+                        </td><!-- tableGrid__item -->
+                        <td class="flexibleTable__item flexibleTable__item--data {{^column-5}}empty-col-5{{/column-5}}">
+                          <div class="js-customRichText-src">{{{column-5}}}</div>
+                        </td><!-- tableGrid__item -->
+                        <td class="flexibleTable__item flexibleTable__item--data {{^column-6}}empty-col-6{{/column-6}}">
+                          <div class="js-customRichText-src">{{{column-6}}}</div>
+                        </td><!-- tableGrid__item -->
+                      </tr>
+                      {{/spreadsheet.flexible-column-table-data}}
+                    </table><!-- grid__container -->
+                  </div><!-- end data-js-hook-set-table-heading="outer" -->
                   {{/block.flexible-column-table}}
-                  
-                  
-                  
-                  
-                  
-                  
+
+
+
+                  {{#block.spacer}}
+                  <div class="spacer"></div><!-- spacer -->
+                  {{/block.spacer}}
                   {{/collection.column-items}}
                 </div><!-- grid__itemInner -->
               </div><!-- grid__item -->
@@ -1457,8 +1650,6 @@
     <script src="js/text-fit-min.js"></script>
     <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
     <script>
-
-      console.clear();
 
       {{{account.snippets.safariPopup}}}
 
@@ -1634,6 +1825,81 @@
       }
 
       emptyColumnsCheck();
+
+      function columnSizesCheck() {
+        const tables = document.querySelectorAll('[data-column-sizes]');
+        for ( const table of tables ) {
+          const columnsSizes = table.dataset.columnSizes.split(',');
+          const total = columnsSizes.reduce((sum, size) => { 
+            return parseInt(size) + sum;
+          }, 0);
+
+          if ( total > 100 ) {
+            table.classList.add('invalid-table');
+          }
+        }
+      }
+
+      function tableBorderController() {
+        const tables = document.querySelectorAll('[data-border-styles');
+        for ( const table of tables ) {
+          const borderStyles = table.dataset.borderStyles === '' ? '[]' : table.dataset.borderStyles;
+          const borderStylesFormated = JSON.parse(borderStyles);
+
+          for ( const borderStyleFormated of borderStylesFormated ) {
+            table.classList.add(`styledBorder-${borderStyleFormated}`);
+          }
+        }        
+      }
+
+      function flexiTableColumnSizeController() {
+        const flexiTables = document.querySelectorAll('[data-flexi-column-sizes]');
+
+        for (const flexiTable of flexiTables) {
+          const parentWidthPercent = flexiTable.parentNode.offsetWidth / 100;
+          const columnSizes = JSON.parse(flexiTable.dataset.flexiColumnSizes);
+          const headingRow = flexiTable.querySelector('tr:first-child');
+          const visibleColumnsCount = headingRow.querySelectorAll('[data-visible-column="true"]').length;
+          let dynamicColumnsCount = 0;
+
+          columnSizes.forEach((columnSize, index) => {
+            const size = columnSize === 0 ? 'auto' : `${columnSize * parentWidthPercent}px`;
+            if (size !== 'auto') {
+              flexiTable.querySelector(`tr td:nth-child(${index + 1})`).style.width = size;
+              dynamicColumnsCount += 1;
+            }
+          });
+
+          const total = columnSizes.reduce((sum, size) => {
+            return parseInt(size) + sum;
+          }, 0);
+
+          // Checking if all the visible columns have the dynamic width set
+          if (dynamicColumnsCount === visibleColumnsCount) {
+            flexiTable.style.width = 'auto';
+          }
+
+          // Checking if the total sum of all column size input exceeds 100%
+          if (total > 100) flexiTable.classList.add('invalid-table')
+        }
+      }
+
+      function setTableHeading() {
+        const tableWrappers = document.querySelectorAll('[data-js-hook-set-table-heading="outer"]');
+
+        for (const wrapper of tableWrappers) {
+          const headingWrapper = wrapper.querySelector('[data-js-hook-set-table-heading="wrapper"]');
+          const table = wrapper.querySelector('[data-js-hook-set-table-heading="table"]');
+          const tableWidth = table.offsetWidth;
+
+          headingWrapper.style.width = `${tableWidth}px`;
+        }
+      }
+
+      flexiTableColumnSizeController();
+      columnSizesCheck();
+      tableBorderController();
+      setTableHeading();      
 
     </script>
 
